@@ -1,5 +1,6 @@
 
 ## 파일 구조
+```
 team1-frontend/
 ├── index.html
 ├── login.html
@@ -18,3 +19,4 @@ team1-frontend/
 │
 ├── assets/
 │   └── (이미지, 아이콘 등)
+```
