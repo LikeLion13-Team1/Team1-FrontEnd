@@ -58,20 +58,26 @@ feat(auth): 소셜 로그인 기능 추가
 ## ✅ src 폴더 구조
 
 ```
-src/
-├── assets/         # 이미지, 폰트 등 정적 파일
-├── components/     # 재사용 가능한 UI 컴포넌트
-├── pages/          # 각각의 화면(라우트 단위)
-│   ├── Home.js
-│   ├── Post.js
-│   └── ...
-├── router/         # 라우터 관련 파일
-│   ├── router.js
-│   └── routes.js
-├── styles/         # 전역 또는 모듈 CSS
-│   └── style.css
-├── utils/          # 유틸 함수 모음
-├── main.js         # 진입점
+project-root/
+├── index.html               ← 앱 진입 HTML (여기서 main.js 실행됨)
+├── src/                     ← Vite의 빌드 대상 폴더
+│   ├── main.js              ← 라우터 포함 SPA 진입점
+│   ├── pages/               ← 각 페이지 별 JS 모듈
+│   │   ├── home.js
+│   │   ├── login.js
+│   │   ├── signup.js
+│   │   ├── mypage.js
+│   ├── styles/              ← CSS 분리
+│   │   ├── globalstyle.css       ← 전역 공통 스타일
+│   │   ├── home.css
+│   │   ├── login.css
+│   │   ├── signup.css
+│   │   ├── mypage.css
+│   └── assets/              ← 이미지, 폰트 등 정적 리소스
+│       └── logo.png
+├── package.json
+├── vite.config.js
+└── README.md
 ```
 
 ## ✅ 코드 스타일
