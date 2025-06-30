@@ -1,22 +1,23 @@
 
 ## 파일 구조
+파일 구조 예시입니다.
 ```
-team1-frontend/
-├── index.html
-├── login.html
-├── signup.html
-├── mypage.html
-├── chatbot.html
-├── calendar.html
-│
-├── styles/
-│   ├── global.css      ← 전체 공통 스타일
-│   └── page.css        ← 각 페이지 전용 스타일 필요시 분리
+TEAM1-FRONTEND/
+├── assets/
+│   └── salimi_icon.png       ← 이미지 등 정적 파일
 │
 ├── js/
-│   ├── common.js       ← 헤더, 네비게이션 등 공통 로직
-│   └── (페이지별 js 필요시 여기에 추가)
+│   ├── index.js              ← index.html에 연결될 JS
+│   └── chatbot.js            ← chatbot.html에 연결될 JS
 │
-├── assets/
-│   └── (이미지, 아이콘 등)
+├── styles/
+│   ├── global.css            ← 공통 스타일
+│   └── chatbot.css           ← chatbot 전용 스타일
+│
+├── pages/
+│   └── chatbot.html          ← 챗봇 페이지
+│
+├── index.html                ← 메인 랜딩 페이지 (Vercel용)
+└── README.md
+
 ```
