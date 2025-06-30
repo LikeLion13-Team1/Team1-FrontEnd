@@ -1,24 +1,34 @@
-import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
+const routes = {
+  '/': () => import('./pages/home.js'),
+  '/login': () => import('./pages/login.js'),
+  '/signup': () => import('./pages/signup.js'),
+  '/mypage': () => import('./pages/mypage.js'),
+  '/chatbot': () => import('./pages/chatbot.js'),
+};
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
+function loadCss(path) {
+  const cssPath = `/src/styles/${path}.css`;
+  const old = document.getElementById('page-style');
+  if (old) old.remove();
 
-setupCounter(document.querySelector('#counter'))
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = cssPath;
+  link.id = 'page-style';
+  document.head.appendChild(link);
+}
+
+async function router() {
+  const path = location.hash.slice(1) || '/';
+  const page = routes[path];
+  if (page) {
+    const module = await page();
+    module.init?.();
+    loadCss(path === '/' ? 'home' : path.slice(1)); // 경로 기준 CSS 로딩
+  } else {
+    document.getElementById('app').innerHTML = '<h2>404 - 페이지 없음</h2>';
+  }
+}
+
+window.addEventListener('DOMContentLoaded', router);
+window.addEventListener('hashchange', router);

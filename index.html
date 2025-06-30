@@ -1,13 +1,21 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <title>SPA Hash Routing</title>
+    <link rel="stylesheet" href="/src/styles/globalstyle.css" />
   </head>
   <body>
-    <div id="app"></div>
+    <nav>
+      <a href="#/">홈</a>
+      <a href="#/login">로그인</a>
+      <a href="#/signup">회원가입</a>
+      <a href="#/mypage">마이페이지</a>
+      <a href="#/chatbot">챗봇</a>
+    </nav>
+
+    <div id="app">로딩 중...</div>
+
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
