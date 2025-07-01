@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../styles/global.css" />
+    <link rel="stylesheet" href="../styles/sidebar.css" />
+    <link rel="stylesheet" href="../styles/routine1.css" />
+    <link rel="stylesheet" href="../styles/header.css" />
+  </head>
+  <body>
+    <div id="header"></div>
+    <div id="sidebar"></div>
+    <div class="wrapper"></div>
+    <script type="module">
+      import { loadSidebar } from "../js/loadSidebar.js";
+      loadSidebar();
+    </script>
+    <script type="module">
+      import { loadHeader } from "../js/loadHeader.js";
+      loadHeader();
+    </script>
+  </body>
+</html>
