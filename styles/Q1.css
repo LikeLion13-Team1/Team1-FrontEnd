@@ -1,0 +1,39 @@
+.btn-container {
+  display: flex;
+  margin-top: 32px;
+  margin-bottom: 108px;
+}
+.next-btn,
+.before-btn {
+  display: flex; /* 또는 inline-flex, inline-block도 가능 */
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 60px;
+  padding: 14px 17px;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  font-family: "Pretendard Variable";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.48px;
+  text-decoration: none;
+}
+.q1-page .before-btn {
+  visibility: hidden;
+}
+.next-btn {
+  background: #45624e;
+  color: #fff;
+  margin-right: 240px;
+}
+
+.before-btn {
+  background: #e4e6d9;
+  color: #45624e;
+  margin-left: 240px;
+  margin-right: 840px;
+}
