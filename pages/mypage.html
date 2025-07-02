@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>마이페이지</title>
+    <link rel="stylesheet" href="../styles/mypage.css" />
+    <link rel="stylesheet" href="../styles/global.css" />
+    <link rel="stylesheet" href="../styles/sidebar.css" />
+    <link rel="stylesheet" href="../styles/header.css" />
+  </head>
+  <body>
+    <div class="flex-container">
+      <div id="sidebar"></div>
+      <div id="header"></div>
+      <div class="wrapper">
+          <!-- mypage.html의 <div class="wrapper"> 내부에 삽입할 HTML -->
+          <div class="main-container">
+          <!-- 내 정보 -->
+            <section class="user-info">
+              <h2><img src="../assets/icon-userinfo.png" alt="내 정보 아이콘" /> 내 정보</h2>
+              <div class="user-info-box">
+                <div class="profile-column">
+                  <img src="../assets/profile.png" alt="프로필 이미지" class="profile-img" />
+                </div>
+                <div class="info-grid">
+                  <div class="row">
+                    <div class="label">닉네임</div>
+                    <div class="value">김멋사</div> 
+                    <div class="label">아이디</div>
+                    <div class="value">user123</div>
+                  </div>
+                  <div class="row">
+                    <div class="label">프로필 사진</div>
+                    <div class="value">
+                      <button class="edit-btn">수정</button>
+                    </div>
+                    <div class="label">비밀번호</div>
+                    <div class="value">
+                      <span>********</span>
+                      <button class="edit-btn">수정</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+
+          <!-- 루틴 & 히스토리 영역 -->
+          <div class="middle-boxes">
+            <!-- 내 루틴 -->
+            <section class="routine-box">
+              <h2>🌞 내 루틴</h2>
+              <ul class="routine-list">
+               <li>
+                  <strong>루틴 1</strong>
+                  <span>매일 아침 저녁 정리 루틴 세트</span>
+                  <button class="go-btn">바로가기</button>
+                </li>
+                <li>
+                  <strong>루틴 2</strong>
+                  <span class="empty">루틴이 비어있어요.</span>
+                  <button class="go-btn">바로가기</button>
+                </li>
+                <li>
+                  <strong>루틴 3</strong>
+                  <span class="empty">루틴이 비어있어요.</span>
+                  <button class="go-btn">바로가기</button>
+                </li>
+                <li>
+                  <strong>루틴 4</strong>
+                  <span>멤버십에 가입 후 이용해 보세요.</span>
+                </li>
+              </ul>
+              <p class="membership-note">멤버십에 가입하시면 루틴을 무제한으로 이용할 수 있어요.</p>
+            </section>
+
+            <!-- 히스토리 (틀만) -->
+            <section class="history-box">
+              <h2>⏰ 히스토리</h2>
+              <div class="history-placeholder"></div>
+            </section>
+          </div>
+
+          <!-- 계정 설정 -->
+          <h2>⚙️ 계정 설정</h2>
+          <section class="settings-box">
+            <div class="settings-grid">
+              <div class="setting-row">
+                <span>알림</span>
+                <label class="toggle-switch">
+                  <input type="checkbox" checked />
+                  <span class="slider"></span>
+                </label>
+              </div>
+              <div class="setting-row">
+                <span>결제 및 구독</span>
+                <button class="edit-btn">수정</button>
+              </div>
+              <div class="setting-row">
+                <span>로그아웃</span>
+                <a href="#">&gt;</a>
+              </div>
+              <div class="setting-row">
+                <span>탈퇴하기</span>
+                <a href="#">&gt;</a>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+    <script type="module">
+      import { loadSidebar } from "../js/loadSidebar.js";
+      loadSidebar();
+    </script>
+    <script type="module">
+      import { loadHeader } from "../js/loadHeader.js";
+      loadHeader();
+    </script>
+    <script src="../js/mypage.js"></script>
+  </body>
+</html>
