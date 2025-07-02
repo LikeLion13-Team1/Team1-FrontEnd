@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css"
+    />
+    <title>Q1</title>
+    <link rel="stylesheet" href="../styles/global.css" />
+    <link rel="stylesheet" href="../styles/header.css" />
+    <link rel="stylesheet" href="../styles/sidebar.css" />
+    <link rel="stylesheet" href="../styles/Q.css" />
+    <link rel="stylesheet" href="../styles/Q1.css" />
+  </head>
+  <body class="q1-page">
+    <div id="header"></div>
+    <div id="sidebar"></div>
+    <div class="card-background">
+      <div class="quesiton-container">
+        <div class="star-wrapper">
+          <img class="star1" src="../assets/star1.png" />
+        </div>
+        <p class="q">
+          몇 가지 질문으로 살리미가 딱 맞는 살림 루틴을 찾아드릴게요!
+        </p>
+        <img class="star2" src="../assets/star2.png" />
+        <img class="star3" src="../assets/star3.png" />
+      </div>
+      <div class="progress">
+        <span class="step" data-step="1">1</span>
+        <span class="step" data-step="2">2</span>
+        <span class="step" data-step="3">3</span>
+        <span class="step" data-step="4">4</span>
+      </div>
+      <div class="question-box">
+        <h2 class="Q1">Q1. 집이 어질러지면 나는?</h2>
+        <div class="btn">
+          <button class="option-btn">으! 못 참아요. 바로 정리부터 해요.</button>
+          <button class="option-btn">조금 참다가 결국 치워요.</button>
+          <button class="option-btn">안 보여요. 난 못 본 걸로 할래요.</button>
+        </div>
+      </div>
+      <div class="btn-container">
+        <a href="#" class="before-btn" style="visibility: hidden">이전</a>
+        <a href="../pages/Q2.html" class="next-btn">다음</a>
+      </div>
+    </div>
+
+    <script type="module">
+      import { loadHeader } from "../js/loadHeader.js";
+      loadHeader();
+    </script>
+    <script type="module">
+      import { loadSidebar } from "../js/loadSidebar.js";
+      loadSidebar();
+    </script>
+    <script type="module">
+      import { updateQstep } from "../js/Qstep.js";
+      updateQstep(1); // ← Q1 단계
+    </script>
+  </body>
+</html>
