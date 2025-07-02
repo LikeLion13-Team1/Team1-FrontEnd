@@ -7,10 +7,11 @@
 body {
   width: 1920px;
   height: 1080px;
-  background: linear-gradient(to top, #f3f4ec, #ffffff60);
+  background: linear-gradient(to top, #f3f4ec, #ffffff);
   display: flex;
   justify-content: center;
   align-items: center;
+  letter-spacing: -1px;
 }
 .login-box {
   top: 115px;
@@ -37,8 +38,17 @@ h1 {
   font-size: 44px;
   font-weight: 700;
   color: #45624e;
-  margin-bottom: 30px;
   margin-top: 0;
+  line-height: 1.2;
+  text-align: center;
+}
+
+#first {
+  margin-bottom: 40px;
+}
+
+#second {
+  margin-bottom: 10px;
 }
 
 .social-buttons {
@@ -46,7 +56,7 @@ h1 {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .social-button {
@@ -66,6 +76,7 @@ h1 {
 
 .social-button img {
   position: absolute;
+  border-radius: 90%;
   left: 40px;
   width: 29px;
   height: 29px;
@@ -80,7 +91,7 @@ hr {
 
 .form-group {
   width: 410px;
-  height: 100px;
+  margin-bottom: 14px;
 }
 
 label {
@@ -92,7 +103,10 @@ label {
 }
 
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+input[type="finalEmail"],
+input[type="confirmPassword"],
+input[type="text"] {
   width: 100%;
   height: 60px;
   padding: 10px;
@@ -100,24 +114,25 @@ input[type="password"] {
   border: 1px solid #45624e;
   border-radius: 10px;
   font-size: 14px;
+  background-color: #d9d9d900;
+  font-size: 20px;
 }
 
 .login-button {
   width: 410px;
-  height: 80px;
   background-color: #45624e;
   color: white;
   border: none;
   border-radius: 28px;
   font-weight: 500;
-  font-size: 22px;
-  margin-top: 20px;
+  font-size: 20px;
+  margin-top: 15px;
   line-height: 60px;
   cursor: pointer;
 }
 
 .signup-text {
-  margin-top: 20px;
+  margin-top: 10px;
   font-weight: 600;
   font-size: 21px;
   color: #3a5141;
@@ -127,4 +142,86 @@ input[type="password"] {
   color: #3a5141;
   font-weight: 800;
   text-decoration: underline;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 18px 0;
+  color: #969696;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1.2px;
+  background-color: #cacaca;
+}
+
+.divider span {
+  margin: 0 16px;
+  white-space: nowrap;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #45624e;
+  line-height: 1.2;
+  text-align: center;
+  letter-spacing: 1.2px;
+}
+
+.password-guide {
+  font-size: 16px;
+  font-weight: 800px;
+  color: #969696;
+  margin-left: 197px;
+}
+
+.checkbox-group {
+  width: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* 왼쪽 정렬 */
+  margin-left: 220px;
+}
+
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  color: #969696;
+  line-height: 1;
+  letter-spacing: -0.2px;
+}
+
+.checkbox-group input[type="checkbox"] {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border: 1px solid #999999;
+  margin-right: 8px;
+  cursor: pointer;
+  position: relative;
+}
+
+.checkbox-group input[type="checkbox"]::after {
+  content: "";
+  position: absolute;
+  left: 3px;
+  width: 4px;
+  height: 10px;
+  border: solid #45624e;
+  border-width: 0 2.5px 2.5px 0;
+  transform: rotate(45deg);
+  display: none;
+}
+
+.checkbox-group input[type="checkbox"]:checked::after {
+  display: block;
 }
