@@ -1,0 +1,57 @@
+.main {
+  display: flex;
+  min-height: calc(100vh - 90px); /* 헤더 높이 고려 */
+}
+
+.aside {
+  width: 324px;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.content {
+  flex: 1;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0px 2px 20px 2px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px;
+  box-sizing: border-box;
+}
+
+.titlemsg {
+  text-align: center;
+  font-size: 40px;
+  font-weight: 600;
+  color: #3a5141;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.content button {
+  display: flex;
+  padding: 17px 96px;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  font-weight: 600;
+  color: white;
+  background-color: #45624e;
+  border: none;
+  border-radius: 30px;
+  width: 410px;
+  height: 60px;
+  gap: 10px;
+  cursor: pointer;
+  white-space: nowrap;
+  line-height: 22px;
+  margin-bottom: 20px;
+}
+
+.content button:hover {
+  background-color: #2f4034;
+}
