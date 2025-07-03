@@ -1,39 +1,45 @@
 .btn-container {
   display: flex;
-  margin-top: 32px;
-  margin-bottom: 108px;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2rem 15rem 6.7rem;
+  width: 90%;
+  max-width: 700px;
+  gap: 36.5rem;
 }
+
 .next-btn,
 .before-btn {
-  display: flex; /* 또는 inline-flex, inline-block도 가능 */
+  display: flex;
   justify-content: center;
   align-items: center;
-  width: 120px;
-  height: 60px;
-  padding: 14px 17px;
-  gap: 10px;
+  width: 6vw; /* 약 104px */
+  height: 5.5vh; /* 약 48px */
+  padding: 0.8rem 0.8rem;
+  gap: 0.5rem;
   flex-shrink: 0;
-  border-radius: 10px;
+  border-radius: 0.625rem;
   font-family: "Pretendard Variable";
-  font-size: 24px;
-  font-style: normal;
+  font-size: 1.25rem;
   font-weight: 700;
-  line-height: normal;
-  letter-spacing: 0.48px;
+  letter-spacing: 0.03rem;
   text-decoration: none;
+  transition: background-color 0.3s ease;
 }
+
+/* 첫 페이지에서 이전 버튼 숨기기 */
 .q1-page .before-btn {
   visibility: hidden;
 }
+
+/* 다음 버튼 */
 .next-btn {
   background: #45624e;
   color: #fff;
-  margin-right: 240px;
 }
 
+/* 이전 버튼 */
 .before-btn {
   background: #e4e6d9;
   color: #45624e;
-  margin-left: 240px;
-  margin-right: 840px;
 }

@@ -1,209 +1,174 @@
-#header {
-  min-height: 90px; /* 헤더 높이를 실제와 동일하게 */
-}
-#sidebar {
-  width: 348px;
-}
 .card-background {
   position: absolute;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  top: 90px;
-  right: 0;
-  left: 348px;
-  width: 1562px;
-  height: 980px;
+  top: 8%;
+  right: 0.5vw;
+  left: 18vw;
+  width: 81vw;
+  height: 91vh;
   background-color: #ffffff;
-  border-radius: 10px;
+  border-radius: 0.625rem;
   box-shadow: 0px 2px 20px 2px rgba(0, 0, 0, 0.1);
-  display: flex;
   overflow: hidden;
   box-sizing: border-box;
 }
+
 .quesiton-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 148px 284px 36px 281px;
-  gap: 14px;
+  margin: 11rem 10vw 2.2rem;
+  gap: 0.5rem;
 }
+
 .star-wrapper {
-  position: relative; /* 기준 잡아줌 */
-  width: 56px;
-  height: 56px;
+  position: relative;
+  width: 2.5rem;
+  height: 2.5rem;
 }
+
 .star1 {
   position: absolute;
   top: 0;
   left: 0;
-  width: 56px;
-  height: 56px;
+  width: 2.5rem;
+  height: 2.5rem;
   z-index: 1;
   background: #fff;
 }
 
 .star1_star {
   position: absolute;
-  width: 37.659px;
-  height: 37.659px;
+  width: 1.8rem;
+  height: 1.8rem;
   transform: rotate(-25deg);
-  flex-shrink: 0;
-  aspect-ratio: 37.66/37.66;
-  z-index: 2; /* 더 위에 쌓임 */
-  top: 0px;
-  left: 20px;
+  z-index: 2;
+  top: 0;
+  left: 1rem;
 }
+
 .q {
   color: #45624e;
   font-family: "Pretendard Variable";
-  font-size: 36px;
-  font-style: normal;
+  font-size: 1.5rem;
   font-weight: 600;
-  line-height: normal;
-  letter-spacing: 0.72px;
+  letter-spacing: 0.03rem;
   white-space: nowrap;
   margin: 0;
 }
+
 .star2 {
-  width: 34.302px;
-  height: 34.302px;
+  width: 1.5rem;
+  height: 1.5rem;
   transform: rotate(-15deg);
-  flex-shrink: 0;
-  margin-top: -50px;
-  margin-left: -15px;
-}
-.star3 {
-  width: 17.987px;
-  height: 17.987px;
-  flex-shrink: 0;
-  margin-top: -100px;
-  margin-left: -17px;
-}
-.progress {
-  display: inline-flex;
-  align-items: center;
-  gap: 190px;
-}
-.step {
-  position: relative; /* 👉 선 위치 기준이 될 수 있게 */
-  display: flex;
-  width: 50px;
-  height: 50px;
-  justify-content: center;
-  align-items: center;
-  border-radius: 25px;
-  background: #e4e6d9;
-  color: #45624e;
-  font-weight: bold;
-  font-size: 20px;
-  z-index: 1;
-  text-align: center;
-  justify-content: center;
-  font-family: "Pretendard Variable";
-  font-size: 26px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 22px; /* 68.75% */
-  letter-spacing: -1.4px;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-top: -2.5rem;
+  margin-left: -0.6rem;
 }
 
-/* 선 연결 */
+.star3 {
+  width: 1rem;
+  height: 1rem;
+  margin-top: -4rem;
+  margin-left: -0.8rem;
+}
+
+.progress {
+  display: flex;
+  align-items: center;
+}
+
+.step {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: #e4e6d9;
+  color: #45624e;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.03rem;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-right: 7rem; /* 동그라미 + 라인 포함 전체 간격 */
+}
+
+.step:last-child {
+  margin-right: 0; /* 마지막 원은 간격 제거 */
+}
+
 .step:not(:last-child)::after {
   content: "";
   position: absolute;
   top: 50%;
-  left: 50%;
-  width: 150px;
-  height: 4px;
+  left: calc(100% + 0.9375rem); /* 원과 라인 사이 15px 간격 */
+  width: calc(
+    7rem - 1.875rem
+  ); /* 전체 간격 7rem에서 양쪽 간격 0.9375rem × 2 제외 */
+  height: 0.2rem;
   background-color: #e0e5dc;
   transform: translateY(-50%);
   z-index: 0;
-  margin: 0 50px 0 50px;
 }
-
-/* 지난 단계 */
-.step.done {
-  display: flex;
+.step.done:not(:last-child)::after {
   background-color: #45624e;
-  color: white;
-  width: 50px;
-  height: 50px;
-  padding: 23px 27px;
-  border-radius: 35px;
-  color: #fff;
-  text-align: center;
-  font-family: "Pretendard Variable";
-  font-size: 32px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 22px; /* 68.75% */
-  letter-spacing: -1.4px;
 }
-
-.step.done::after {
-  background-color: #e0e5dc;
+.step.done {
+  background-color: #45624e;
+  color: #fff;
+  font-size: 1.1rem;
+  width: 2.5rem;
+  height: 2.5rem;
 }
 
 .step.current {
   background-color: #45624e;
   color: white;
-  width: 70px;
-  height: 70px;
-  font-size: 32px;
-  border-radius: 35px;
+  width: 3rem;
+  height: 3rem;
+  font-size: 1.2rem;
 }
 
 .question-box {
   display: flex;
-  width: 1080px;
-  height: 447px;
-  padding: 50px 120px 30px 120px;
+  width: 56vw;
+  padding: 2rem 7rem;
   flex-direction: column;
   align-items: center;
-  gap: 50px;
-  flex-shrink: 0;
-  border-radius: 10px;
-  border: 2px solid #45624e;
-  margin: 36px 242px 0px 242px;
-  box-sizing: border-box;
+  gap: 1.5rem;
+  border-radius: 0.625rem;
+  border: 1px solid #45624e;
+  margin: 2rem auto 0;
 }
+
 .Q1 {
   color: #45624e;
-  align-self: stretch;
   text-align: center;
   font-family: "Pretendard Variable";
-  font-size: 36px;
-  font-style: normal;
+  font-size: 1.5rem;
   font-weight: 700;
-  line-height: normal;
-  letter-spacing: 0.72px;
-  margin-top: 0;
-  gap: 50px;
+  letter-spacing: 0.03rem;
 }
+
 .btn {
-  gap: 20px;
+  gap: 0.8rem;
   display: flex;
   flex-direction: column;
 }
+
 .option-btn {
-  width: 840px;
-  height: 70px;
-  padding: 15px 118px;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  align-self: stretch;
-  border-radius: 20px;
+  width: 43vw;
+  padding: 0.8rem 0.8rem;
+  border-radius: 0.8rem;
   background: #f3f4ec;
   border: none;
   color: #45624e;
   font-family: "Pretendard Variable";
-  font-size: 30px;
-  font-style: normal;
+  font-size: 1.3rem;
   font-weight: 700;
-  line-height: normal;
-  letter-spacing: 0.6px;
+  text-align: center;
 }
