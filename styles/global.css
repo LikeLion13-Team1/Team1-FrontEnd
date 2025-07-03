@@ -26,12 +26,13 @@ body {
   padding: 0 10px;
 }
 
+/* 공통 레이아웃 */
 .main {
   display: flex;
   flex-wrap: wrap;
+  min-height: calc(100vh - 90px);
   padding: 0 10px;
   gap: 14px;
-  min-height: calc(100% - 90px);
 }
 
 .main-content {
@@ -39,17 +40,36 @@ body {
   min-width: 300px;
 }
 
+/* 공통 사이드바 */
 .aside {
   width: 324px;
-  height: 100%;
+  min-width: 280px;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  padding: 10px;
   background: #fff;
   border-radius: 10px;
   box-shadow: 0px 2px 20px 2px rgba(0, 0, 0, 0.1);
-  padding-top: 31px;
-  overflow-y: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex-shrink: 0;
-  z-index: 1;
+  overflow-y: auto;
+}
+
+/* 공통 콘텐츠 영역 */
+.content {
+  flex: 1;
+  min-width: 300px;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0px 2px 20px 2px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  box-sizing: border-box;
 }

@@ -1,36 +1,3 @@
-/* ===== 공통 레이아웃 ===== */
-.main {
-  display: flex;
-  min-height: calc(100vh - 90px); /* 헤더 높이 고려 */
-  flex-wrap: wrap;
-}
-/* ===== 사이드바 ===== */
-.aside {
-  width: 324px;
-  min-width: 280px;
-  flex-shrink: 0;
-  box-sizing: border-box;
-  padding: 10px;
-}
-
-/* ===== 콘텐츠 영역 ===== */
-.content {
-  flex: 1;
-  min-width: 300px;
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
-  background-color: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0px 2px 20px 2px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 40px 20px;
-  box-sizing: border-box;
-}
-
 /* 루틴 제목 및 설명 */
 .routine-header {
   text-align: center;
