@@ -9,16 +9,10 @@
     <link rel="stylesheet" href="../styles/header.css" />
   </head>
   <body>
-    <div class="flex-container">
-      <div id="sidebar"></div>
-      <div id="header"></div>
-      <div class="wrapper">
-        <div class="header-fixed">
-          <h1 class="title">
-            살&nbsp;&nbsp;리&nbsp;&nbsp;미&nbsp;&nbsp;챗&nbsp;&nbsp;봇
-          </h1>
-          <hr class="title-underline" />
-        </div>
+    <header class="main-header"><div id="header"></div></header>
+    <div class="main">
+      <aside class="aside"><div id="sidebar"></div></aside>
+      <section class="content">
         <div class="item">
           <div id="chatBox" class="chat-box"></div>
           <p class="welcome-message">오늘은 어떤 살림 고민이 있으신가요?</p>
@@ -46,7 +40,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </div>
 
     <script type="module">
