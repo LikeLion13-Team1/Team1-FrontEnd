@@ -81,7 +81,7 @@ document.addEventListener("click", (e) => {
 // 더미 데이터 (실제로는 백엔드 연동으로 교체 예정)
 async function fetchRoutineData() {
   return {
-    title: "루틴 1 매일 아침 저녁 정리 루틴 세트",
+    title: "루틴 2 매일 아침 저녁 정리 루틴 세트",
     description:
       "벌써 오늘 하루 목표의 60%에 도달했어요!\n아자아자 멋사님은 해낼 수 있어요 ~",
     sections: [
