@@ -6,15 +6,9 @@
 
 html,
 body {
-<<<<<<< HEAD
   width: 100vw; /* 뷰포트 너비 */
   height: 100vh; /* 뷰포트 높이 */
   font-family: "Pretendard", sans-serif;
-  background-color: #f5f5f0;
-=======
-  width: 1920px;
-  height: 1080px;
-  font-family: "Pretendard", sans-serif;
+
   background-color: #f3f4ec;
->>>>>>> 0bab9fbd1cd2fdf1ac7a409bfbf4890952ed79e0
 }

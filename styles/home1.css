@@ -1,0 +1,194 @@
+.main-background {
+  width: 98vw;
+  height: 91vh; /* 또는 min-height로 지정 */
+  background-color: #fff;
+  border-radius: 0.625rem;
+  box-shadow: 0px 2px 20px 2px rgba(0, 0, 0, 0.1);
+  margin-left: 0.6rem;
+  margin-right: 0.6rem;
+  z-index: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  align-self: flex-start;
+  padding: 0;
+}
+.welcome {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #45624e;
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.divider {
+  width: 86vw;
+  border: 0.2px solid;
+  background: rgba(150, 150, 150, 0.6);
+}
+.role-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  margin-left: 24rem;
+  margin-bottom: 0;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  margin-left: 39rem;
+  gap: 0.7rem;
+}
+/* 역할 텍스트 */
+.role-text {
+  color: #45624e;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.user-icon {
+  width: 3.4vw;
+  height: 6.41vh;
+}
+
+/* 설명 박스 */
+.description-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  margin-right: 24rem;
+  margin-bottom: 0;
+}
+.desc-icon {
+  width: 3.4vw;
+  height: 6.41vh;
+}
+.desc-text {
+  color: #45624e;
+  font-family: "Pretendard Variable";
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.045rem;
+  margin-bottom: 0;
+}
+
+/* 카드 컨테이너 */
+.card-container {
+  padding: 2.5rem 0.9375rem;
+  display: flex;
+  gap: 0.625rem;
+  justify-content: center;
+  flex-wrap: nowrap;
+  margin-bottom: 0;
+}
+
+/* 카드 기본 */
+.info-card {
+  width: 22vw;
+  height: 22.22vh;
+  padding: 1.5rem 0.9rem 2.5rem;
+  display: flex;
+  gap: 0.625rem;
+  border-radius: 2.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  background: #eef1f5;
+  box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+}
+
+/* 카드별 배경 */
+.card1 {
+  background: #eef1f5;
+}
+.card2 {
+  background: #eff5f1;
+}
+.card3 {
+  bbackground: #f2efea;
+}
+.title {
+  display: flex;
+  white-space: nowrap;
+  gap: 0.2rem;
+}
+.check {
+  width: 1.6vw;
+  height: 3vh;
+}
+.calender-icon {
+  width: 1.4vw;
+  height: 3vh;
+}
+/* 카드 제목 */
+.card-title {
+  font-family: "Pretendard Variable";
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: #2f4331;
+  margin-bottom: 1rem;
+  margin-top: 0;
+}
+
+/* 카드 안 설명 */
+.card-desc {
+  width: 20vw;
+  display: flex;
+  height: 9vh;
+  padding: 0.375rem 0.625rem; /* 6px 10px를 16px 기준 rem으로 변환 */
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  align-self: stretch;
+  font-family: "Pretendard Variable";
+  background-color: #ffffff;
+  border-radius: 3.8rem;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 0.8rem 1.2rem;
+  font-size: 0.95rem;
+  color: #2f4331;
+  line-height: 1.5;
+  text-align: center;
+  font-weight: 600;
+}
+/* 하단 안내 */
+.footer-msg {
+  color: #45624e;
+  margin-top: 2rem;
+  text-align: center;
+  font-family: "Pretendard Variable";
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.045rem;
+}
+.signup-btn {
+  width: 13.54vw; /* 260px를 1920px 뷰포트 너비 기준으로 변환 */
+  height: 5.56vh; /* 60px를 1080px 뷰포트 높이 기준으로 변환 */
+  padding: 0.75rem 2.5rem; /* 12px와 40px를 16px 기준 rem으로 변환 */
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem; /* 10px를 16px 기준 rem으로 변환 */
+  flex-shrink: 0;
+  margin-top: 1rem;
+  background-color: #3a5140;
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 0.6rem 1.4rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.signup-btn:hover {
+  background-color: #2e4032;
+}

@@ -7,23 +7,77 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css"
     />
-    <title>Q1</title>
+    <title>로그인 전 화면</title>
     <link rel="stylesheet" href="../styles/global.css" />
     <link rel="stylesheet" href="../styles/header.css" />
-    <link rel="stylesheet" href="../styles/Q.css" />
+    <link rel="stylesheet" href="../styles/home1.css" />
   </head>
   <body class="q1-page">
-    <div id="header"></div>
-    <div id="sidebar"></div>
-    <div class="background">
-      <div class="quesiton-container">
-       
-      
+    <div id="header"><div class="user-name">가입하기</div></div>
+    <div class="main-background">
+      <h1 class="welcome">살리미에 오신 것을 환영합니다.</h1>
+      <hr class="divider" />
+      <div class="role-box">
+        <p class="role-text">
+          살리미는 무슨 역할을 하나요?<img
+            src="../assets/user.png"
+            class="user-icon"
+          />
+        </p>
       </div>
-     
-     
-     
 
+      <!-- 설명 문장 -->
+      <div class="description-box">
+        <img src="../assets/bot.png" class="desc-icon" />
+        <p class="desc-text">
+          하핫, 사실 저는 여러분의 살림을 도와주는 요정이에요!<br />
+          제가 무슨 역할을 하냐면요..
+        </p>
+      </div>
+
+      <!-- 카드 영역 -->
+      <div class="card-container">
+        <div class="info-card card1">
+          <div class="title">
+            <p class="card-title">나만의 루틴 추천</p>
+            <img src="../assets/check.png" class="check" />
+          </div>
+          <div class="card-desc">
+            간단한 질문 몇 개로,<br />딱 맞는 살림 루틴을 추천해요.
+          </div>
+        </div>
+        <div class="info-card card2">
+          <div class="title">
+            <p class="card-title">살리미 챗봇</p>
+            <img src="../assets/robot.png" class="check" />
+          </div>
+          <div class="card-desc">
+            살림이 궁금할 땐 살리미에게!<br />AI가 도와드려요.
+          </div>
+        </div>
+        <div class="info-card card3">
+          <div class="title">
+            <p class="card-title">내 캘린더</p>
+            <img src="../assets/calender.png" class="check" />
+          </div>
+          <div class="card-desc">
+            내가 고른 루틴을 캘린더에서<br />한눈에 관리할 수 있어요.
+          </div>
+        </div>
+      </div>
+
+      <!-- 하단 라인 -->
+      <hr class="divider" />
+
+      <!-- 하단 문구 + 버튼 -->
+      <div class="footer-msg">
+        <p>
+          당신의 살림 유형은 무엇인지 궁금하지 않나요?<br />회원가입 후 모든
+          기능을 이용해 보세요.
+        </p>
+        <button class="signup-btn">회원가입하기</button>
+      </div>
+    </div>
     <script type="module">
       import { loadHeader } from "../js/loadHeader.js";
       loadHeader();
