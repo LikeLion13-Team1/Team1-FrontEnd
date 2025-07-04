@@ -1,0 +1,210 @@
+/* 루틴 제목 및 설명 */
+.routine-header {
+  text-align: center;
+  margin-bottom: 55px;
+  padding: 0 10px;
+}
+
+.routine-header h2 {
+  color: #3a5141;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.72px;
+  margin-bottom: 20px;
+}
+
+.routine-header p {
+  font-size: 28px;
+  color: #9d9d9d;
+  line-height: normal;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: 0.56px;
+}
+
+/* 루틴 카드 영역 */
+.routine-sets {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+/* ===== 루틴 카드 ===== */
+.routine-box {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  min-height: 400px;
+  background-color: #fff;
+  border: 2px solid #cacaca;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 32px;
+  box-sizing: border-box;
+  gap: 24px;
+}
+
+/* 카드 내 제목 */
+.routine-box h3 {
+  display: flex;
+  align-items: center;
+  font-size: 29px;
+  font-weight: bold;
+  color: #45624e;
+  gap: 10px;
+  margin: 0;
+}
+
+.routine-icon {
+  width: 32px;
+  height: 32px;
+}
+
+/* 카드 내 루틴 리스트 */
+.routine-box ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-left: 0;
+  margin: 0;
+}
+
+.routine-box li {
+  display: flex;
+  justify-content: space-between;
+  font-size: 28px;
+  color: #45624e;
+  font-weight: 600;
+}
+
+/* ===== 버튼 영역 ===== */
+.edit-button {
+  align-self: center;
+  padding: 12px 18px;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  color: #45624e;
+  font-weight: 700;
+  margin-top: auto;
+  transition: background-color 0.2s ease;
+}
+
+.edit-button:hover {
+  background-color: #f0f0f0;
+}
+
+.save-button-container {
+  margin-top: 45px;
+}
+
+.save-button {
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #45624e;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  letter-spacing: 0.48px;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 12px 18px;
+  transition: background-color 0.2s ease;
+}
+
+.save-button:hover {
+  background-color: #263d2d;
+}
+
+/* ===== 체크박스 ===== */
+.checkbox-icon {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+
+/* ===== 모달 영역 ===== */
+.edit-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.edit-modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background-color: white;
+  width: 90%;
+  max-width: 600px;
+  border-radius: 12px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal-list-container {
+  display: flex;
+  width: 100%;
+  gap: 2rem;
+  justify-content: space-between;
+  margin: 1rem 0;
+}
+
+.modal-list {
+  list-style: none;
+  padding: 0;
+  width: 50%;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.modal-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+}
+
+.modal-add-row {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  margin: 10px 0;
+}
+
+.custom-add-input {
+  flex-grow: 1;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.add-button,
+.save-button-modal {
+  background-color: #1d4d3f;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}
