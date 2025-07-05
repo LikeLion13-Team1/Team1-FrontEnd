@@ -1,19 +1,3 @@
-.sidebar {
-  width: 324px;
-  height: 980px;
-  border-radius: 10px;
-  background: #fff;
-  box-shadow: 0px 2px 20px 2px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 31px;
-  position: absolute;
-  left: 10px;
-  top: 90px;
-  z-index: 1;
-}
-
 .logo {
   display: flex;
   flex-direction: column;
@@ -42,10 +26,11 @@ hr {
   width: 244px;
   height: 1.2px;
   background: #cacaca;
+  border: none;
 }
 
-/* 공통 버튼 스타일을 a 태그에 적용 */
-.sidebar a.btn {
+/* 공통 버튼 스타일 */
+.aside a.btn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -65,7 +50,7 @@ hr {
   box-sizing: border-box;
 }
 
-/* 초록색 버튼 */
+/* 초록 버튼 */
 .btn-green {
   background-color: #45624e;
   color: #ffffff;
@@ -81,9 +66,11 @@ hr {
   margin-bottom: 16px;
 }
 
-.btn:nth-of-type(2) {
+/* 버튼 간격 조정 (선택 사항) */
+.aside .btn:nth-of-type(2) {
   margin-bottom: 15px;
 }
-.btn:nth-of-type(5) {
+
+.aside .btn:nth-of-type(5) {
   margin-bottom: 30px;
 }
