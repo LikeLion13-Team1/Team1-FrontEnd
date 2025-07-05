@@ -24,6 +24,7 @@
   width: 488px;
   height: 52px;
   align-items: center;
+
   justify-content: center;
   background-color: #fff;
   border-radius: 40px;
@@ -51,7 +52,7 @@
 .right-section {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 1vw;
 }
 
 .user-name {
