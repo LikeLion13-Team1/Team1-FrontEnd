@@ -1,0 +1,32 @@
+.titlemsg {
+  text-align: center;
+  font-size: 40px;
+  font-weight: 600;
+  color: #3a5141;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.content button {
+  display: flex;
+  padding: 17px 96px;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  font-weight: 600;
+  color: white;
+  background-color: #45624e;
+  border: none;
+  border-radius: 30px;
+  width: 410px;
+  height: 60px;
+  gap: 10px;
+  cursor: pointer;
+  white-space: nowrap;
+  line-height: 22px;
+  margin-bottom: 20px;
+}
+
+.content button:hover {
+  background-color: #2f4034;
+}
