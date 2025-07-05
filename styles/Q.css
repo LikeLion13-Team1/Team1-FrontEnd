@@ -1,0 +1,159 @@
+.quesiton-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 9rem 10vw 2.5rem;
+  gap: 0.8rem;
+}
+.progress {
+  display: flex;
+  justify-content: center;
+}
+.star-wrapper {
+  position: relative;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.star1 {
+  position: absolute;
+  top: -0.5rem;
+  left: 0;
+  width: 3rem;
+  height: 3rem;
+  z-index: 1;
+  background: #fff;
+}
+
+.q {
+  color: #45624e;
+  font-family: "Pretendard Variable";
+  font-size: 2.25rem;
+  font-weight: 600;
+  letter-spacing: 0.03rem;
+  white-space: nowrap;
+  margin: 0;
+}
+
+.star2 {
+  width: 2.5rem;
+  height: 2.5rem;
+  transform: rotate(-15deg);
+  margin-top: -2.5rem;
+  margin-left: -0.6rem;
+}
+
+.star3 {
+  width: 1.3rem;
+  height: 1.3rem;
+  margin-top: -4rem;
+  margin-left: -0.8rem;
+}
+
+.progress {
+  display: flex;
+  align-items: center;
+}
+
+.step {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: #e4e6d9;
+  color: #45624e;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.03rem;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-right: 11rem; /* 동그라미 + 라인 포함 전체 간격 */
+}
+
+.step:last-child {
+  margin-right: 0; /* 마지막 원은 간격 제거 */
+}
+
+.step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 0.9375rem); /* 동그라미와 짝대기 사이 간격 */
+  width: 9rem; /* 👈 고정 크기 사용 */
+  height: 0.2rem;
+  background-color: #e0e5dc;
+  transform: translateY(-50%);
+  z-index: 0;
+}
+.step.done:not(:last-child)::after {
+  background-color: #45624e;
+}
+.step.done {
+  background-color: #45624e;
+  color: #fff;
+  font-size: 1.5rem;
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.step.current {
+  background-color: #45624e;
+  color: white;
+  width: 4.3rem;
+  height: 4.3rem;
+  font-size: 2.1rem;
+}
+
+.question-box {
+  width: 90%;
+  max-width: 1000px;
+  max-height: 450px;
+  padding: 3rem 1.5rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1.5rem;
+  border-radius: 0.625rem;
+  border: 1px solid #45624e;
+  margin: 2.5rem auto 0;
+  box-sizing: border-box;
+}
+.Q1 {
+  color: #45624e;
+  text-align: center;
+  font-family: "Pretendard Variable";
+  font-size: 2.2rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.72px;
+  margin-bottom: 3.1rem;
+}
+.option-btn {
+  margin-top: 0;
+  width: 100%;
+  max-width: 800px;
+  padding: 0.8rem 1rem;
+  border-radius: 0.8rem;
+  background: #f3f4ec;
+  border: none;
+  color: #45624e;
+  font-family: "Pretendard Variable";
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-align: center;
+  white-space: normal; /* 줄바꿈 허용 */
+  word-break: keep-all; /* 단어 기준 줄바꿈 */
+  box-sizing: border-box;
+}
+
+.btn {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  align-items: center;
+  width: 100%;
+}
