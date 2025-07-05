@@ -2,8 +2,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  margin: 2rem auto 6rem auto;
+  width: 1000vw;
+  margin: 2rem 2rem 6rem 2rem;
   gap: 24rem;
   flex-wrap: nowrap; /* 버튼 줄바꿈 방지 */
 }
@@ -14,19 +14,15 @@
   width: 33vw;
   max-height: 55px;
   height: 7.5vh;
-  padding: 0.8rem;
+  padding: 0.6rem 0.8rem 3rem 0.8rem;
   border-radius: 10px;
   font-family: "Pretendard Variable";
   font-size: 1.5rem;
   font-weight: 700;
   transition: background-color 0.3s ease;
   text-align: center;
-  text-decoration: none;
-}
 
-/* 첫 페이지에서 이전 버튼 숨기기 */
-.q1-page .before-btn {
-  visibility: hidden;
+  text-decoration: none;
 }
 
 /* 다음 버튼 */
