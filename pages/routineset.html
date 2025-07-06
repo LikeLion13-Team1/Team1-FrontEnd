@@ -1,55 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>루틴 세트 설정</title>
     <link rel="stylesheet" href="../styles/global.css" />
     <link rel="stylesheet" href="../styles/sidebar.css" />
     <link rel="stylesheet" href="../styles/routineset.css" />
     <link rel="stylesheet" href="../styles/header.css" />
   </head>
   <body>
-    <header class="main-header"><div id="header"></div></header>
+    <header class="main-header">
+      <div id="header"></div>
+    </header>
+
     <div class="main">
-      <aside class="aside"><div id="sidebar"></div></aside>
-    <section class="content">
-      <div id="edit-modal" class="edit-modal hidden">
-        <div class="modal-content">
-          <h2>추가 및 제거</h2>
-          <div class="modal-list-container">
-            <ul class="modal-list left"></ul>
-            <ul class="modal-list right"></ul>
-          </div>
+      <aside class="aside">
+        <div id="sidebar"></div>
+      </aside>
 
-          <div class="modal-add-row">
-            <input
-              type="text"
-              placeholder="직접 추가하기"
-              class="custom-add-input"
-            />
-            <button class="add-button">추가</button>
-          </div>
+      <section class="content">
+        <!-- 모달 -->
+        <div id="edit-modal" class="edit-modal hidden">
+          <div class="modal-content">
+            <h2>추가 및 제거</h2>
+            <div class="modal-list-container">
+              <ul class="modal-list left"></ul>
+              <ul class="modal-list right"></ul>
+            </div>
 
-          <button class="save-button-modal">이대로 저장하기</button>
+            <div class="modal-add-row">
+              <input
+                type="text"
+                placeholder="직접 추가하기"
+                class="custom-add-input"
+              />
+              <button class="add-button">추가</button>
+            </div>
+
+            <button class="save-button-modal">이대로 저장하기</button>
+          </div>
         </div>
-      </div>
-      <div class="routine-header">
-        <h2 id="routine-title">
-          <img src="../assets/broomstick.svg" alt="Broomstick Icon" />루틴 제목
-          로딩 중...
-        </h2>
-        <p id="routine-description">루틴 설명 로딩 중...</p>
-      </div>
 
-      <div class="routine-sets" id="routine-sets-container">
-        <!-- 루틴 카드들이 JS에서 동적으로 생성될 예정 -->
-      </div>
+        <!-- 루틴 정보 -->
+        <div class="routine-header">
+          <h2 id="routine-title">
+            <img src="../assets/broomstick.svg" alt="Broomstick Icon" />루틴
+            제목 로딩 중...
+          </h2>
+          <p id="routine-description">루틴 설명 로딩 중...</p>
+        </div>
 
-      <div class="save-button-container">
-        <button class="save-button">저장하기</button>
-      </div>
-    <section>
+        <!-- 루틴 카드들 -->
+        <div class="routine-sets" id="routine-sets-container">
+          <!-- JS로 동적으로 생성 -->
+        </div>
+
+        <div class="save-button-container">
+          <button class="save-button">저장하기</button>
+        </div>
+      </section>
+    </div>
+    <script src="../js/auth/authCheck.js"></script>
     <script type="module" src="../js/routineset/routineset.js"></script>
     <script type="module">
       import { loadSidebar } from "../js/loadSidebar.js";
