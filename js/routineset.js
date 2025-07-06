@@ -1,3 +1,5 @@
+token = sessionStorage.getItem("token");
+
 document.addEventListener("DOMContentLoaded", async () => {
   const routineData = await fetchRoutineData(); // 실제로는 백엔드로 부터 데이터 가져오기 -> 현재 더미 데이터 사용
 
