@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="../styles/Q2.css" />
     <link rel="stylesheet" href="../styles/Qfinal.css" />
   </head>
-  <body>
+  <body data-question-key="routin">
     <header class="main-header">
       <div id="header"></div>
     </header>
@@ -42,16 +42,20 @@
     <script type="module">
       import { loadHeader } from "../js/loadHeader.js";
       loadHeader();
-    </script>
-    <script type="module">
       import { loadSidebar } from "../js/loadSidebar.js";
       loadSidebar();
-      setTimeout(() => {
-        const speechText = document.querySelector(".speech-text");
-        if (speechText) {
-          speechText.textContent = "오늘 하루 목표의 20%에 도달했어요!";
-        }
-      }, 100);
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const answers = JSON.parse(localStorage.getItem("surveyAnswers")) || {};
+        const routine = answers.routin || "루틴1"; // 기본값
+
+        // HTML에 텍스트 적용
+        document.querySelectorAll(".highlight").forEach((el) => {
+          el.textContent = routine;
+        });
+
+        document.querySelector(".baro-btn").textContent = `${routine} 바로가기`;
+      });
     </script>
   </body>
 </html>
