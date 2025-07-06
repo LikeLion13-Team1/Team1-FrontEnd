@@ -66,6 +66,15 @@
     <script type="module">
       import { loadSidebar } from "../js/loadSidebar.js";
       loadSidebar();
+      // 설문에 대한 option-btn 클릭시
+      document.querySelectorAll(".option-btn").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          document
+            .querySelectorAll(".option-btn")
+            .forEach((b) => b.classList.remove("selected"));
+          e.currentTarget.classList.add("selected");
+        });
+      });
       //Q에대한 대답 저장
       document.addEventListener("DOMContentLoaded", () => {
         const questionKey = document.body.dataset.questionKey;

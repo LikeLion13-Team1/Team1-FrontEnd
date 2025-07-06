@@ -77,6 +77,55 @@
           });
         });
       });
+      // 1. 설문 답 불러오기
+      const answers = JSON.parse(localStorage.getItem("surveyAnswers"));
+
+      // 2. 텍스트 답안을 ENUM 값으로 매핑
+      const answerToCode = {
+        "으! 못 참아요. 바로 정리부터 해요.": "CLEAN_IMMEDIATELY",
+        "조금 참다가 결국 치워요.": "CLEAN_EVENTUALLY",
+        "안 보여요. 난 못 본 걸로 할래요.": "IGNORE",
+
+        "계획부터 세우고 하나하나 해결해요.": "PLAN_AND_EXECUTE",
+        "그날그날 기분에 따라 달라요.": "GO_WITH_FLOW",
+        "일단 침대에 누워요. 그냥 내일 하는 건 어때요?": "AVOID",
+
+        "집은 자고로 먼지 한 톨 없이 반짝반짝 해야죠.": "SPOTLESS",
+        "정리만 되어도 그냥 만족하며 삽니다.": "TIDY_ENOUGH",
+        "내 마음이 편하면 그게 깔끔 아닌가요?": "COMFORTABLE",
+
+        "힘들어도 좋아요:) 확실한 루틴을 주세요.": "FIRST_AND_CLEAR",
+        "유연한 게 좋아요.": "FLEXIBLE",
+        "작고 쉬운 거부터 주세요..": "SMALL_AND_EASY",
+      };
+
+      // 3. 백엔드에 보낼 ENUM 형식 만들기
+      const featureData = {
+        messyHouse: answerToCode[answers.q1],
+        cleaningStyle: answerToCode[answers.q2],
+        cleanHouse: answerToCode[answers.q3],
+        routineStyle: answerToCode[answers.q4],
+      };
+
+      // 4. 백엔드에 POST 요청
+      fetch("http://localhost:8080/api/v1/members/feature", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        },
+        body: JSON.stringify(featureData),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("루틴 분석 결과:", data.result.routineType);
+          // 결과 보여주기 (예: 결과 영역이 있다면)
+          document.querySelector(".result-box").textContent =
+            data.result.routineType;
+        })
+        .catch((err) => {
+          console.error("루틴 분석 실패:", err);
+        });
     </script>
   </body>
 </html>
