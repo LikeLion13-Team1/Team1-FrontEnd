@@ -1,7 +1,14 @@
-a {
-  text-decoration: none;
+/* a {
+  text-decoration: none; */
+
+.main-header {
+  display: flex;
+  gap: 2px;
 }
 .home1-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: #45624e;
   font-family: "Pretendard Variable";
   font-size: 24px;
@@ -9,8 +16,38 @@ a {
   font-weight: 600;
   line-height: normal;
   letter-spacing: 0.96px;
-  margin-right: 12px;
+  padding: 12px 30px;
+  border-radius: 100px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
+
+.home1-login:hover {
+  opacity: 0.6;
+}
+
+.home1-signup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  border-radius: 100px;
+  padding: 12px 30px;
+  background: #45624e;
+  border: none;
+  color: #fff;
+  line-height: normal;
+  letter-spacing: 0.96px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.home1-signup:hover {
+  background-color: #2e4032;
+}
+
 .item {
   display: flex;
   flex-direction: column;
@@ -182,4 +219,8 @@ a {
 
 .signup-btn:hover {
   background-color: #2e4032;
+}
+
+.right-wrapper {
+  display: none;
 }
