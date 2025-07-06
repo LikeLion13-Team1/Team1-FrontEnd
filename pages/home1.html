@@ -11,7 +11,8 @@
   </head>
   <body class="home1-page">
     <header class="main-header">
-      <p class="home1-login">가입하기</p>
+      <button class="home1-login">로그인하기</button>
+      <button class="home1-signup">가입하기</button>
       <div id="header"></div>
     </header>
     <div class="main">
@@ -91,7 +92,18 @@
         if (speechText) {
           speechText.textContent = "로그인 후 바뀌는 화면이 궁금하지 않나요? ";
         }
-      }, 100);
+      }, 3000);
+
+      document.querySelector(".signup-btn").addEventListener("click", () => {
+        window.location.href = "signup.html";
+      });
+
+      document.querySelector(".home1-login").addEventListener("click", () => {
+        window.location.href = "login.html";
+      });
+      document.querySelector(".home1-signup").addEventListener("click", () => {
+        window.location.href = "signup.html";
+      });
     </script>
   </body>
 </html>
