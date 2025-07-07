@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const accessToken = data.result?.accessToken;
         console.log(accessToken);
         if (accessToken) {
-          localStorage.setItem("token", accessToken);
+          sessionStorage.setItem("token", accessToken);
         }
 
         // 로그인 후 이동할 페이지로 리디렉션
