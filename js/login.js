@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         // 로그인 후 이동할 페이지로 리디렉션
-        window.location.href = "/pages/home2.html";
+        window.location.href = "./home2.html";
       } else {
         alert("❌ 로그인 실패: " + data.message);
       }

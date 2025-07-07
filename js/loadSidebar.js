@@ -13,7 +13,7 @@ export function loadSidebar(path = "../pages/sidebar.html") {
         if (logoArea) {
           logoArea.style.cursor = "pointer";
           logoArea.addEventListener("click", () => {
-            window.location.href = "/pages/home2.html";
+            window.location.href = "../pages/home2.html";
           });
         }
       })
