@@ -42,8 +42,9 @@ body {
 
 /* 공통 사이드바 */
 .aside {
-  width: 324px;
-  min-width: 280px;
+  width: 216px;
+  height: 100%;
+  min-height: 652px;
   flex-shrink: 0;
   box-sizing: border-box;
   padding: 10px;
@@ -62,6 +63,8 @@ body {
   flex: 1;
   min-width: 300px;
   width: 100%;
+  height: 100%;
+  min-height: 652px;
   max-width: 100%;
   overflow-x: hidden;
   background-color: #ffffff;
