@@ -36,11 +36,11 @@ document.addEventListener("DOMContentLoaded", function () {
       if (data.isSuccess) {
         // 토큰 저장 (필요 시 result.accessToken / result.refreshToken 등)
         const accessToken = data.result?.accessToken;
+
         console.log(accessToken);
         if (accessToken) {
           sessionStorage.setItem("token", accessToken);
         }
-
         // 로그인 후 이동할 페이지로 리디렉션
         window.location.href = "../pages/home2.html";
       } else {
