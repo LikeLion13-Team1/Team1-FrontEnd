@@ -3,72 +3,66 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 9rem 10vw 1.3rem;
+  margin: 4rem 10vw 0;
   gap: 1.3rem;
 }
 
 .bot {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   width: 15vw;
   height: auto;
   max-width: 80px;
   flex-shrink: 0;
   margin: 0;
 }
+
 .question-box {
   width: 90%;
-  max-width: 1000px;
-  max-height: 450px;
-  padding: 3rem 1.5rem;
+  max-width: 700px;
+  padding: 2rem 1rem;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  gap: 1.5rem;
+  gap: 1rem;
   border-radius: 0.625rem;
   border: 1px solid #45624e;
+  margin: 0 auto 0;
   box-sizing: border-box;
-  margin-top: 0;
 }
 
 .btn-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 1000vw;
-  margin: 2rem 2rem 6rem 2rem;
-  gap: 24rem;
-  flex-wrap: nowrap; /* 버튼 줄바꿈 방지 */
+  width: 90%;
+  margin: 1.5rem auto 0rem auto;
+  gap: 16rem;
 }
 
 .next-btn,
 .before-btn {
-  max-width: 120px;
+  max-width: 100px;
   width: 33vw;
-  max-height: 55px;
-  height: 7.5vh;
-  padding: 0.6rem 0.8rem 3rem 0.8rem;
+  max-height: 50px;
+  height: 6vh;
+  padding: 0.7rem;
   border-radius: 10px;
-  font-family: "Pretendard Variable";
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 700;
-  transition: background-color 0.3s ease;
   text-align: center;
-
   text-decoration: none;
 }
 
-/* 다음 버튼 */
 .next-btn {
   background: #45624e;
   color: #fff;
 }
 
-/* 이전 버튼 */
 .before-btn {
   background: #e4e6d9;
   color: #45624e;
+}
+
+.q1-page .before-btn {
+  visibility: hidden;
 }

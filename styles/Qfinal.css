@@ -3,8 +3,18 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  text-align: center; /* 텍스트도 중앙 정렬 */
+  margin: 0 auto; /* 필요시 중앙 정렬 */
+  padding: 1rem 0; /* 위아래 간격 */
 }
-
+.text1 {
+  color: #45624e;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.04rem;
+  margin-bottom: 0.5rem;
+}
 .highlight {
   color: #45624e;
   font-family: "Pretendard Variable";
@@ -13,19 +23,9 @@
   letter-spacing: 0.04rem;
 }
 
-.text1 {
-  color: #45624e;
-  font-family: "Pretendard Variable";
-  font-size: 1.5rem; /* 약 24px */
-  font-weight: 600;
-  letter-spacing: 0.04rem;
-  margin-bottom: 0.5rem;
-}
-
 .text2 {
   color: #3a5141;
-  font-family: "Pretendard Variable";
-  font-size: 2rem; /* 약 32px */
+  font-size: 2rem;
   font-weight: 600;
   letter-spacing: 0.05rem;
   margin-top: 0;
@@ -34,7 +34,6 @@
 
 .text3 {
   color: #9d9d9d;
-  font-family: "Pretendard Variable";
   font-size: 1.5rem;
   font-weight: 600;
   letter-spacing: 0.04rem;
@@ -45,7 +44,6 @@
 .text4 {
   color: #45624e;
   text-align: center;
-  font-family: "Pretendard Variable";
   font-size: 1.5rem;
   font-weight: 600;
   letter-spacing: 0.04rem;
@@ -55,7 +53,6 @@
 
 .text5 {
   color: #45624e;
-  font-family: "Pretendard Variable";
   font-size: 1.5rem;
   font-weight: 600;
   letter-spacing: 0.04rem;
@@ -75,8 +72,7 @@
   margin-top: 0;
   color: #fff;
   text-align: center;
-  font-family: "Pretendard Variable";
-  font-size: 1.2rem; /* 약 19px */
+  font-size: 1.2rem;
   font-weight: 700;
   line-height: 1.4rem;
   letter-spacing: -0.05rem;
