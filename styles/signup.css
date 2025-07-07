@@ -218,3 +218,12 @@ h2 {
 .checkbox-group input[type="checkbox"]:checked::after {
   display: block;
 }
+
+input.error {
+  border: 2px solid #ff0000 !important;
+}
+
+label.error {
+  color: #ff0000 !important;
+  font-weight: bold;
+}

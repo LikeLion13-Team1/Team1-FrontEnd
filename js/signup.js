@@ -50,7 +50,18 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
+    const confirmPasswordInput = document.getElementById("confirmPassword");
+    const confirmPasswordLabel = document.querySelector(
+      'label[for="confirmPassword"]'
+    );
+
+    // 에러 클래스 먼저 제거 (기존 스타일 제거)
+    confirmPasswordInput.classList.remove("error");
+    confirmPasswordLabel.classList.remove("error");
+
     if (password !== confirmPassword) {
+      confirmPasswordInput.classList.add("error");
+      confirmPasswordLabel.classList.add("error");
       alert("비밀번호가 일치하지 않습니다.");
       return;
     }
