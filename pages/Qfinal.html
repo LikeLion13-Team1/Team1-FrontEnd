@@ -45,6 +45,13 @@
       import { loadSidebar } from "../js/loadSidebar.js";
       loadSidebar();
 
+      // 루틴 바로가기
+      document.querySelector(".baro-btn").addEventListener("click", () => {
+        const routine = answers.routin || "루틴1";
+        window.location.href = `../pages/routineset.html?routine=${encodeURIComponent(
+          routine
+        )}`;
+      });
       document.addEventListener("DOMContentLoaded", () => {
         const answers = JSON.parse(localStorage.getItem("surveyAnswers")) || {};
         const routine = answers.routin || "루틴1"; // 기본값
@@ -55,6 +62,12 @@
         });
 
         document.querySelector(".baro-btn").textContent = `${routine} 바로가기`;
+
+        document.querySelector(".baro-btn").addEventListener("click", () => {
+          window.location.href = `../pages/routineset.html?routine=${encodeURIComponent(
+            routine
+          )}`;
+        });
       });
     </script>
   </body>

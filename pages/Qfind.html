@@ -48,18 +48,19 @@
 
     <script type="module">
       import { loadHeader } from "../js/loadHeader.js";
-      loadHeader();
       import { loadSidebar } from "../js/loadSidebar.js";
+      loadHeader();
       loadSidebar();
 
       document.addEventListener("DOMContentLoaded", () => {
         const questionKey = document.body.dataset.questionKey;
 
         if (!questionKey) {
-          console.warn("❗ data-question-key가 없음! 저장 스킵함.");
+          console.warn("❗ data-question-key 없음, 루틴 저장 스킵");
           return;
         }
 
+        // 루틴 슬롯 선택 시 저장
         document.querySelectorAll(".option-btn").forEach((btn) => {
           btn.addEventListener("click", (e) => {
             document
@@ -69,63 +70,118 @@
 
             const answer =
               e.target.dataset.answer || e.target.textContent.trim();
+            if (!answer) return;
+
             const answers =
               JSON.parse(localStorage.getItem("surveyAnswers")) || {};
             answers[questionKey] = answer;
             localStorage.setItem("surveyAnswers", JSON.stringify(answers));
-            console.log(`${questionKey} 저장됨:`, answer);
+            console.log(`[✅ 루틴 선택 저장] ${questionKey}: ${answer}`);
           });
         });
+
+        processRoutineRecommendation(); // 설문 결과 기반 루틴 추천 시작
       });
-      // 1. 설문 답 불러오기
-      const answers = JSON.parse(localStorage.getItem("surveyAnswers"));
 
-      // 2. 텍스트 답안을 ENUM 값으로 매핑
-      const answerToCode = {
-        "으! 못 참아요. 바로 정리부터 해요.": "CLEAN_IMMEDIATELY",
-        "조금 참다가 결국 치워요.": "CLEAN_EVENTUALLY",
-        "안 보여요. 난 못 본 걸로 할래요.": "IGNORE",
+      async function processRoutineRecommendation() {
+        const answers = JSON.parse(localStorage.getItem("surveyAnswers")) || {};
 
-        "계획부터 세우고 하나하나 해결해요.": "PLAN_AND_EXECUTE",
-        "그날그날 기분에 따라 달라요.": "GO_WITH_FLOW",
-        "일단 침대에 누워요. 그냥 내일 하는 건 어때요?": "AVOID",
+        const answerToCode = {
+          "으! 못 참아요. 바로 정리부터 해요.": "CLEAN_IMMEDIATELY",
+          "조금 참다가 결국 치워요.": "CLEAN_EVENTUALLY",
+          "안 보여요. 난 못 본 걸로 할래요.": "IGNORE",
 
-        "집은 자고로 먼지 한 톨 없이 반짝반짝 해야죠.": "SPOTLESS",
-        "정리만 되어도 그냥 만족하며 삽니다.": "TIDY_ENOUGH",
-        "내 마음이 편하면 그게 깔끔 아닌가요?": "COMFORTABLE",
+          "계획부터 세우고 하나하나 해결해요.": "PLAN_AND_EXECUTE",
+          "그날그날 기분에 따라 달라요.": "GO_WITH_FLOW",
+          "일단 침대에 누워요. 그냥 내일 하는 건 어때요?": "AVOID",
 
-        "힘들어도 좋아요:) 확실한 루틴을 주세요.": "FIRST_AND_CLEAR",
-        "유연한 게 좋아요.": "FLEXIBLE",
-        "작고 쉬운 거부터 주세요..": "SMALL_AND_EASY",
-      };
+          "집은 자고로 먼지 한 톨 없이 반짝반짝 해야죠.": "SPOTLESS",
+          "정리만 되어도 그냥 만족하며 삽니다.": "TIDY_ENOUGH",
+          "내 마음이 편하면 그게 깔끔 아닌가요?": "COMFORTABLE",
 
-      // 3. 백엔드에 보낼 ENUM 형식 만들기
-      const featureData = {
-        messyHouse: answerToCode[answers.q1],
-        cleaningStyle: answerToCode[answers.q2],
-        cleanHouse: answerToCode[answers.q3],
-        routineStyle: answerToCode[answers.q4],
-      };
+          "힘들어도 좋아요:) 확실한 루틴을 주세요.": "FIRST_AND_CLEAR",
+          "유연한 게 좋아요.": "FLEXIBLE",
+          "작고 쉬운 거부터 주세요..": "SMALL_AND_EASY",
+        };
 
-      // 4. 백엔드에 POST 요청
-      fetch("http://localhost:8080/api/v1/members/feature", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("accessToken"),
-        },
-        body: JSON.stringify(featureData),
-      })
-        .then((res) => res.json())
-        .then((data) => {
+        const featureData = {
+          messyHouse: answerToCode[answers.q1],
+          cleaningStyle: answerToCode[answers.q2],
+          cleanHouse: answerToCode[answers.q3],
+          routineStyle: answerToCode[answers.q4],
+        };
+
+        try {
+          const token = localStorage.getItem("token");
+          if (!token) throw new Error("로그인 토큰 없음");
+
+          const data = {
+            result: {
+              routineType: "ROUTINE_1_MORNING_SET", // 💡 임의로 설정
+            },
+          };
+
           console.log("루틴 분석 결과:", data.result.routineType);
-          // 결과 보여주기 (예: 결과 영역이 있다면)
           document.querySelector(".result-box").textContent =
             data.result.routineType;
-        })
-        .catch((err) => {
-          console.error("루틴 분석 실패:", err);
-        });
+
+          // 2. 루틴 추천 요청
+          const recommendRes = await fetch(
+            "http://localhost:8080/api/v1/routines/recommendation",
+            {
+              method: "POST",
+              headers: {
+                Authorization: "Bearer " + token,
+              },
+            }
+          );
+
+          const recommendJson = await recommendRes.json();
+          console.log("🎁 추천된 루틴 정보:", recommendJson);
+
+          // 여기에 실제 추천된 루틴 텍스트 등을 localStorage에 저장할 수도 있음
+          const recommendedRoutineName = "매일 아침 저녁 정리 루틴 세트"; // 임시 고정 (추천 API 응답 포맷 확인 후 수정)
+
+          // 3. 루틴 생성 요청
+          const now = new Date().toISOString();
+          const createRoutineData = {
+            name: recommendedRoutineName,
+            description: `${routineType} 기반 추천 루틴`,
+            routineStatus: "PROCESSING",
+            cycle: "NO",
+            startAt: now,
+            endAt: now,
+          };
+
+          const createRes = await fetch(
+            "http://localhost:8080/api/v1/routines",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + token,
+              },
+              body: JSON.stringify(createRoutineData),
+            }
+          );
+
+          const createJson = await createRes.json();
+          console.log("✅ 루틴 생성 완료:", createJson);
+
+          // 생성된 루틴 ID를 저장 (이후 routineset.html에서 사용)
+          const routineId = createJson.result.routineId;
+          const updatedAnswers = {
+            ...answers,
+            routineType,
+            routineId,
+            routineName: recommendedRoutineName,
+          };
+
+          localStorage.setItem("surveyAnswers", JSON.stringify(updatedAnswers));
+        } catch (err) {
+          console.error("❌ 루틴 처리 실패:", err);
+        }
+      }
     </script>
   </body>
 </html>
