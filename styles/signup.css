@@ -6,52 +6,53 @@
 
 body,
 html {
+  font-family: "Pretendard", sans-serif;
   width: 100%;
   height: 100%;
   background: linear-gradient(to top, #f3f4ec, #ffffff);
   display: flex;
   justify-content: center;
   align-items: center;
-  letter-spacing: -1px;
-  overflow-x: hidden; /* 좌우 스크롤 방지 */
 }
+
 .login-box {
-  top: 115px;
-  left: 504px;
-  width: 912px;
-  height: 850px;
+  top: 77px;
+  left: 336px;
+  width: 607px;
+  height: 566px;
   background: linear-gradient(to bottom, #f3f4ec, #ffffff60);
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-  padding: 50px 80px;
+  padding: 36px 80px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .logo img {
-  width: 100px;
+  width: 66px;
   height: auto;
   display: block;
   margin: 0;
 }
 
 h1 {
-  font-size: 44px;
+  font-size: 28px;
   font-weight: 700;
   color: #45624e;
-  margin-top: 0;
   line-height: 1.2;
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 18px;
+  letter-spacing: -2px;
 }
 
 .social-buttons {
-  width: 410px;
+  width: 273px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-bottom: 34px;
+  gap: 6px;
+  margin-bottom: 5px;
+  letter-spacing: -1.4px;
 }
 
 .social-button {
@@ -59,12 +60,13 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 60px;
+  padding-left: 14px;
+  height: 40px;
   border: 1px solid #45624e;
   border-radius: 28px;
   background-color: #d9d9d900;
-  font-size: 20px;
-  font-weight: 800;
+  font-size: 14px;
+  font-weight: 700;
   color: #3a5141;
   cursor: pointer;
 }
@@ -72,26 +74,26 @@ h1 {
 .social-button img {
   position: absolute;
   border-radius: 90%;
-  left: 40px;
-  width: 29px;
-  height: 29px;
+  left: 30px;
+  width: 19px;
+  height: 19px;
 }
 
 .divider {
   display: flex;
   align-items: center;
   width: 100%;
-  margin: 18px 0;
+  margin: 12px 0 10px 0px;
   color: #969696;
-  font-weight: 600;
-  font-size: 16px;
+  font-weight: 550;
+  font-size: 14px;
 }
 
 .divider::before,
 .divider::after {
   content: "";
   flex: 1;
-  height: 1.2px;
+  height: 1px;
   background-color: #cacaca;
 }
 
@@ -101,15 +103,16 @@ h1 {
 }
 
 .form-group {
-  width: 410px;
-  margin-bottom: 14px;
+  width: 273px;
+  margin-bottom: 7px;
+  letter-spacing: -1px;
 }
 
 label {
-  font-size: 20px;
+  font-size: 12px;
   font-weight: 700;
   color: #3a5141;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
   display: block;
 }
 
@@ -119,70 +122,72 @@ input[type="finalEmail"],
 input[type="confirmPassword"],
 input[type="text"] {
   width: 100%;
-  height: 60px;
-  padding: 10px;
+  height: 40px;
+  padding: 7px;
   color: black;
   border: 1px solid #45624e;
   border-radius: 10px;
-  font-size: 14px;
   background-color: #d9d9d900;
   font-size: 20px;
 }
 
 .login-button {
-  width: 410px;
+  width: 273px;
+  line-height: 39px;
   background-color: #45624e;
   color: white;
   border: none;
   border-radius: 28px;
   font-weight: 500;
-  font-size: 20px;
-  margin-top: 15px;
-  line-height: 60px;
+  font-size: 14px;
+  margin-top: 11px;
   cursor: pointer;
+  letter-spacing: -1.4px;
 }
 
 .signup-text {
-  margin-top: 10px;
-  font-weight: 600;
-  font-size: 21px;
+  margin-top: 18px;
+  font-weight: 550;
+  font-size: 13px;
   color: #3a5141;
+  letter-spacing: -1px;
 }
 
 .signup-text a {
   color: #3a5141;
-  font-weight: 800;
+  font-weight: 650;
   text-decoration: underline;
 }
 
 h2 {
-  font-size: 24px;
+  font-size: 16px;
   font-weight: 600;
   color: #45624e;
   line-height: 1.2;
   text-align: center;
-  letter-spacing: 1.2px;
+  letter-spacing: 12px;
 }
 
 .password-guide {
-  font-size: 14px;
+  font-size: 10px;
   font-weight: 800px;
   color: #969696;
-  margin-left: 225px;
+  text-align: right; /* 오른쪽 정렬로 대체 */
+  margin-top: 5px;
 }
 
 .checkbox-group {
-  width: 220px;
+  width: 273px;
   display: flex;
   flex-direction: column;
   align-items: flex-start; /* 왼쪽 정렬 */
-  margin-left: 220px;
 }
 
 .checkbox-group label {
+  width: 100%;
   display: flex;
   align-items: center;
-  font-size: 16px;
+  font-size: 10px;
   color: #969696;
   line-height: 1;
   letter-spacing: -0.2px;
@@ -190,8 +195,8 @@ h2 {
 
 .checkbox-group input[type="checkbox"] {
   appearance: none;
-  width: 14px;
-  height: 14px;
+  width: 10px;
+  height: 10px;
   border: 1px solid #999999;
   margin-right: 8px;
   cursor: pointer;
@@ -201,9 +206,9 @@ h2 {
 .checkbox-group input[type="checkbox"]::after {
   content: "";
   position: absolute;
-  left: 3px;
-  width: 4px;
-  height: 10px;
+  left: 1px;
+  width: 2px;
+  height: 5px;
   border: solid #45624e;
   border-width: 0 2.5px 2.5px 0;
   transform: rotate(45deg);

@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("finalEmail").value = email;
     page1.style.display = "none";
-    page2.style.display = "block";
+    page2.style.display = "flex";
   });
 
   // ✅ 로그인 페이지로 돌아가기
