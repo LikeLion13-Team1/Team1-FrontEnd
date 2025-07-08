@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <title>마이페이지</title>
-    <link rel="stylesheet" href="../styles/mypage.css" />
     <link rel="stylesheet" href="../styles/global.css" />
+    <link rel="stylesheet" href="../styles/mypage.css" />
     <link rel="stylesheet" href="../styles/sidebar.css" />
     <link rel="stylesheet" href="../styles/header.css" />
   </head>
@@ -21,27 +21,22 @@
                 <div class="profile-column">
                   <img src="../assets/bot.png" alt="프로필 이미지" class="profile-img" />
                 </div>
-                <div class="info-right">
+                <div class="info-grid">
                   <div class="info-row">
-                    <div class="info-label">
-                      <span>닉네임</span>
-                      <strong>김멋사</strong>
-                    </div>
-                    <div class="info-label">
-                      <span>이메일</span>
-                      <strong>user123</strong>
-                    </div>
+                    <span>닉네임</span>
+                    <strong id="nickname"></strong>
                   </div>
-
                   <div class="info-row">
-                    <div class="info-label">
-                      <span>프로필 사진</span>
-                      <button class="edit-btn">수정</button>
-                    </div>
-                    <div class="info-label">
-                      <span>비밀번호</span>
-                      <button class="edit-btn">수정</button>
-                    </div>
+                    <span>이메일</span>
+                    <strong id="email"></strong>
+                  </div>
+                  <div class="info-row">
+                    <span>함께한지</span>
+                    <strong id="joindays"></strong>
+                  </div>
+                  <div class="info-row">
+                    <span>비밀번호</span>
+                    <button class="edit-btn" id="editBtn">수정</button>
                   </div>
                 </div>
               </div>
@@ -57,58 +52,88 @@
                <li>
                   <strong>루틴 1</strong>
                   <span>매일 아침 저녁 정리 루틴 세트</span>
-                  <button class="go-btn">바로가기</button>
+                  <button class="go-btn" data-url="routine1.html">바로가기</button> <!--페이지 이동형-->
                 </li>
                 <li>
                   <strong>루틴 2</strong>
                   <span class="empty">루틴이 비어있어요.</span>
-                  <button class="go-btn">바로가기</button>
+                  <button class="go-btn" data-url="routineset.html">바로가기</button>
                 </li>
                 <li>
                   <strong>루틴 3</strong>
                   <span class="empty">루틴이 비어있어요.</span>
-                  <button class="go-btn">바로가기</button>
+                  <button class="go-btn" data-url="emptyroutine.html">바로가기</button>
                 </li>
                 <li>
                   <strong>루틴 4</strong>
-                  <span>멤버십에 가입 후 이용해 보세요.</span>
+                  <span class="empty">멤버십에 가입 후 이용해 보세요.</span>
                 </li>
               </ul>
-              <a herf="#" class="membership-note">멤버십에 가입하시면 루틴을 무제한으로 이용할 수 있어요.</a>
+              <a href="#" class="membership-note">멤버십에 가입하시면 루틴을 무제한으로 이용할 수 있어요.</a>
             </section>
 
             <!-- 히스토리 (틀만) -->
             <section class="history-box">
-            <h2><img src="../assets/history.png" alt="히스토리 아이콘" /> 히스토리</h2>              <div class="history-placeholder"></div>
+              <h2><img src="../assets/history.png" alt="히스토리 아이콘" /> 히스토리</h2>                            
+              <ul class="history-list">
+                <li>
+                  <strong>6월 20일</strong>
+                  <span class="dot">·</span>
+                  <span></span>
+                  <button class="arrow-btn" id="openPageBtn">&gt;</button> <!--모달형-->
+                </li>
+                <li>
+                  <strong>6월 19일</strong>
+                  <span class="dot">·</span>
+                  <span></span>
+                  <button class="arrow-btn" id="openPageBtn">&gt;</button>
+                </li>
+                <li>
+                  <strong>6월 18일</strong>
+                  <span class="dot">·</span>
+                  <span></span>
+                  <button class="arrow-btn" id="openPageBtn">&gt;</button>
+                </li>
+                <li>
+                  <strong>6월 17일</strong>
+                  <span class="dot">·</span>
+                  <span></span>
+                  <button class="arrow-btn" id="openPageBtn">&gt;</button>
+                </li>
+              </ul>
+              <button class="show-btn" id="showBtn">&gt;</button>
             </section>
           </div>
 
           <!-- 계정 설정 -->
-          <h2><img src="../assets/setting.png" alt="계정 설정 아이콘" /> 계정 설정</h2>
-          <section class="settings-box">
-            <div class="settings-grid">
-              <div class="setting-row">
-                <span>알림</span>
-                <label class="toggle-switch">
-                  <input type="checkbox" checked />
-                  <span class="slider"></span>
-                </label>
+            <section class="setting">
+              <h2><img src="../assets/setting.png" alt="계정 설정 아이콘" /> 계정 설정</h2>
+              <div class="settings-box">
+                <div class="settings-grid">
+                  <div class="setting-row">
+                    <span>알림</span>
+                    <label class="toggle-switch">
+                      <input type="checkbox" checked />
+                      <span class="slider"></span>
+                    </label>
+                  </div>
+                  <div class="setting-row">
+                    <span>로그아웃</span>
+                    <button class="arrow-btn" id="logoutBtn">&gt;</button> <!--모달형-->
+                  </div>
+                  <div class="setting-row">
+                    <span>결제 및 구독</span>
+                    <button class="edit-btn" id="membershipBtn">수정</button>
+                  </div>              
+                  <div class="setting-row">
+                    <span>탈퇴하기</span>
+                    <button class="arrow-btn" id="deleteBtn">&gt;</button>
+                  </div>
+                </div>
               </div>
-              <div class="setting-row">
-                <span>로그아웃</span>
-                <a href="#">&gt;</a>
-              </div>
-              <div class="setting-row">
-                <span>결제 및 구독</span>
-                <button class="edit-btn">수정</button>
-              </div>              <div class="setting-row">
-                <span>탈퇴하기</span>
-                <a href="#">&gt;</a>
-              </div>
-            </div>
-          </section>
+            </section>
+          </div>
         </div>
-      </div>
 
     <script type="module">
       import { loadSidebar } from "../js/loadSidebar.js";
