@@ -35,5 +35,5 @@ document.querySelector(".card2").addEventListener("click", () => {
   window.location.href = "chatbot.html";
 });
 document.querySelector(".card3").addEventListener("click", () => {
-  window.location.href = "calender.html";
+  window.location.href = "calendar.html";
 });

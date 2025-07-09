@@ -26,12 +26,16 @@
   background: #45624e;
   color: #fff;
 }
-
+.next-btn:hover {
+  background-color: #324638;
+}
 .before-btn {
-  background: #e4e6d9;
+  background-color: #e4e6d9;
   color: #45624e;
 }
-
+.before-btn:hover {
+  background-color: #e3e3e3;
+}
 .q1-page .before-btn {
   visibility: hidden;
 }

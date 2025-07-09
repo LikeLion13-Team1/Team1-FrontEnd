@@ -142,7 +142,7 @@
 
 .option-btn:hover,
 .option-btn.selected {
-  background-color: #ddddda;
+  background-color: #e3e3e3;
   transform: scale(1.02);
 }
 
