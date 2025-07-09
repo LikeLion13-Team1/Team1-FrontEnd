@@ -17,38 +17,40 @@
           <div id="chatBox" class="chat-box"></div>
           <p class="welcome-message">오늘은 어떤 살림 고민이 있으신가요?</p>
           <div class="buttonArea">
-            <p class="button-description">추천 질문</p>
+            <di class="button-description">추천 질문</di>
             <button class="question-btn" id="routineBtn">
               오늘 하루 루틴 추천해줘
             </button>
             <button class="question-btn" id="weatherBtn">
-              오늘 날씨 알려줘
+              오늘의 날씨와 살림 알려줘
             </button>
             <button class="question-btn" id="tipBtn">
               살림 꿀팁 하나만 알려줘
             </button>
           </div>
-          <div class="inputArea">
-            <div class="input-wrapper">
-              <input
-                id="chatInput"
-                placeholder="안녕하세요, 살리미에게 궁금한 것을 물어보세요 :)"
+
+          <div class="input-wrapper">
+            <input
+              id="chatInput"
+              placeholder="안녕하세요, 살리미에게 궁금한 것을 물어보세요 :)"
+            />
+            <button id="sendBtn">
+              <img
+                src="../assets/send.svg"
+                alt="send-icon"
+                width="30"
+                height="30"
               />
-              <button id="sendBtn">
-                <img src="../assets/send.svg" alt="send-icon" />
-              </button>
-            </div>
+            </button>
           </div>
         </div>
       </section>
     </div>
-
+    <script src="../js/auth/authCheck.js"></script>
     <script type="module">
       import { loadSidebar } from "../js/loadSidebar.js";
-      loadSidebar();
-    </script>
-    <script type="module">
       import { loadHeader } from "../js/loadHeader.js";
+      loadSidebar();
       loadHeader();
     </script>
     <script src="../js/config.js"></script>
