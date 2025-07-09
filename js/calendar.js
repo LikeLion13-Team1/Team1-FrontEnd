@@ -41,7 +41,7 @@ function renderCalendar(year, month) {
     daysContainer.appendChild(btn);
   }
 
-  // 현재 달 날짜 렌더링
+  // 현재 달 날짜 렌더링, 선택한 날짜 기준 어제,다음날,다다음날, 다다다음날까지 반영
   const range = [
     selectedDate - 1,
     selectedDate + 1,
@@ -60,8 +60,8 @@ function renderCalendar(year, month) {
 
     dayBtn.onclick = () => {
       selectedDate = date;
-      renderCalendar(viewYear, viewMonth);
-      showRoutines(viewYear, viewMonth, selectedDate);
+      renderCalendar(viewYear, viewMonth); //캘린더 버튼 표시
+      showRoutines(viewYear, viewMonth, selectedDate); //루틴 표시
     };
 
     daysContainer.appendChild(dayBtn);
@@ -78,12 +78,14 @@ function renderCalendar(year, month) {
   }
 }
 
+//루틴박스 초기화
 function showRoutines(year, month, date) {
   const routineContainer = document.getElementById("routine-container");
   while (routineContainer.firstChild) {
     routineContainer.removeChild(routineContainer.firstChild);
   }
 
+  //getDay() --> 요일(숫자)를 요일(문자)로
   const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   // 날짜 기준 배열 구성: 전날, 선택일, 다음날, 다다음날
@@ -93,7 +95,7 @@ function showRoutines(year, month, date) {
     baseDate, // 선택일
     new Date(baseDate.getTime() + 1 * 86400000), // 다음날
     new Date(baseDate.getTime() + 2 * 86400000), // 다다음날
-    new Date(baseDate.getTime() + 3 * 86400000),
+    new Date(baseDate.getTime() + 3 * 86400000), //다다다음날
   ];
 
   datesToShow.forEach((dateObj) => {
@@ -102,7 +104,7 @@ function showRoutines(year, month, date) {
     const displayDate = dateObj.getDate();
     const weekday = daysOfWeek[dateObj.getDay()];
 
-    // ✅ 누락된 column 생성 추가
+    //날짜, 요일, 루틴 박스 감싸줌
     const column = document.createElement("div");
     column.className = "routine-column";
 
@@ -116,25 +118,21 @@ function showRoutines(year, month, date) {
     }
 
     const routineHeader = document.createElement("div");
-    routineHeader.className = "routine-date";
+    routineHeader.className = "routine-date"; //날짜+요일을 감쌈
 
     const dateNum = document.createElement("div");
-    dateNum.className = "routine-day-number";
+    dateNum.className = "routine-day-number"; //날짜
     dateNum.textContent = displayDate;
 
     const weekdayEl = document.createElement("div");
-    weekdayEl.className = "routine-day-week";
+    weekdayEl.className = "routine-day-week"; //요일
     weekdayEl.textContent = weekday;
 
     routineHeader.appendChild(dateNum);
     routineHeader.appendChild(weekdayEl);
     column.appendChild(routineHeader);
 
-    const mockRoutines = getMockRoutines(
-      displayYear,
-      displayMonth,
-      displayDate
-    );
+    const Routines = getRoutines(displayYear, displayMonth, displayDate);
     const stepEl = document.createElement("div");
     stepEl.className = "routine-step";
     column.appendChild(stepEl);
@@ -142,36 +140,36 @@ function showRoutines(year, month, date) {
     const hr = document.createElement("hr");
     hr.className = "routine-divider";
     column.appendChild(hr);
+    // Routines.forEach(...) 전
+    if (Routines.length === 0) {
+      const emptyEl = document.createElement("div");
+      emptyEl.className = "routine-box empty";
+      emptyEl.textContent = "루틴 없음"; // 또는 아이콘/공백 등 원하는 표시
+      column.appendChild(emptyEl);
+    } else {
+      Routines.forEach((task) => {
+        const taskEl = document.createElement("div");
+        taskEl.className = "routine-box";
 
-    mockRoutines.forEach((task) => {
-      //  routine-box 생성
-      const taskEl = document.createElement("div");
-      taskEl.className = "routine-box";
+        const textEl = document.createElement("p");
+        textEl.className = "routine-text";
+        textEl.textContent = task;
 
-      //텍스트 요소 추가
-      const textEl = document.createElement("p");
-      textEl.className = "routine-text";
-      textEl.textContent = task;
+        const imgEl = document.createElement("img");
+        imgEl.className = "routine-img";
+        imgEl.src = "../assets/time.png";
+        imgEl.alt = "routine image";
 
-      //이미지 요소 추가
-      const imgEl = document.createElement("img");
-      imgEl.className = "routine-img";
-      imgEl.src = "../assets/time.png"; // 이미지 경로 실제로 바꿔줘
-      imgEl.alt = "routine image";
-
-      // routine-box 안에 텍스트와 이미지 삽입
-      taskEl.appendChild(textEl);
-      taskEl.appendChild(imgEl);
-
-      // column에 붙이기
-      column.appendChild(taskEl);
-    });
-
+        taskEl.appendChild(textEl);
+        taskEl.appendChild(imgEl);
+        column.appendChild(taskEl);
+      });
+    }
     routineContainer.appendChild(column);
   });
 }
 // 예시 루틴 데이터 (테스트용)
-function getMockRoutines(year, month, date) {
+function getRoutines(year, month, date) {
   const dummy = {
     10: ["창문 열고 환기", "쓰레기 비우기", "마른 걸레로 바닥 쓰기"],
     11: ["식탁 닦기", "세탁물 확인", "내일 일정 체크", "에어컨 필터 교체하기"],
@@ -186,7 +184,7 @@ function getMockRoutines(year, month, date) {
   };
   return dummy[date] || [];
 }
-
+//전달, 전월로 이동
 function prevMonth() {
   if (viewMonth === 0) {
     viewMonth = 11;
@@ -197,7 +195,7 @@ function prevMonth() {
   renderCalendar(viewYear, viewMonth);
   showRoutines(viewYear, viewMonth, selectedDate);
 }
-
+//다음달 , 다음 월로 이동
 function nextMonth() {
   if (viewMonth === 11) {
     viewMonth = 0;

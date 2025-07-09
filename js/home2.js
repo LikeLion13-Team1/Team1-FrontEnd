@@ -33,4 +33,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.error("사용자 정보 요청 실패:", err);
     welcomeEl.innerHTML = `멋사님, 오늘도 좋은 하루 보내세요 :)`;
   }
+  document.querySelector(".card1 ")?.addEventListener("click", () => {
+    window.location.href = "Q1.html";
+  });
+  document.querySelector(".card2 ")?.addEventListener("click", () => {
+    window.location.href = "chatbot.html";
+  });
+  document.querySelector(".card3 ")?.addEventListener("click", () => {
+    window.location.href = "calendar.html";
+  });
 });
