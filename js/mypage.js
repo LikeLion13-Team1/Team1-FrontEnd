@@ -1,73 +1,54 @@
-console.log("Mypage script loaded");
+import { fetchWithAuth } from "../js/auth/auth.js";
 
 document.getElementById("openPageBtn").addEventListener("click", () => {
   document.getElementById("myModal").style.display = "block";
-}); //연결하려는 모달
+});
 
-//회원정보 불러오기
+// ✅ 회원정보 불러오기
 document.addEventListener("DOMContentLoaded", async () => {
   try {
-    const token = localStorage.getItem("accessToken");
-    const response = await fetch(
-      "http://13.209.221.182:8080/api/v1/members/info",
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const response = await fetchWithAuth(
+      "http://13.209.221.182:8080/api/v1/members/info"
+    ); // Authorization은 fetchWithAuth가 처리
 
-    if (!response.ok) {
-      throw new Error("회원 정보 불러오기 실패");
-    }
+    if (!response.ok) throw new Error("회원 정보 불러오기 실패");
 
     const data = await response.json();
+    const { username, email, createdAt } = data.result;
 
-    document.getElementById("nickname").textContent = data.result.nickname;
-    document.getElementById("email").textContent = data.result.email;
+    document.getElementById("nickname").textContent = username;
+    document.getElementById("email").textContent = email;
 
-    //함께한 날 계산 (예: 가입일이 서버에서 내려올 경우)
-    //const joinedDate = new Date(data.result.createdAt); // 가입일
-    //const today = new Date();
-    //const days = Math.floor((today - joinedDate) / (1000 * 60 * 60 * 24));
-    //document.getElementById("joinedDays").textContent = `${days}일째`;
+    if (createdAt) {
+      const joinDate = new Date(createdAt);
+      const today = new Date();
+      const diffDays = Math.floor((today - joinDate) / (1000 * 60 * 60 * 24));
+      document.getElementById("joindays").textContent = `${diffDays}일 째`;
+    }
   } catch (error) {
     console.error("유저 정보를 불러오는 중 오류 발생:", error);
   }
 });
 
-//페이지 연결
+// ✅ 페이지 연결
 document.addEventListener("DOMContentLoaded", () => {
-  const goButtons = document.querySelectorAll(".go-btn");
-
-  goButtons.forEach((button) => {
+  document.querySelectorAll(".go-btn").forEach((button) => {
     button.addEventListener("click", () => {
       const targetUrl = button.getAttribute("data-url");
-      if (targetUrl) {
-        window.location.href = targetUrl;
-      }
+      if (targetUrl) window.location.href = targetUrl;
     });
   });
 });
 
-//로그아웃
+// ✅ 로그아웃
 document.getElementById("logoutBtn").addEventListener("click", async () => {
-  const token = localStorage.getItem("accessToken");
-
-  if (!token) {
-    alert("로그인된 상태가 아닙니다.");
-    return;
-  }
-
   try {
-    const response = await fetch(
-      "http://13.209.221.182:8080/api/v1/members/withdrawal",
+    const response = await fetchWithAuth(
+      "http://13.209.221.182:8080/api/v1/auth/logout",
       {
-        method: "DELETE",
+        method: "POST",
         headers: {
-          Authorization: "Bearer ${token}}",
-          "Content-Type": "application/json",
+          "Content-Type": "application/json", // Authorization은 fetchWithAuth가 처리
         },
       }
     );
@@ -79,7 +60,7 @@ document.getElementById("logoutBtn").addEventListener("click", async () => {
       localStorage.removeItem("accessToken");
       window.location.href = "login.html";
     } else {
-      alert("로그아웃 실패: ${data.message");
+      alert(`로그아웃 실패: ${data.message}`);
     }
   } catch (error) {
     console.error("서버오류:", error);
