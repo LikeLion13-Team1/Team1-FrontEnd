@@ -152,20 +152,13 @@
 .card1 {
   background: #eef1f5;
 }
-.card1:hover {
-  background: #d0d3d6;
-}
+
 .card2 {
   background: #eff5f1;
 }
-.card2:hover {
-  background: #d4dad6;
-}
+
 .card3 {
   background: #f2efea;
-}
-.card3:hover {
-  background: #d9d7d4;
 }
 
 .title {
@@ -232,7 +225,7 @@
 }
 
 .signup-btn:hover {
-  background-color: #2e4032;
+  background: #324638;
 }
 
 .home1-page .right-wrapper {

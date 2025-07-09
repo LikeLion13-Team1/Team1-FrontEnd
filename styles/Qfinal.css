@@ -78,3 +78,6 @@
   letter-spacing: -0.05rem;
   border: 0;
 }
+.baro-btn:hover {
+  background-color: #324638;
+}

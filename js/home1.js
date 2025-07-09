@@ -14,16 +14,4 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelector(".home1-signup")?.addEventListener("click", () => {
     window.location.href = "signup.html";
   });
-
-  document.querySelector(".card1")?.addEventListener("click", () => {
-    window.location.href = "Q1.html";
-  });
-
-  document.querySelector(".card2")?.addEventListener("click", () => {
-    window.location.href = "chatbot.html";
-  });
-
-  document.querySelector(".card3")?.addEventListener("click", () => {
-    window.location.href = "calender.html";
-  });
 });
