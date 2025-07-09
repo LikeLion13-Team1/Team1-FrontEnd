@@ -3,36 +3,35 @@
   justify-content: center;
   align-items: center;
   width: 1000vw;
-  margin: 2rem 2rem 6rem 2rem;
-  gap: 24rem;
+  margin: 2rem 2rem 0rem 2rem;
+  gap: 16rem;
   flex-wrap: nowrap; /* 버튼 줄바꿈 방지 */
 }
 
 .next-btn,
 .before-btn {
-  max-width: 120px;
+  max-width: 100px;
   width: 33vw;
-  max-height: 55px;
-  height: 7.5vh;
-  padding: 0.6rem 0.8rem 3rem 0.8rem;
+  max-height: 50px;
+  height: 6vh;
+  padding: 0.7rem;
   border-radius: 10px;
-  font-family: "Pretendard Variable";
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 700;
-  transition: background-color 0.3s ease;
   text-align: center;
-
   text-decoration: none;
 }
 
-/* 다음 버튼 */
 .next-btn {
   background: #45624e;
   color: #fff;
 }
 
-/* 이전 버튼 */
 .before-btn {
   background: #e4e6d9;
   color: #45624e;
+}
+
+.q1-page .before-btn {
+  visibility: hidden;
 }

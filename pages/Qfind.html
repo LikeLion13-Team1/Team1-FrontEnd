@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="../styles/Q2.css" />
     <link rel="stylesheet" href="../styles/Qfind.css" />
   </head>
-  <body>
+  <body data-question-key="routin">
     <header class="main-header">
       <div id="header"></div>
     </header>
@@ -48,11 +48,10 @@
 
     <script type="module">
       import { loadHeader } from "../js/loadHeader.js";
-      loadHeader();
-    </script>
-    <script type="module">
       import { loadSidebar } from "../js/loadSidebar.js";
+      loadHeader();
       loadSidebar();
     </script>
+    <script src="../js/Qfind.js"></script>
   </body>
 </html>
