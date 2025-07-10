@@ -1,72 +1,55 @@
 import { recommendedItems } from "./data.js";
+import { createRoutineInGroup } from "../api/routineApi.js";
 
-// 모달 열기, 항목 렌더링, 저장 처리 로직
 let currentSectionBox = null;
 
-// 이벤트 등록 함수
-export function setupModalHandlers() {
-  const modal = document.getElementById("edit-modal");
+// ✅ 루틴 아이템 DOM 생성 함수
+function createRoutineItem(name, routineId = null) {
+  const li = document.createElement("li");
+  li.className = "routine-item";
 
-  // 수정 버튼 클릭 시
-  document.addEventListener("click", (e) => {
-    if (e.target.classList.contains("edit-button")) {
-      currentSectionBox = e.target.closest(".routine-box");
-      const sectionTitle = currentSectionBox
-        .querySelector("h3")
-        .textContent.trim();
-      renderRecommendedItems(sectionTitle);
-      modal.classList.remove("hidden");
-    }
+  if (routineId) {
+    li.dataset.routineId = routineId;
+  }
 
-    // 모달 바깥 클릭 시 닫기
-    if (e.target.id === "edit-modal") {
-      modal.classList.add("hidden");
-      currentSectionBox = null;
-    }
+  li.innerHTML = `
+    <div class="item-main">
+      <div class="item-leftsection">
+        <span class="item-name">${name}</span>
+        <img class="toggle-frequency" src="../assets/closing.svg" />
+      </div>
+      <img src="../assets/unchecked.svg" class="checkbox-icon" data-checked="false" alt="checkbox" />
+    </div>
+    <div class="item-frequency">주기: 매일</div>
+  `;
+  return li;
+}
+
+// ✅ 주기 토글 기능 연결 함수
+function attachToggleEvents(item) {
+  const btn = item.querySelector(".toggle-frequency");
+  const freq = item.querySelector(".item-frequency");
+
+  // 버튼 클릭 시 주기 표시 on/off
+  btn?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    freq.classList.toggle("show");
+    btn.classList.toggle("rotated");
   });
 
-  // 저장 버튼 클릭 시 선택 항목들 추가
-  document.querySelector(".save-button-modal").addEventListener("click", () => {
-    if (!currentSectionBox) return;
-
-    const checkedBoxes = document.querySelectorAll(
-      ".recommend-checkbox:checked"
-    );
-    checkedBoxes.forEach((checkbox) => {
-      currentSectionBox.querySelector("ul").insertAdjacentHTML(
-        "beforeend",
-        `
-        <li>
-          <span class="item-name">${checkbox.value}</span>
-          <img src="../assets/unchecked.svg" class="checkbox-icon" data-checked="false" alt="checkbox" />
-        </li>
-      `
-      );
-    });
-
-    const customInput = document
-      .querySelector(".custom-add-input")
-      .value.trim();
-    if (customInput) {
-      currentSectionBox.querySelector("ul").insertAdjacentHTML(
-        "beforeend",
-        `
-        <li>
-          <span class="item-name">${customInput}</span>
-          <img src="../assets/unchecked.svg" class="checkbox-icon" data-checked="false" alt="checkbox" />
-        </li>
-      `
-      );
-    }
-
-    modal.classList.add("hidden");
-    document.querySelector(".custom-add-input").value = "";
+  // 전체 item 클릭 시도 주기 표시 on/off + 체크박스는 제외
+  item.addEventListener("click", (e) => {
+    if (e.target.classList.contains("checkbox-icon")) return;
+    freq.classList.toggle("show");
+    btn.classList.toggle("rotated");
   });
 }
-// 추천 항목 리스트 렌더링 함수
+
+// ✅ 추천 항목 렌더링 함수
 function renderRecommendedItems(sectionTitle) {
   const leftList = document.querySelector(".modal-list.left");
   const rightList = document.querySelector(".modal-list.right");
+
   leftList.innerHTML = "";
   rightList.innerHTML = "";
 
@@ -81,7 +64,93 @@ function renderRecommendedItems(sectionTitle) {
     (i % 2 === 0 ? leftList : rightList).appendChild(li);
   });
 
+  // 저장 버튼 텍스트 변경
   document.querySelector(
     ".save-button-modal"
   ).textContent = `이대로 '${sectionTitle}'에 저장하기`;
+}
+
+// ✅ 모달 관련 이벤트 핸들러 등록 함수
+export function setupModalHandlers() {
+  const modal = document.getElementById("edit-modal");
+
+  // 전체 클릭 이벤트 (수정 버튼 or 모달 배경)
+  document.addEventListener("click", (e) => {
+    // 수정 버튼 클릭 시
+    if (e.target.classList.contains("edit-button")) {
+      currentSectionBox = e.target.closest(".routine-box");
+
+      const sectionTitle =
+        currentSectionBox?.querySelector("h3")?.textContent.trim() ||
+        "이름 없음";
+      renderRecommendedItems(sectionTitle);
+      modal.classList.remove("hidden");
+    }
+
+    // 모달 배경 클릭 시 닫기
+    if (e.target.id === "edit-modal") {
+      modal.classList.add("hidden");
+      currentSectionBox = null;
+    }
+  });
+
+  // ✅ 저장 버튼 클릭 시 루틴 추가
+  document
+    .querySelector(".save-button-modal")
+    .addEventListener("click", async () => {
+      if (!currentSectionBox) return;
+
+      const ul = currentSectionBox.querySelector("ul");
+      const checkedBoxes = document.querySelectorAll(
+        ".recommend-checkbox:checked"
+      );
+      const customInput = document
+        .querySelector(".custom-add-input")
+        .value.trim();
+
+      const currentGroupId = 3; // TODO: 그룹 ID 동적으로 가져올 수 있도록 수정
+      const today = new Date().toISOString().split("T")[0];
+
+      // ✅ 체크된 추천 항목 생성
+      for (const checkbox of checkedBoxes) {
+        try {
+          const routine = await createRoutineInGroup(currentGroupId, {
+            name: checkbox.value,
+            description: "사용자 추가 루틴",
+            isActive: true,
+            cycle: "NO",
+            startAt: today,
+            endAt: null,
+          });
+          const li = createRoutineItem(checkbox.value, routine.routineId);
+          ul.appendChild(li);
+          attachToggleEvents(li);
+        } catch (err) {
+          console.error("✅ 추천 루틴 생성 실패:", err);
+        }
+      }
+
+      // ✅ 직접 입력 항목 생성
+      if (customInput) {
+        try {
+          const routine = await createRoutineInGroup(currentGroupId, {
+            name: customInput,
+            description: "사용자 추가 루틴",
+            isActive: true,
+            cycle: "NO",
+            startAt: today,
+            endAt: null,
+          });
+          const li = createRoutineItem(customInput, routine.routineId);
+          ul.appendChild(li);
+          attachToggleEvents(li);
+        } catch (err) {
+          console.error("✅ 직접 입력 루틴 생성 실패:", err);
+        }
+      }
+
+      // ✅ 입력값 초기화 및 모달 닫기
+      document.querySelector(".custom-add-input").value = "";
+      modal.classList.add("hidden");
+    });
 }
