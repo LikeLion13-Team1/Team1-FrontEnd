@@ -36,14 +36,16 @@
             <span class="step" data-step="4">4</span>
           </div>
           <div class="question-box">
-            <h2 class="Q1">Q2. 살림할 시간이 생기면 나는?</h2>
+            <h2 class="Q1">Q2. 나의 살림 스타일은?</h2>
             <div class="btn">
-              <button class="option-btn">
-                계획부터 세우고 하나하나 해결해요.
+              <button class="option-btn" data-score="3">
+                매일매일 정리정돈 필수!
               </button>
-              <button class="option-btn">그날그날 기분에 따라 달라요.</button>
-              <button class="option-btn">
-                일단 침대에 누워요. 그냥 내일 하는 건 어때요?
+              <button class="option-btn" data-score="2">
+                그래도 적당히는 치워요.
+              </button>
+              <button class="option-btn" data-score="1">
+                안보이면 장땡 괜찮아요.
               </button>
             </div>
           </div>
@@ -58,36 +60,33 @@
     <script type="module" src="../js/auth/authCheck.js"></script>
     <script type="module">
       import { loadHeader } from "../js/loadHeader.js";
-      loadHeader();
-    </script>
-    <script type="module">
       import { loadSidebar } from "../js/loadSidebar.js";
+
+      loadHeader();
       loadSidebar();
-    </script>
-    <script type="module">
-      import { updateQstep } from "../js/Qstep.js";
-      updateQstep(2); // ← Q2 단계
-    </script>
-    <script type="module">
-      document.addEventListener("DOMContentLoaded", () => {
-        const questionKey = document.body.dataset.questionKey;
-        console.log(" 현재 질문 키:", questionKey);
 
-        document.querySelectorAll(".option-btn").forEach((btn) => {
-          btn.addEventListener("click", (e) => {
-            document.querySelectorAll(".option-btn").forEach((b) => {
-              b.classList.remove("selected");
-            });
-            e.target.classList.add("selected");
+      const questionKey = document.body.dataset.questionKey;
+      console.log("📌 현재 질문 키:", questionKey);
 
-            const answer =
-              e.target.dataset.answer || e.target.textContent.trim();
-            const answers =
-              JSON.parse(localStorage.getItem("surveyAnswers")) || {};
-            answers[questionKey] = answer;
-            localStorage.setItem("surveyAnswers", JSON.stringify(answers));
-            console.log(`${questionKey} 저장됨:`, answer);
-          });
+      const buttons = document.querySelectorAll(".option-btn");
+
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          // 버튼 선택 UI
+          buttons.forEach((b) => b.classList.remove("selected"));
+          e.currentTarget.classList.add("selected");
+
+          // 답변 저장
+          const answer =
+            e.currentTarget.dataset.answer ||
+            e.currentTarget.textContent.trim();
+          const answers =
+            JSON.parse(localStorage.getItem("surveyAnswers")) || {};
+
+          answers[questionKey] = answer;
+          localStorage.setItem("surveyAnswers", JSON.stringify(answers));
+
+          console.log(`✅ ${questionKey} 저장됨:`, answer);
         });
       });
     </script>
