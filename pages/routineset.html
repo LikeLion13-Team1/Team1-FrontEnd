@@ -45,8 +45,12 @@
         <!-- 루틴 정보 -->
         <div class="routine-header">
           <h2 id="routine-title">
-            <img src="../assets/broomstick.svg" alt="Broomstick Icon" />루틴
-            제목 로딩 중...
+            <img
+              src="../assets/broomstick.svg"
+              alt="Broomstick Icon"
+              width="22px"
+              height="35px"
+            />루틴 제목 로딩 중...
           </h2>
           <p id="routine-description">루틴 설명 로딩 중...</p>
         </div>
@@ -57,17 +61,18 @@
         </div>
 
         <div class="save-button-container">
+          <button class="delete-button">삭제하기</button>
           <button class="save-button">저장하기</button>
         </div>
       </section>
     </div>
     <script src="../js/auth/authCheck.js"></script>
-    <script type="module" src="../js/routineset/routineset.js"></script>
     <script type="module">
       import { loadSidebar } from "../js/loadSidebar.js";
       import { loadHeader } from "../js/loadHeader.js";
       loadSidebar();
       loadHeader();
     </script>
+    <script type="module" src="../js/test222.js"></script>
   </body>
 </html>
