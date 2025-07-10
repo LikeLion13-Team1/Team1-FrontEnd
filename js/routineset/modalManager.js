@@ -1,7 +1,28 @@
 import { recommendedItems } from "./data.js";
-import { createRoutineInGroup } from "../api/routineApi.js";
+import { createRoutineInGroup, fetchRoutineGroup } from "../api/routineApi.js";
+import { renderRoutineSections } from "./renderRoutineSections.js";
 
 let currentSectionBox = null;
+let currentGroupId = null;
+
+async function initRoutinePage() {
+  try {
+    // URL에서 groupId 가져오기
+    const urlParams = new URLSearchParams(window.location.search);
+    const groupId = Number(urlParams.get("groupId"));
+
+    if (!groupId) {
+      console.error("❌ groupId 없음");
+      return;
+    }
+
+    const groupData = await fetchRoutineGroup(groupId);
+    currentGroupId = groupId; // ✔ groupId 저장
+    renderRoutineSections(groupData); // 루틴 UI 렌더링 함수
+  } catch (err) {
+    console.error("루틴 그룹 정보 불러오기 실패:", err);
+  }
+}
 
 // ✅ 루틴 아이템 DOM 생성 함수
 function createRoutineItem(name, routineId = null) {
@@ -56,9 +77,10 @@ function renderRecommendedItems(sectionTitle) {
   recommendedItems.forEach((item, i) => {
     const li = document.createElement("li");
     li.innerHTML = `
-      <label>
+      <label class="toggle-switch recommend-switch">
+        <span class="switch-label">${item}</span>
         <input type="checkbox" class="recommend-checkbox" value="${item}" />
-        ${item}
+        <span class="slider"></span>
       </label>
     `;
     (i % 2 === 0 ? leftList : rightList).appendChild(li);
@@ -98,7 +120,7 @@ export function setupModalHandlers() {
   document
     .querySelector(".save-button-modal")
     .addEventListener("click", async () => {
-      if (!currentSectionBox) return;
+      if (!currentSectionBox || !currentGroupId) return;
 
       const ul = currentSectionBox.querySelector("ul");
       const checkedBoxes = document.querySelectorAll(
@@ -108,10 +130,8 @@ export function setupModalHandlers() {
         .querySelector(".custom-add-input")
         .value.trim();
 
-      const currentGroupId = 3; // TODO: 그룹 ID 동적으로 가져올 수 있도록 수정
       const today = new Date().toISOString().split("T")[0];
 
-      // ✅ 체크된 추천 항목 생성
       for (const checkbox of checkedBoxes) {
         try {
           const routine = await createRoutineInGroup(currentGroupId, {
@@ -120,17 +140,16 @@ export function setupModalHandlers() {
             isActive: true,
             cycle: "NO",
             startAt: today,
-            endAt: null,
+            endAt: today,
           });
           const li = createRoutineItem(checkbox.value, routine.routineId);
           ul.appendChild(li);
           attachToggleEvents(li);
         } catch (err) {
-          console.error("✅ 추천 루틴 생성 실패:", err);
+          console.error("추천 루틴 생성 실패:", err);
         }
       }
 
-      // ✅ 직접 입력 항목 생성
       if (customInput) {
         try {
           const routine = await createRoutineInGroup(currentGroupId, {
@@ -139,18 +158,19 @@ export function setupModalHandlers() {
             isActive: true,
             cycle: "NO",
             startAt: today,
-            endAt: null,
+            endAt: today,
           });
           const li = createRoutineItem(customInput, routine.routineId);
           ul.appendChild(li);
           attachToggleEvents(li);
         } catch (err) {
-          console.error("✅ 직접 입력 루틴 생성 실패:", err);
+          console.error("직접 입력 루틴 생성 실패:", err);
         }
       }
 
-      // ✅ 입력값 초기화 및 모달 닫기
       document.querySelector(".custom-add-input").value = "";
       modal.classList.add("hidden");
+      initRoutinePage();
     });
+  initRoutinePage();
 }

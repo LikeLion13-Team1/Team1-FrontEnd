@@ -2,6 +2,7 @@ import { renderRoutineSections } from "../js/routineset/renderRoutineSections.js
 import {
   fetchRoutineGroup,
   fetchRoutinesInGroup,
+  deleteRoutineGroup,
 } from "../js/api/routineApi.js";
 import { setupModalHandlers } from "../js/routineset/modalManager.js";
 import { setupCheckboxToggle } from "../js/routineset/routineCheckBox.js";
@@ -20,6 +21,24 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   const numericGroupId = Number(groupId);
+
+  // ✅ 삭제 버튼 이벤트 등록
+  const deleteButton = document.querySelector(".delete-button");
+  if (deleteButton) {
+    deleteButton.addEventListener("click", async () => {
+      const confirmDelete = confirm("정말 이 루틴 그룹을 삭제하시겠습니까?");
+      if (!confirmDelete) return;
+
+      try {
+        await deleteRoutineGroup(numericGroupId);
+        alert("✅ 루틴 그룹이 삭제되었습니다.");
+        window.location.href = "./home2.html"; // 삭제 후 이동할 경로
+      } catch (err) {
+        console.error("❌ 루틴 그룹 삭제 실패:", err);
+        alert("루틴 그룹 삭제에 실패했습니다.");
+      }
+    });
+  }
 
   try {
     // ✅ 1. 그룹 정보 불러오기

@@ -1,7 +1,14 @@
 import { fetchRoutineById } from "../api/routineApi.js";
 
-// ✅ 주기 토글 이벤트 핸들러 등록 함수
+const cycleMap = {
+  NO: "없음",
+  DAY: "매일",
+  WEEK: "매주",
+  MONTH: "매월",
+  YEAR: "매년",
+};
 
+// ✅ 주기 토글 이벤트 핸들러 등록 함수
 function attachToggleEvents(item) {
   const btn = item.querySelector(".toggle-frequency");
   const freq = item.querySelector(".item-frequency");
@@ -20,7 +27,6 @@ function attachToggleEvents(item) {
 }
 
 // ✅ 루틴 섹션 렌더링 함수
-
 export async function renderRoutineSections(routineIds, container) {
   if (!container) {
     console.error("❌ container가 없음");
@@ -63,7 +69,10 @@ export async function renderRoutineSections(routineIds, container) {
             alt="checkbox"
           />
         </div>
-        <div class="item-frequency">주기: ${routine.cycle}</div>
+        <div class="item-frequency">
+          <p>주기: ${cycleMap[routine.cycle] || "없음"}</p>
+          <p>설명: ${routine.description || "설명이 없습니다."}</p>
+        </div>
       `;
 
       attachToggleEvents(li);
