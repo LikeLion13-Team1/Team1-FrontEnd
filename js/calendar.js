@@ -77,38 +77,77 @@ function renderCalendar(year, month) {
     daysContainer.appendChild(btn);
   }
 }
+async function getRoutinesFromAPI(year, month, date) {
+  const yyyyMMdd = `${year}-${String(month + 1).padStart(2, "0")}-${String(
+    date
+  ).padStart(2, "0")}`;
+  const token = localStorage.getItem("accessToken");
 
-//루틴박스 초기화
-function showRoutines(year, month, date) {
+  if (!token) {
+    console.warn("⚠️ accessToken이 없습니다. 로그인 후 다시 시도해주세요.");
+    return [];
+  }
+
+  try {
+    const res = await fetch(
+      `http://13.209.221.182:8080/api/v1/routines/events?date=${yyyyMMdd}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    // 401, 500 등 실패 응답 처리
+    if (!res.ok) {
+      const errorText = await res.text();
+      console.error(`❌ 루틴 API 오류 (${res.status}):`, errorText);
+      return [];
+    }
+
+    const data = await res.json();
+    console.log(`📅 ${yyyyMMdd}의 루틴 응답:`, data.result);
+    return data.result || [];
+  } catch (e) {
+    console.error("❗ 루틴 불러오기 중 오류:", e);
+    return [];
+  }
+}
+
+//루틴불러오기
+const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+async function showRoutines(year, month, date) {
   const routineContainer = document.getElementById("routine-container");
   while (routineContainer.firstChild) {
     routineContainer.removeChild(routineContainer.firstChild);
   }
 
-  //getDay() --> 요일(숫자)를 요일(문자)로
-  const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-
-  // 날짜 기준 배열 구성: 전날, 선택일, 다음날, 다다음날
+  // 기준 날짜 세팅
   const baseDate = new Date(year, month, date);
   const datesToShow = [
-    new Date(baseDate.getTime() - 1 * 86400000), // 전날
-    baseDate, // 선택일
-    new Date(baseDate.getTime() + 1 * 86400000), // 다음날
-    new Date(baseDate.getTime() + 2 * 86400000), // 다다음날
-    new Date(baseDate.getTime() + 3 * 86400000), //다다다음날
+    new Date(baseDate.getTime() - 1 * 86400000),
+    baseDate,
+    new Date(baseDate.getTime() + 1 * 86400000),
+    new Date(baseDate.getTime() + 2 * 86400000),
+    new Date(baseDate.getTime() + 3 * 86400000),
   ];
 
-  datesToShow.forEach((dateObj) => {
+  for (const dateObj of datesToShow) {
     const displayYear = dateObj.getFullYear();
     const displayMonth = dateObj.getMonth();
     const displayDate = dateObj.getDate();
     const weekday = daysOfWeek[dateObj.getDay()];
 
-    //날짜, 요일, 루틴 박스 감싸줌
+    const routines = await getRoutinesFromAPI(
+      displayYear,
+      displayMonth,
+      displayDate
+    );
+
+    // 📦 루틴 column 요소 생성
     const column = document.createElement("div");
     column.className = "routine-column";
-
-    // 선택된 날짜면 강조
     if (
       displayYear === year &&
       displayMonth === month &&
@@ -118,21 +157,20 @@ function showRoutines(year, month, date) {
     }
 
     const routineHeader = document.createElement("div");
-    routineHeader.className = "routine-date"; //날짜+요일을 감쌈
+    routineHeader.className = "routine-date";
 
     const dateNum = document.createElement("div");
-    dateNum.className = "routine-day-number"; //날짜
+    dateNum.className = "routine-day-number";
     dateNum.textContent = displayDate;
 
     const weekdayEl = document.createElement("div");
-    weekdayEl.className = "routine-day-week"; //요일
+    weekdayEl.className = "routine-day-week";
     weekdayEl.textContent = weekday;
 
     routineHeader.appendChild(dateNum);
     routineHeader.appendChild(weekdayEl);
     column.appendChild(routineHeader);
 
-    const Routines = getRoutines(displayYear, displayMonth, displayDate);
     const stepEl = document.createElement("div");
     stepEl.className = "routine-step";
     column.appendChild(stepEl);
@@ -140,20 +178,20 @@ function showRoutines(year, month, date) {
     const hr = document.createElement("hr");
     hr.className = "routine-divider";
     column.appendChild(hr);
-    // Routines.forEach(...) 전
-    if (Routines.length === 0) {
+
+    if (routines.length === 0) {
       const emptyEl = document.createElement("div");
       emptyEl.className = "routine-box empty";
-      emptyEl.textContent = "루틴 없음"; // 또는 아이콘/공백 등 원하는 표시
+      emptyEl.textContent = "루틴 없음";
       column.appendChild(emptyEl);
     } else {
-      Routines.forEach((task) => {
+      routines.forEach((routine) => {
         const taskEl = document.createElement("div");
         taskEl.className = "routine-box";
 
         const textEl = document.createElement("p");
         textEl.className = "routine-text";
-        textEl.textContent = task;
+        textEl.textContent = routine.name; // ← API 루틴 이름
 
         const imgEl = document.createElement("img");
         imgEl.className = "routine-img";
@@ -165,8 +203,9 @@ function showRoutines(year, month, date) {
         column.appendChild(taskEl);
       });
     }
+
     routineContainer.appendChild(column);
-  });
+  }
 }
 // 예시 루틴 데이터 (테스트용)
 function getRoutines(year, month, date) {
