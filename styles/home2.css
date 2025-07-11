@@ -1,0 +1,152 @@
+body.home2-page {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.welcome {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #45624e;
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.home2-page .divider {
+  width: 90%;
+  max-width: 1000px;
+  height: 1px;
+  background: rgba(150, 150, 150, 0.5);
+  margin: 10px auto 2rem;
+  border: none;
+}
+
+.bot-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 0 24px;
+  max-width: 1000px;
+  width: 100%;
+  text-align: center;
+}
+
+.bot-icon {
+  width: 67px;
+  height: 67px;
+}
+
+.role-text {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #45624e;
+  line-height: 1.5;
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 0 1rem;
+  flex-wrap: nowrap;
+  max-width: 1000px;
+  width: 100%;
+  margin-top: 0;
+}
+
+.home2-page .info-card {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 18rem;
+  min-height: 17rem;
+  padding: 1.5rem 10px 10px 10px;
+  gap: 0.75rem;
+  flex-shrink: 0;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 2.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.card1 {
+  background: #eef1f5;
+}
+.card1:hover {
+  background: #d0d3d6;
+}
+.card2 {
+  background: #eff5f1;
+}
+.card2:hover {
+  background: #d4dad6;
+}
+.card3 {
+  background: #f2efea;
+}
+.card3:hover {
+  background: #d9d7d4;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.home2-page .card-title {
+  font-size: 21px;
+  font-weight: 600;
+  color: #2f4331;
+  margin: 0;
+}
+
+.check {
+  width: 20px;
+  height: 20px;
+}
+
+.home2-page .card-desc {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2f4331;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 1rem 0.6rem 0.4rem 0.6rem;
+  border-radius: 2.5rem;
+  margin-top: 14px;
+  line-height: 2;
+  width: 16.6rem;
+  height: 15rem;
+
+  white-space: nowrap;
+  line-height: 1.3;
+  gap: 2rem;
+}
+
+.type-list {
+  margin: 8px 40px;
+  text-align: left;
+  letter-spacing: 0.36px;
+  gap: 0;
+}
+
+.type-list2 {
+  margin: 8px 2px;
+  text-align: left;
+}
+
+.type-list li,
+.type-list2 li {
+  line-height: 1;
+  list-style-position: inside;
+  padding-left: 0;
+}
+.card-desc-title {
+  margin-bottom: 1.1rem;
+}
+.card-desc-msg {
+  margin-top: 1.1rem;
+}

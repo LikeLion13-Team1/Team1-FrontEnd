@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>비밀번호 찾기</title>
+    <link rel="stylesheet" href="../styles/findpw.css" />
+  </head>
+  <body>
+    <div class="login-box" id="findPwPage">
+      <div class="logo">
+        <img src="../assets/salimi_icon2.png" alt="살리미 로고" />
+      </div>
+      <h2>살 리 미</h2>
+
+      <!-- 이메일 입력 -->
+      <div class="form-group">
+        <label for="finalEmail">이메일</label>
+        <div class="input-with-button">
+          <input
+            type="email"
+            id="finalEmail"
+            placeholder="이메일을 입력해 주세요"
+          />
+          <button class="btn email-btn" id="sendCodeBtn">인증번호 받기</button>
+        </div>
+      </div>
+
+      <!-- 인증번호 입력 -->
+      <!-- 인증번호 입력 -->
+      <div class="form-group" id="authSection" style="display: none">
+        <div class="input-with-button">
+          <input
+            type="text"
+            id="authCode"
+            placeholder="인증번호 6자리를 입력해 주세요"
+          />
+          <button class="btn code-btn">인증번호 확인</button>
+        </div>
+      </div>
+
+      <hr class="divider-pw" />
+
+      <!-- 비밀번호 입력 -->
+      <div class="form-group">
+        <label for="signupPassword">비밀번호 변경</label>
+        <input
+          type="password"
+          id="signupPassword"
+          placeholder="문자, 숫자, 특수문자 포함 8자 이상"
+        />
+      </div>
+
+      <!-- 비밀번호 확인 입력 -->
+      <div class="form-group">
+        <label for="confirmPassword">비밀번호 확인</label>
+        <input type="password" id="confirmPassword" />
+      </div>
+
+      <!-- 비밀번호 변경 버튼 -->
+      <button class="login-button">비밀번호 변경하기</button>
+
+      <!-- 로그인 링크 -->
+      <div class="signup-text">
+        <a href="login.html">살리미에 로그인하기</a>
+      </div>
+    </div>
+
+    <script src="../js/findpw.js"></script>
+  </body>
+</html>
+<style>
+  /* 추가된 버튼 크기 조정 */
+  .email-btn,
+  .code-btn {
+    width: 95px !important;
+    font-size: 9px !important;
+    padding: 6px 4px !important;
+  }
+</style>
