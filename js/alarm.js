@@ -52,7 +52,7 @@ function fetchAndCheckAlarm() {
 fetchAndCheckAlarm();
 
 // 15초 간격으로 실행
-setInterval(fetchAndCheckAlarm, 5000);
+setInterval(fetchAndCheckAlarm, 20000);
 
 // 테스트용 모달 (원하면 유지, 아니라면 제거)
 setTimeout(() => {

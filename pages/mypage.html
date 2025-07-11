@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../styles/mypage.css" />
     <link rel="stylesheet" href="../styles/sidebar.css" />
     <link rel="stylesheet" href="../styles/header.css" />
+    <link rel="stylesheet" href="../styles/alarm.css" />
   </head>
   <body>
     <header class="main-header"><div id="header"></div></header>
@@ -192,6 +193,8 @@
       </div>
     </div>
 
+    <div id="alarm-modal-container"></div>
+
     <script type="module" src="../js/auth/authCheck.js"></script>
     <script type="module">
       import { loadSidebar } from "../js/loadSidebar.js";
@@ -203,5 +206,14 @@
     </script>
     <script type="module" src="../js/mypage.js"></script>
     <script type="module" src="../js/calendar.js"></script>
+    <script>
+    fetch('alarm.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('alarm-modal-container').innerHTML = html;
+      })
+      .catch(console.error);
+    </script>
+    <script src="../js/alarm.js"></script>
   </body>
 </html>
