@@ -45,28 +45,29 @@
       import { loadSidebar } from "../js/loadSidebar.js";
       loadSidebar();
 
-      // 루틴 바로가기
-      document.querySelector(".baro-btn").addEventListener("click", () => {
-        const routine = answers.routin || "루틴1";
-        window.location.href = `../pages/routineset.html?routine=${encodeURIComponent(
-          routine
-        )}`;
-      });
       document.addEventListener("DOMContentLoaded", () => {
         const answers = JSON.parse(localStorage.getItem("surveyAnswers")) || {};
         const routine = answers.routin || "루틴1"; // 기본값
+
+        // 루틴 이름을 숫자 groupId로 매핑
+        const routineToGroupIdMap = {
+          루틴1: 1,
+          루틴2: 2,
+          루틴3: 3,
+          // 필요시 계속 확장 가능
+        };
+
+        const groupId = routineToGroupIdMap[routine] || 1; // 기본값 fallback
 
         // HTML에 텍스트 적용
         document.querySelectorAll(".highlight").forEach((el) => {
           el.textContent = routine;
         });
 
-        document.querySelector(".baro-btn").textContent = `${routine} 바로가기`;
-
-        document.querySelector(".baro-btn").addEventListener("click", () => {
-          window.location.href = `../pages/routineset.html?routine=${encodeURIComponent(
-            routine
-          )}`;
+        const baroBtn = document.querySelector(".baro-btn");
+        baroBtn.textContent = `${routine} 바로가기`;
+        baroBtn.addEventListener("click", () => {
+          window.location.href = `../pages/routineset.html?groupId=${groupId}`;
         });
       });
     </script>

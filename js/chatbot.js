@@ -165,3 +165,28 @@ tipBtn.addEventListener("click", () => {
   const message = "오늘의 살림 꿀팁 하나만 알려줘!";
   askChatbot(message);
 });
+
+const messages = [
+  "오늘은 어떤 살림 고민이 있으신가요?",
+  "오늘의 살림 루틴이 궁금하신가요?",
+  "오늘의 살림 꿀팁을 원하시나요?",
+  "살림 도우미 살리미가 도와드릴게요!",
+];
+
+let currentIndex = 0;
+
+const welcomeMessageEl = document.querySelector(".welcome-message");
+
+setInterval(() => {
+  // 먼저 투명하게
+  welcomeMessageEl.classList.add("fade-out");
+
+  setTimeout(() => {
+    // 이후 메시지 변경
+    currentIndex = (currentIndex + 1) % messages.length;
+    welcomeMessageEl.textContent = messages[currentIndex];
+
+    // 다시 보이게
+    welcomeMessageEl.classList.remove("fade-out");
+  }, 500); // 트랜지션 시간과 맞춰서 500ms 후 실행
+}, 5000);
