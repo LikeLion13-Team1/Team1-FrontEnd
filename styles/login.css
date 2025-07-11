@@ -109,7 +109,7 @@ input[type="password"] {
   color: black;
   border: 1px solid #45624e;
   border-radius: 10px;
-  font-size: 14px;
+  font-size: 11px;
   background-color: #d9d9d900;
   font-size: 20px;
 }
@@ -126,10 +126,11 @@ input[type="password"] {
   margin-top: 10px;
   cursor: pointer;
   letter-spacing: -1.4px;
+  margin-bottom: 10px;
 }
 
 .signup-text {
-  margin-top: 18px;
+  /* 원래 18*/
   font-weight: 550;
   font-size: 13px;
   color: #3a5141;

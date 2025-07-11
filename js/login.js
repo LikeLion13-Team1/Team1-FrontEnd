@@ -1,7 +1,13 @@
-// login.js 입니다.
 document.addEventListener("DOMContentLoaded", function () {
   const toSignup1 = document.getElementById("toSignup1");
+  const toFindPW = document.getElementById("toFindPW");
   const loginButton = document.querySelector(".login-button");
+
+  // 👉 비밀번호 찾기 페이지 이동
+  toFindPW.addEventListener("click", function (e) {
+    e.preventDefault();
+    window.location.href = "findpw.html";
+  });
 
   // 👉 회원가입 페이지 이동
   toSignup1.addEventListener("click", function (e) {
@@ -34,18 +40,15 @@ document.addEventListener("DOMContentLoaded", function () {
       const data = await response.json();
 
       if (data.isSuccess) {
-        // 토큰 저장 (필요 시 result.accessToken / result.refreshToken 등)
         const accessToken = data.result?.accessToken;
         const refreshToken = data.result?.refreshToken;
 
         console.log("🔐 accessToken:", accessToken);
         console.log("🔁 refreshToken:", refreshToken);
 
-        // localStorage에 저장 (자동 재발급 로직과 일치)
         localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("refreshToken", refreshToken);
 
-        // 이동
         window.location.href = "./home2.html";
       } else {
         alert("❌ 로그인 실패: " + data.message);
@@ -56,3 +59,24 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+const kakaoLoginBtn = document.getElementById("kakaoLoginBtn");
+const kakaoClientId = "91f8abb11bc458dd121fa173ace8bf55";
+const redirectUri = "http://13.209.221.182:8080/pages/kakao-callback.html";
+
+kakaoLoginBtn.addEventListener("click", function () {
+  // 카카오 로그인 페이지로 이동
+  window.location.href = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${kakaoClientId}&redirect_uri=${redirectUri}`;
+});
+
+// const params = new URLSearchParams(window.location.search);
+// // const accessToken = params.get("accessToken");
+// // const refreshToken = params.get("refreshToken");
+
+// console.log(accessToken);
+// console.log(refreshToken);
+
+// if (accessToken && refreshToken) {
+//   localStorage.setItem("accessToken", accessToken);
+//   localStorage.setItem("refreshToken", refreshToken);
+//   window.history.replaceState({}, document.title, "home2.html");
+// }

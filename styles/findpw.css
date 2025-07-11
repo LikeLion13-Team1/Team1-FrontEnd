@@ -1,0 +1,271 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  font-family: "Pretendard Variable", sans-serif;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, #f3f4ec, #ffffff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-box {
+  top: 77px;
+  left: 336px;
+  width: 607px;
+  height: 566px;
+  background: linear-gradient(to bottom, #f3f4ec, #ffffff60);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  padding: 36px 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo img {
+  width: 66px;
+  height: auto;
+  display: block;
+  margin: 0;
+}
+
+h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #45624e;
+  line-height: 1.2;
+  text-align: center;
+  margin-bottom: 18px;
+  letter-spacing: -2px;
+}
+
+.social-buttons {
+  width: 273px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 5px;
+  letter-spacing: -1.4px;
+}
+
+.social-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 14px;
+  height: 40px;
+  border: 1px solid #45624e;
+  border-radius: 28px;
+  background-color: #d9d9d900;
+  font-size: 14px;
+  font-weight: 700;
+  color: #3a5141;
+  cursor: pointer;
+}
+
+.social-button img {
+  position: absolute;
+  border-radius: 90%;
+  left: 30px;
+  width: 19px;
+  height: 19px;
+}
+
+.divider-pw {
+  width: 447px;
+  height: 1.2px;
+  background: #cacaca;
+  margin-top: 22px;
+  margin-bottom: 11px;
+}
+
+.form-group {
+  width: 273px;
+  margin-bottom: 7px;
+  letter-spacing: -1px;
+}
+
+label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #3a5141;
+  margin-bottom: 3px;
+  display: block;
+}
+
+.input-with-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.input-with-button input[type="email"],
+.input-with-button input[type="text"] {
+  width: 100%;
+  height: 40px;
+  padding: 7px;
+  color: black;
+  border: 1px solid #45624e;
+  border-radius: 10px;
+  background-color: #d9d9d900;
+  color: #000;
+
+  font-family: "Pretendard Variable";
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px; /* 200% */
+  letter-spacing: -1px;
+}
+
+.input-with-button .btn {
+  white-space: nowrap;
+  display: flex;
+  width: 60px;
+  height: 21px;
+  padding: 5px 7px 10px;
+  border: none;
+  border-radius: 4px;
+  background: #e8e8e8;
+  color: #969696;
+  justify-content: center;
+  align-items: center;
+  font-family: "Pretendard Variable";
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.18px;
+  cursor: pointer;
+}
+
+input[type="password"] {
+  border: 1px solid #45624e;
+  border-radius: 10px;
+  width: 100%;
+  height: 40px;
+  padding: 7px;
+  color: #000;
+  font-family: "Pretendard Variable";
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px; /* 200% */
+  letter-spacing: -1px;
+}
+input[type="finalEmail"],
+input[type="confirmPassword"] {
+  width: 100%;
+  height: 40px;
+  padding: 7px;
+  color: black;
+  border: 1px solid #45624e;
+  border-radius: 10px;
+  background-color: #d9d9d900;
+  font-size: 20px;
+}
+
+.login-button {
+  width: 273px;
+  line-height: 39px;
+  background-color: #45624e;
+  color: white;
+  border: none;
+  border-radius: 28px;
+  font-weight: 500;
+  font-size: 14px;
+  margin-top: 11px;
+  cursor: pointer;
+  letter-spacing: -1.4px;
+}
+
+.signup-text {
+  margin-top: 18px;
+  font-weight: 550;
+  font-size: 13px;
+  color: #3a5141;
+  letter-spacing: -1px;
+}
+
+.signup-text a {
+  color: #3a5141;
+  font-weight: 650;
+  text-decoration: underline;
+}
+
+h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #45624e;
+  line-height: 1.2;
+  text-align: center;
+  letter-spacing: 12px;
+}
+
+.password-guide {
+  font-size: 10px;
+  font-weight: 800px;
+  color: #969696;
+  text-align: right; /* 오른쪽 정렬로 대체 */
+  margin-top: 5px;
+}
+
+.checkbox-group {
+  width: 273px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* 왼쪽 정렬 */
+}
+
+.checkbox-group label {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  font-size: 10px;
+  color: #969696;
+  line-height: 1;
+  letter-spacing: -0.2px;
+}
+
+.checkbox-group input[type="checkbox"] {
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  border: 1px solid #999999;
+  margin-right: 8px;
+  cursor: pointer;
+  position: relative;
+}
+
+.checkbox-group input[type="checkbox"]::after {
+  content: "";
+  position: absolute;
+  left: 1px;
+  width: 2px;
+  height: 5px;
+  border: solid #45624e;
+  border-width: 0 2.5px 2.5px 0;
+  transform: rotate(45deg);
+  display: none;
+}
+
+.checkbox-group input[type="checkbox"]:checked::after {
+  display: block;
+}
+
+input.error {
+  border: 2px solid red !important;
+}
+
+label.error {
+  color: #ff0000 !important;
+  font-weight: bold;
+}

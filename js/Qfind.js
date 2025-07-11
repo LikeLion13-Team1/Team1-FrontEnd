@@ -42,7 +42,7 @@ async function fetchMyGroups() {
     for (const group of groups) {
       // 1. 루틴 추천 생성
       await fetchWithAuth(
-        `${BASE_URL}/api/v1/groups/groups/${group.groupId}/recommendation`,
+        `${BASE_URL}/api/v1/groups/${group.groupId}/recommendation`,
         {
           method: "POST",
         }
