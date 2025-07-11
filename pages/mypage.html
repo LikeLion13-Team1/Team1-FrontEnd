@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../styles/mypage.css" />
     <link rel="stylesheet" href="../styles/sidebar.css" />
     <link rel="stylesheet" href="../styles/header.css" />
+    <link rel="stylesheet" href="../styles/alarm.css" />
   </head>
   <body>
     <header class="main-header"><div id="header"></div></header>
@@ -36,8 +37,7 @@
                   </div>
                   <div class="info-row">
                     <span>비밀번호</span>
-                    <button class="edit-btn" id="editBtn">수정</button>
-                  </div>
+                    <button class="edit-btn" id="editBtn">수정</button>                  </div>
                 </div>
               </div>
             </section>
@@ -77,29 +77,25 @@
               <h2><img src="../assets/history.png" alt="히스토리 아이콘" /> 히스토리</h2>                            
               <ul class="history-list">
                 <li>
-                  <strong>6월 20일</strong>
+                  <strong class="history-date"></strong>
                   <span class="dot">·</span>
                   <span></span>
-                  <button class="arrow-btn" id="openPageBtn">&gt;</button> <!--모달형-->
-                </li>
+                  <button class="arrow-btn openPageBtn" data-date="YYYY-MM-DD">&gt;</button>                </li>
                 <li>
-                  <strong>6월 19일</strong>
+                  <strong class="history-date"></strong>
                   <span class="dot">·</span>
                   <span></span>
-                  <button class="arrow-btn" id="openPageBtn">&gt;</button>
-                </li>
+                  <button class="arrow-btn openPageBtn" data-date="YYYY-MM-DD">&gt;</button>                </li>
                 <li>
-                  <strong>6월 18일</strong>
+                  <strong class="history-date"></strong>
                   <span class="dot">·</span>
                   <span></span>
-                  <button class="arrow-btn" id="openPageBtn">&gt;</button>
-                </li>
+                  <button class="arrow-btn openPageBtn" data-date="YYYY-MM-DD">&gt;</button>                </li>
                 <li>
-                  <strong>6월 17일</strong>
+                  <strong class="history-date"></strong>
                   <span class="dot">·</span>
                   <span></span>
-                  <button class="arrow-btn" id="openPageBtn">&gt;</button>
-                </li>
+                  <button class="arrow-btn openPageBtn" data-date="YYYY-MM-DD">&gt;</button>                </li>
               </ul>
               <button class="show-btn" id="showBtn">&gt;</button>
             </section>
@@ -122,8 +118,8 @@
                     <button class="arrow-btn" id="logoutBtn">&gt;</button> <!--모달형-->
                   </div>
                   <div class="setting-row">
-                    <span>결제 및 구독</span>
-                    <button class="edit-btn" id="membershipBtn">수정</button>
+                    <span>도움말</span>
+                    <button class="arrow-btn" id="helpBtn">&gt;</button>
                   </div>              
                   <div class="setting-row">
                     <span>탈퇴하기</span>
@@ -134,6 +130,71 @@
             </section>
           </div>
         </div>
+
+    <!-- 도움말 모달 -->
+    <div id="helpModal" class="modal">
+      <div class="modal-content1">
+        <span class="close">&times;</span>
+        <h3>살리미 사용 가이드</h3>
+        <hr class="long-line">
+        <p class="Q">[시작하기] 어떻게 시작하나요?</p>
+        <p class="A"><strong>로그인 후</strong>, "나만의 루틴 찾기"에서 질문에 답하면 당신에게 딱 맞는 <strong>살림루틴</strong>을 추천해 드려요!</p>
+        <p class="Q">[루틴 보기] 루틴은 어디서 보나요?</p>
+        <p class="A">추천받은 루틴은 <strong>&lt;루틴1, 루틴2,루틴3&gt;메뉴</strong>에서 확인할 수 있어요.</p>
+        <p class="A">이 루틴은 캘린더에서도 확인 가능합니다.</p>
+        <p class="Q">[루틴 추가] 직접 루틴을 추가하고 싶어요!</p>
+        <p class="A">&lt;루틴1&gt;에서 예시 루틴을 선택하거나,</p>
+        <p class="A">원하는 일정을 직접 추가해 <strong>나만의 루틴 세트</strong>를 만들 수 있어요.</p>
+        <p class="Q">[살리미 챗봇] 챗봇은 어떤 기능을 하나요??</p>
+        <p class="A">'살리미 챗봇' 메뉴에서 "오늘 뭐하면 좋을까?", "간단한 살림 팁 알려줘" 같은 질문을 해보세요!</p>
+        <p class="A"><strong>가볍게 묻고, 바로 대답받는 AI비서</strong>예요.</p>
+        <p class="Q">[마이페이지]] 마이페이지에선 뭘 할 수 있나요?</p>
+        <p class="A">내가 선택한 루틴, 캘린더 일정 등을 <strong>한눈에 관리</strong>할 수 있어요.</p>
+      </div>
+    </div>
+
+    <!-- 비밀번호 수정 모달 -->
+    <div id="editModal" class="modal">
+      <div class="modal-content2">
+        <span class="close">&times;</span>
+        <h3>비밀번호 수정</h3>
+        <hr class="long-line">
+        <div class="form-group">
+          <label>기존 비밀번호</label>
+          <input type="password" id="currentPassword" />
+          <label>변경 비밀번호</label>
+          <input type="password" id="newPassword" />
+          <label>변경 비밀번호 확인</label>
+          <input type="password" id="newPasswordConfirm" />
+          <button class="complete-btn" id="completeBtn">수정하기</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 로그아웃 모달 -->
+    <div id="logoutModal" class="modal">
+      <div class="modal-content3">
+        <p class="check">로그아웃하시겠습니까?</p>
+        <div class="modal-btn-group">
+          <button id="confirmLogout" class="confirm">예</button>
+          <button id="cancelLogout" class="cancel">아니요</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 탈퇴하기 모달 -->
+    <div id="deleteModal" class="modal">
+      <div class="modal-content3">
+        <p class="check">정말 탈퇴하시겠습니까?</p>
+        <div class="modal-btn-group">
+          <button id="confirmDelete" class="confirm">예</button>
+          <button id="cancelDelete" class="cancel">아니요</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="alarm-modal-container"></div>
+
     <script type="module" src="../js/auth/authCheck.js"></script>
     <script type="module">
       import { loadSidebar } from "../js/loadSidebar.js";
@@ -144,5 +205,15 @@
       loadHeader();
     </script>
     <script type="module" src="../js/mypage.js"></script>
+    <script type="module" src="../js/calendar.js"></script>
+    <script>
+    fetch('alarm.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('alarm-modal-container').innerHTML = html;
+      })
+      .catch(console.error);
+    </script>
+    <script src="../js/alarm.js"></script>
   </body>
 </html>
