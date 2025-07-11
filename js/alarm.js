@@ -16,7 +16,7 @@ function checkAlarm(alarm) {
 function showModal(alarm) {
     document.getElementById("alarm-modal").classList.add("active");
 
-    document.getElementById("alarm-title").innerHTML = alarm.routineName+"을(를) 수행하지 않았습니다.";
+    document.getElementById("alarm-title").innerHTML = alarm.routineName+" 을(를) 수행하지 않았습니다.";
     document.getElementById("alarm-description").innerHTML = alarm.routineDescription;
     document.getElementById("alarm-time").innerHTML = alarm.time.substring(0, 10);
 
