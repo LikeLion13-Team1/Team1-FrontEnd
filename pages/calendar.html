@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../styles/header.css" />
     <link rel="stylesheet" href="../styles/sidebar.css" />
     <link rel="stylesheet" href="../styles/calendar.css" />
+    <link rel="stylesheet" href="../styles/alarm.css" />
   </head>
   <body>
     <header class="main-header"><div id="header"></div></header>
@@ -60,6 +61,7 @@
         <div class="calendar-diver1"></div>
       </section>
     </div>
+    <div id="alarm-modal-container"></div>
     <script type="module">
       import { loadSidebar } from "../js/loadSidebar.js";
       loadSidebar();
@@ -69,5 +71,14 @@
       loadHeader();
     </script>
     <script src="../js/calendar.js"></script>
+    <script>
+    fetch('alarm.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('alarm-modal-container').innerHTML = html;
+      })
+      .catch(console.error);
+    </script>
+    <script src="../js/alarm.js"></script>
   </body>
 </html>
