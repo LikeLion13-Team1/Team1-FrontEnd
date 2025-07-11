@@ -61,9 +61,9 @@ export async function deleteRoutineGroup(groupId) {
 }
 
 // ✨ 특정 그룹의 루틴 목록 조회
-export async function fetchRoutinesInGroup(groupId) {
+export async function fetchRoutinesInGroup(groupId, cursor, size) {
   const res = await fetchWithAuth(
-    `http://13.209.221.182:8080/api/v1/groups/${groupId}/routines/my?cursor=0&size=5`
+    `http://13.209.221.182:8080/api/v1/groups/${groupId}/routines/my?cursor=${cursor}&size=${size}`
   );
   const data = await res.json();
   return data.result.routines || [];
@@ -97,6 +97,18 @@ export async function fetchRoutineById(routineId) {
   );
 
   if (!res.ok) throw new Error("루틴 단일 조회 실패");
+
+  const data = await res.json();
+  return data.result;
+}
+
+// ✅ 그룹의 모든 루틴 + isActive = true
+export async function fetchRoutineActive(groupId, cursor, size) {
+  const res = await fetchWithAuth(
+    `http://13.209.221.182:8080/api/v1/groups/${groupId}/routines/my/active?cursor=${cursor}&size=${size}`
+  );
+
+  if (!res.ok) throw new Error("루틴 Active 조회 실패");
 
   const data = await res.json();
   return data.result;
@@ -137,5 +149,6 @@ export async function fetchMyRoutines() {
   if (!res.ok) throw new Error("루틴 목록 불러오기 실패");
 
   const data = await res.json();
+  console.log(data.result);
   return data.result; // 루틴 배열
 }

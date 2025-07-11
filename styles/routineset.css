@@ -44,7 +44,7 @@ body {
 /* ===== 루틴 카드 ===== */
 .routine-box {
   width: 100%;
-  max-width: 400px;
+  max-width: 740px;
   height: 333px;
   background-color: #fff;
   border: 2px solid #cacaca;
@@ -94,12 +94,20 @@ li.routine-item {
   background: transparent;
 }
 
+.routine-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 두 열로 나열 */
+  gap: 20px; /* 항목 간 간격 */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 /* 카드 내 루틴 리스트 */
 .routine-box ul {
   height: 250px;
   list-style: none;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 14px;
   padding: 0px 8px 0px 0px;
   margin: 0;
@@ -334,10 +342,11 @@ li.routine-item {
 }
 
 .item-frequency.show {
-  max-height: 80px; /* 충분한 높이 설정 */
+  max-height: 100px; /* 충분한 높이 설정 */
   display: flex;
   align-items: center;
   opacity: 1;
+  height: 100%;
   text-align: left;
   display: flex;
   flex-direction: column;
@@ -347,6 +356,8 @@ li.routine-item {
   background: none;
   border: none;
   font-size: 16px;
+  align-items: center;
+  text-align: left;
   cursor: pointer;
   margin-left: 6px;
   transform: rotate(0deg);

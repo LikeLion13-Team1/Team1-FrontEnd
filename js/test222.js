@@ -3,9 +3,13 @@ import {
   fetchRoutineGroup,
   fetchRoutinesInGroup,
   deleteRoutineGroup,
+  fetchRoutineActive,
 } from "../js/api/routineApi.js";
 import { setupModalHandlers } from "../js/routineset/modalManager.js";
 import { setupCheckboxToggle } from "../js/routineset/routineCheckBox.js";
+
+const cursor = 0;
+const size = 20;
 
 document.addEventListener("DOMContentLoaded", async () => {
   setupModalHandlers();
@@ -55,15 +59,17 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const routineDes = document.getElementById("routine-description");
     routineDes.innerText = group.name;
-
     // ✅ 2. 루틴 목록 불러오기
-    const routineData = await fetchRoutinesInGroup(numericGroupId);
-    const routineIds = routineData.map((r) => r.routineId); // ✨ routineId만 추출
-    console.log("📦 루틴 ID 목록:", routineIds);
+    const routineData = await fetchRoutineActive(numericGroupId, cursor, size);
+    const arr = routineData.routines;
+    console.log("루틴데이터", routineData);
+    console.log("배열", arr);
+    const routineId = arr.map((r) => r.routineId);
+    console.log("📦 루틴 ID 목록:", routineId);
 
     // ✅ 3. 렌더링
     const container = document.getElementById("routine-sets-container");
-    await renderRoutineSections(routineIds, container);
+    await renderRoutineSections(routineId, container);
   } catch (error) {
     console.error("❌ 그룹 정보 또는 루틴 렌더링 실패", error);
   }

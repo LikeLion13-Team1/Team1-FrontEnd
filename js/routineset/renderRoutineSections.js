@@ -40,6 +40,7 @@ export async function renderRoutineSections(routineIds, container) {
   routineBox.className = "routine-box";
 
   const ul = document.createElement("ul");
+  ul.className = "routine-list";
 
   let totalTasks = 0;
   let completedTasks = 0;
@@ -48,7 +49,6 @@ export async function renderRoutineSections(routineIds, container) {
   for (const routineId of routineIds) {
     try {
       const routine = await fetchRoutineById(routineId);
-
       totalTasks++;
       if (routine.isActive) completedTasks++;
 
@@ -70,8 +70,10 @@ export async function renderRoutineSections(routineIds, container) {
           />
         </div>
         <div class="item-frequency">
-          <p>주기: ${cycleMap[routine.cycle] || "없음"}</p>
+          <p>주기: ${cycleMap[routine.cycle] || "아님"}</p>
           <p>설명: ${routine.description || "설명이 없습니다."}</p>
+          <p>시작 날짜: ${routine.startAt || "설명이 없습니다."}</p>
+          <p>종료 날짜: ${routine.endAt || "설명이 없습니다."}</p>
         </div>
       `;
 
