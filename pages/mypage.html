@@ -36,8 +36,7 @@
                   </div>
                   <div class="info-row">
                     <span>비밀번호</span>
-                    <strong id="password">********</strong>
-                  </div>
+                    <button class="edit-btn" id="editBtn">수정</button>                  </div>
                 </div>
               </div>
             </section>
@@ -133,7 +132,7 @@
 
     <!-- 도움말 모달 -->
     <div id="helpModal" class="modal">
-      <div class="modal-content">
+      <div class="modal-content1">
         <span class="close">&times;</span>
         <h3>살리미 사용 가이드</h3>
         <hr class="long-line">
@@ -150,7 +149,46 @@
         <p class="A"><strong>가볍게 묻고, 바로 대답받는 AI비서</strong>예요.</p>
         <p class="Q">[마이페이지]] 마이페이지에선 뭘 할 수 있나요?</p>
         <p class="A">내가 선택한 루틴, 캘린더 일정 등을 <strong>한눈에 관리</strong>할 수 있어요.</p>
-        <br>
+      </div>
+    </div>
+
+    <!-- 비밀번호 수정 모달 -->
+    <div id="editModal" class="modal">
+      <div class="modal-content2">
+        <span class="close">&times;</span>
+        <h3>비밀번호 수정</h3>
+        <hr class="long-line">
+        <div class="form-group">
+          <label>기존 비밀번호</label>
+          <input type="password" id="currentPassword" />
+          <label>변경 비밀번호</label>
+          <input type="password" id="newPassword" />
+          <label>변경 비밀번호 확인</label>
+          <input type="password" id="newPasswordConfirm" />
+          <button class="complete-btn" id="completeBtn">수정하기</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 로그아웃 모달 -->
+    <div id="logoutModal" class="modal">
+      <div class="modal-content3">
+        <p class="check">로그아웃하시겠습니까?</p>
+        <div class="modal-btn-group">
+          <button id="confirmLogout" class="confirm">예</button>
+          <button id="cancelLogout" class="cancel">아니요</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 탈퇴하기 모달 -->
+    <div id="deleteModal" class="modal">
+      <div class="modal-content3">
+        <p class="check">정말 탈퇴하시겠습니까?</p>
+        <div class="modal-btn-group">
+          <button id="confirmDelete" class="confirm">예</button>
+          <button id="cancelDelete" class="cancel">아니요</button>
+        </div>
       </div>
     </div>
 

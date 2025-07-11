@@ -103,3 +103,38 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+const KAKAO_CLIENT_ID = "여기에_카카오_REST_API_키"; // 카카오 REST API 키 입력
+const REDIRECT_URI = "http://localhost:5500/login.html"; // 리다이렉트 URI (카카오 콘솔과 동일해야 함)
+
+// ✅ 버튼 클릭 시 → 카카오 로그인 페이지로 이동
+document.getElementById("kakao-login").addEventListener("click", () => {
+  const kakaoUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${KAKAO_CLIENT_ID}&redirect_uri=${encodeURIComponent(
+    REDIRECT_URI
+  )}`;
+  window.location.href = kakaoUrl;
+});
+
+// ✅ 로그인 후 리다이렉트되면 URL에 code가 붙어있음 → 백엔드에 전달
+window.addEventListener("DOMContentLoaded", async () => {
+  const code = new URLSearchParams(window.location.search).get("code");
+  if (!code) return;
+
+  try {
+    const res = await fetch(
+      `http://13.209.221.182:8080/api/v1/callback/kakao?code=${code}`
+    );
+    const data = await res.json();
+
+    if (data.isSuccess) {
+      localStorage.setItem("accessToken", data.result.accessToken); // JWT 저장
+      alert("카카오 로그인 성공!");
+      window.location.href = "/main.html"; // 로그인 후 이동할 페이지
+    } else {
+      alert("카카오 로그인 실패: " + data.message);
+    }
+  } catch (err) {
+    console.error("로그인 오류:", err);
+    alert("서버 연결 실패");
+  }
+});
