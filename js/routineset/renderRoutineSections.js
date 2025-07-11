@@ -1,5 +1,4 @@
-import { fetchRoutineById } from "../api/routineApi.js";
-
+import { fetchRoutineById, updateRoutineById } from "../api/routineApi.js";
 const cycleMap = {
   NO: "없음",
   DAY: "매일",
@@ -7,6 +6,51 @@ const cycleMap = {
   MONTH: "매월",
   YEAR: "매년",
 };
+
+document.addEventListener("click", async (e) => {
+  const pencil = e.target.closest(".freq-edit-icon");
+  if (!pencil) return;
+
+  const routineItem = pencil.closest(".routine-item");
+  const routineId = routineItem?.dataset?.routineId;
+
+  if (!routineId) {
+    alert("루틴 ID를 찾을 수 없습니다.");
+    return;
+  }
+
+  try {
+    // ✅ 사용자 입력 받기 (간단하게 prompt로 구현)
+    const name = prompt("루틴 이름을 입력하세요:");
+    if (!name) return;
+
+    const description = prompt("루틴 설명을 입력하세요:");
+    if (description === null) return;
+
+    const startAt = prompt("시작 날짜 (예: 2025-07-11):");
+    if (!startAt) return;
+
+    const endAt = prompt("종료 날짜 (예: 2025-07-13):");
+    if (!endAt) return;
+
+    const cycle = prompt("주기 (NO, DAY, WEEK, MONTH, YEAR 중 하나):", "NO");
+
+    // ✅ PATCH 요청 보내기
+    const updated = await updateRoutineById(routineId, {
+      name,
+      description,
+      startAt,
+      endAt,
+      cycle: cycle || "NO",
+    });
+
+    alert("✅ 루틴이 수정되었습니다.");
+    location.reload(); // or renderRoutineSections(...) 호출
+  } catch (err) {
+    console.error("❌ 루틴 수정 실패:", err);
+    alert("루틴 수정 중 오류가 발생했습니다.");
+  }
+});
 
 // ✅ 주기 토글 이벤트 핸들러 등록 함수
 function attachToggleEvents(item) {
@@ -20,7 +64,12 @@ function attachToggleEvents(item) {
   });
 
   item.addEventListener("click", (e) => {
-    if (e.target.classList.contains("checkbox-icon")) return;
+    if (
+      e.target.classList.contains("checkbox-icon") ||
+      e.target.classList.contains("freq-edit-icon")
+    )
+      return;
+
     freq.classList.toggle("show");
     btn.classList.toggle("rotated");
   });
@@ -70,10 +119,15 @@ export async function renderRoutineSections(routineIds, container) {
           />
         </div>
         <div class="item-frequency">
-          <p>주기: ${cycleMap[routine.cycle] || "아님"}</p>
-          <p>설명: ${routine.description || "설명이 없습니다."}</p>
-          <p>시작 날짜: ${routine.startAt || "설명이 없습니다."}</p>
-          <p>종료 날짜: ${routine.endAt || "설명이 없습니다."}</p>
+          <div class="freq-content">
+            <p>루틴 주기: ${cycleMap[routine.cycle] || "없음"}</p>
+            <p>루틴 설명: ${routine.description || "설명이 없습니다."}</p>
+            <p>시작 날짜: ${routine.startAt?.slice(2) || "없음"}</p>
+            <p>종료 날짜: ${routine.endAt?.slice(2) || "없음"}</p>
+          </div>
+          <div class="freq-icon">
+            <img src="../assets/pencil.svg" alt="edit" class="freq-edit-icon" />
+          </div>
         </div>
       `;
 
