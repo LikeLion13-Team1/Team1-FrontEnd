@@ -472,3 +472,11 @@ li.routine-item {
 .switch-label {
   font-size: 15px;
 }
+
+.empty-message {
+  text-align: center;
+  color: #999;
+  margin-top: 110px;
+  font-size: 26px;
+  font-weight: 600;
+}

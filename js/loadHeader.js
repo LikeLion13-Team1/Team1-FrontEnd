@@ -1,4 +1,5 @@
-// loadHeader.js
+import { fetchUserInfo } from "./api/routineApi.js"; // ← 경로는 실제 위치에 맞게 조정
+
 export function loadHeader(path = "../pages/header.html") {
   document.addEventListener("DOMContentLoaded", () => {
     const header = document.getElementById("header");
@@ -6,10 +7,21 @@ export function loadHeader(path = "../pages/header.html") {
 
     fetch(path)
       .then((res) => res.text())
-      .then((html) => {
+      .then(async (html) => {
         header.innerHTML = html;
 
-        // 헤더가 삽입된 이후에 메시지 순환
+        // ✅ 사용자 이름 삽입
+        try {
+          const userInfo = await fetchUserInfo();
+          const userNameElem = document.querySelector(".user-name");
+          if (userNameElem && userInfo?.username) {
+            userNameElem.textContent = `${userInfo.username}님`;
+          }
+        } catch (err) {
+          console.error("유저 이름 로딩 실패:", err);
+        }
+
+        // 💬 메시지 순환
         const messages = [
           "루틴을 세우면 하루를 알차게 보낼 수 있어요!",
           "살림 챗봇에게 궁금한 걸 물어보세요!",

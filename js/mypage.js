@@ -53,20 +53,25 @@ async function loadRoutineGroups() {
     liElements.forEach((li, idx) => {
       const strong = li.querySelector("strong");
       const span = li.querySelector("span");
-      const btn = li.querySelector("button");
+      const btn = li.querySelector("button"); // 버튼이 있을 수도 있고 없을 수도 있음
 
       strong.textContent = `루틴 ${idx + 1}`;
+
       if (groups[idx]) {
         const group = groups[idx];
         span.textContent = group.name || "루틴이 비어있어요.";
         span.classList.toggle("empty", !group.name);
-        btn.onclick = () =>
-          (window.location.href = `./routineset.html?groupId=${group.groupId}`);
+        if (btn) {
+          btn.onclick = () =>
+            (window.location.href = `./routineset.html?groupId=${group.groupId}`);
+        }
       } else {
         span.textContent = "루틴이 비어있어요.";
         span.classList.add("empty");
-        btn.disabled = true;
-        btn.style.opacity = "0.4";
+        if (btn) {
+          btn.disabled = true;
+          btn.style.opacity = "0.4";
+        }
       }
     });
   } catch (err) {

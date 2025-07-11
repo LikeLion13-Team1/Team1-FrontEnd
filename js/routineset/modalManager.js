@@ -171,8 +171,8 @@ export function setupModalHandlers() {
             description: "사용자 추가 루틴",
             isActive: true,
             cycle: "NO",
-            startAt: customInput.startAt,
-            endAt: customInput.endAt,
+            startAt: customInput.startAt || "2025-07-13",
+            endAt: customInput.endAt || "2025-07-13",
           });
           const li = createRoutineItem(customInput, routine.routineId);
           ul.appendChild(li);

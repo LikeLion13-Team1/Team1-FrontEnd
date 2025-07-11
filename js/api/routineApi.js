@@ -171,3 +171,13 @@ export async function updateRoutineById(routineId, data) {
 
   return response.json();
 }
+
+export async function fetchUserInfo() {
+  const res = await fetchWithAuth(
+    "http://13.209.221.182:8080/api/v1/members/info"
+  );
+  if (!res.ok) throw new Error("회원 정보 불러오기 실패");
+
+  const json = await res.json();
+  return json.result; // { username: "김멋사", ... }
+}
