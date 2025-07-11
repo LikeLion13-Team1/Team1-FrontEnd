@@ -1,0 +1,143 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  font-family: "Pretendard Variable", sans-serif;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, #f3f4ec, #ffffff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-box {
+  top: 77px;
+  left: 336px;
+  width: 607px;
+  height: 566px;
+  background: linear-gradient(to bottom, #f3f4ec, #ffffff60);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  padding: 36px 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo img {
+  width: 66px;
+  height: auto;
+  display: block;
+  margin: 0;
+}
+
+h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #45624e;
+  margin-top: 0;
+  line-height: 1.2;
+  text-align: center;
+  margin-bottom: 24px;
+  letter-spacing: -2px;
+}
+
+.social-buttons {
+  width: 273px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 20px;
+  letter-spacing: -1.4px;
+}
+
+.social-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 14px;
+  height: 40px;
+  border: 1px solid #45624e;
+  border-radius: 28px;
+  background-color: #d9d9d900;
+  font-size: 14px;
+  font-weight: 700;
+  color: #3a5141;
+  cursor: pointer;
+}
+
+.social-button img {
+  position: absolute;
+  border-radius: 90%;
+  left: 30px;
+  width: 19px;
+  height: 19px;
+}
+
+hr {
+  width: 100%;
+  margin-bottom: 12px;
+  border: none;
+  border-top: 1px solid #cacaca;
+}
+
+.form-group {
+  width: 273px;
+  margin-bottom: 4px;
+  letter-spacing: -1px;
+}
+
+label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #3a5141;
+  margin-bottom: 3px;
+  display: block;
+}
+
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  height: 40px;
+  padding: 7px;
+  color: black;
+  border: 1px solid #45624e;
+  border-radius: 10px;
+  font-size: 14px;
+  background-color: #d9d9d900;
+  font-size: 20px;
+}
+
+.login-button {
+  width: 273px;
+  line-height: 39px;
+  background-color: #45624e;
+  color: white;
+  border: none;
+  border-radius: 28px;
+  font-weight: 500;
+  font-size: 14px;
+  margin-top: 10px;
+  cursor: pointer;
+  letter-spacing: -1.4px;
+}
+
+.signup-text {
+  margin-top: 18px;
+  font-weight: 550;
+  font-size: 13px;
+  color: #3a5141;
+  letter-spacing: -1px;
+}
+
+.signup-text a {
+  color: #3a5141;
+  font-weight: 650;
+  text-decoration: underline;
+}

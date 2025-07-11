@@ -1,14 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>살림 챗봇</title>
     <link rel="stylesheet" href="../styles/global.css" />
+    <link rel="stylesheet" href="../styles/sidebar.css" />
     <link rel="stylesheet" href="../styles/chatbot.css" />
+    <link rel="stylesheet" href="../styles/header.css" />
+    <link rel="stylesheet" href="../styles/alarm.css" />
   </head>
   <body>
-    <h1>Chatbot</h1>
-    <script src="../js/chatbot.js"></script>
+    <header class="main-header"><div id="header"></div></header>
+    <div class="main">
+      <aside class="aside"><div id="sidebar"></div></aside>
+      <section class="content">
+        <div class="item">
+          <div id="chatBox" class="chat-box"></div>
+          <p class="welcome-message">오늘은 어떤 살림 고민이 있으신가요?</p>
+          <div class="buttonArea">
+            <di class="button-description">추천 질문</di>
+            <button class="question-btn" id="routineBtn">
+              오늘 하루 루틴 추천해줘
+            </button>
+            <button class="question-btn" id="weatherBtn">
+              오늘의 날씨와 살림 알려줘
+            </button>
+            <button class="question-btn" id="tipBtn">
+              살림 꿀팁 하나만 알려줘
+            </button>
+          </div>
+
+          <div class="input-wrapper">
+            <input
+              id="chatInput"
+              placeholder="안녕하세요, 살리미에게 궁금한 것을 물어보세요 :)"
+            />
+            <button id="sendBtn">
+              <img
+                src="../assets/send.svg"
+                alt="send-icon"
+                width="30"
+                height="30"
+              />
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div id="alarm-modal-container"></div>
+    <script src="../js/auth/authCheck.js"></script>
+    <script type="module">
+      import { loadSidebar } from "../js/loadSidebar.js";
+      import { loadHeader } from "../js/loadHeader.js";
+      loadSidebar();
+      loadHeader();
+    </script>
+    <script src="../js/config.js"></script>
+    <script type="module" src="../js/chatbot.js"></script>
+    <script>
+    fetch('alarm.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('alarm-modal-container').innerHTML = html;
+      })
+      .catch(console.error);
+    </script>
+    <script src="../js/alarm.js"></script>
   </body>
 </html>

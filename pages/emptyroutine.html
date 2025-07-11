@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../styles/global.css" />
+    <link rel="stylesheet" href="../styles/sidebar.css" />
+    <link rel="stylesheet" href="../styles/header.css" />
+    <link rel="stylesheet" href="../styles/emptyroutine.css" />
+  </head>
+  <body>
+    <header class="main-header"><div id="header"></div></header>
+    <div class="main">
+      <aside class="aside"><div id="sidebar"></div></aside>
+      <section class="content">
+        <div class="titlemsg">
+          앗, 루틴3가 비어있어요. <br />
+          나만의 루틴 찾기를 통해 루틴3를 채워보세요 :)
+        </div>
+        <button id="go-to-custom">나만의 루틴 찾기 바로가기</button>
+        <button id="go-to-routine1">루틴2 바로가기</button>
+      </section>
+    </div>
+    <script type="module">
+      import { loadSidebar } from "../js/loadSidebar.js";
+      import { loadHeader } from "../js/loadHeader.js";
+      loadSidebar();
+      loadHeader();
+
+      // 페이지 이동 로직
+      const goToCustomBtn = document.getElementById("go-to-custom");
+      const goToRoutine1Btn = document.getElementById("go-to-routine1");
+
+      goToCustomBtn.addEventListener("click", () => {
+        window.location.href = "../pages/routine1.html"; // 원하는 경로로 수정
+      });
+
+      goToRoutine1Btn.addEventListener("click", () => {
+        window.location.href = "../pages/routineset.html"; // 원하는 경로로 수정
+      });
+    </script>
+  </body>
+</html>

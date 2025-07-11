@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Qfind</title>
+    <link rel="stylesheet" href="../styles/global.css" />
+    <link rel="stylesheet" href="../styles/header.css" />
+    <link rel="stylesheet" href="../styles/sidebar.css" />
+    <link rel="stylesheet" href="../styles/Q.css" />
+    <link rel="stylesheet" href="../styles/Q2.css" />
+    <link rel="stylesheet" href="../styles/Qfind.css" />
+  </head>
+  <body data-question-key="routin">
+    <header class="main-header">
+      <div id="header"></div>
+    </header>
+    <div class="main">
+      <aside class="aside">
+        <div id="sidebar"></div>
+      </aside>
+
+      <section class="content">
+        <div class="item">
+          <div class="quesiton-container">
+            <p class="q">살리미가 멋사님께 딱 맞는 루틴을 준비해 뒀어요 :)</p>
+            <img class="bot" src="../assets/bot.png" />
+          </div>
+          <div class="progress"></div>
+          <div class="question-box">
+            <h2 class="Q1">루틴을 어디에 저장할까요?</h2>
+            <div class="btn">
+              <button class="option-btn">루틴1</button>
+              <button class="option-btn">루틴2</button>
+              <button class="option-btn">루틴3</button>
+            </div>
+          </div>
+          <div class="btn-container">
+            <a href="../pages/Q4.html" class="before-btn">이전</a>
+            <div class="btn-gap"></div>
+
+            <a href="../pages/Qfinal.html" class="next-btn">완료</a>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script type="module" src="../js/auth/authCheck.js"></script>
+    <script type="module">
+      import { loadHeader } from "../js/loadHeader.js";
+      import { loadSidebar } from "../js/loadSidebar.js";
+      loadHeader();
+      loadSidebar();
+    </script>
+    <script type="module" src="../js/Qfind.js"></script>
+  </body>
+</html>

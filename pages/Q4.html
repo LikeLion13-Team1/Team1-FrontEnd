@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Q4</title>
+    <link rel="stylesheet" href="../styles/global.css" />
+    <link rel="stylesheet" href="../styles/header.css" />
+    <link rel="stylesheet" href="../styles/sidebar.css" />
+    <link rel="stylesheet" href="../styles/Q.css" />
+    <link rel="stylesheet" href="../styles/Q2.css" />
+  </head>
+  <body data-question-key="q4">
+    <header class="main-header">
+      <div id="header"></div>
+    </header>
+
+    <div class="main">
+      <aside class="aside">
+        <div id="sidebar"></div>
+      </aside>
+
+      <section class="content">
+        <div class="item">
+          <div class="quesiton-container">
+            <div class="star-wrapper">
+              <img class="star1" src="../assets/star1.png" />
+            </div>
+            <p class="q">이제 알겠다, 멋사님의 루틴</p>
+            <img class="star2" src="../assets/star2.png" />
+            <img class="star3" src="../assets/star3.png" />
+          </div>
+          <div class="progress">
+            <span class="step" data-step="1">1</span>
+            <span class="step" data-step="2">2</span>
+            <span class="step" data-step="3">3</span>
+            <span class="step" data-step="4">4</span>
+          </div>
+          <div class="question-box">
+            <h2 class="Q1">Q4. 루틴 추천 받을 때 나는?</h2>
+            <div class="btn">
+              <button class="option-btn" data-score="3">
+                힘들어도 좋아요:) 확실한 루틴을 주세요.
+              </button>
+              <button class="option-btn" data-score="2">
+                쉬운 것부터 차근차근이 좋아요.
+              </button>
+              <button class="option-btn" data-score="1">
+                흠.. 그날 기분 따라 알아서 할게요.
+              </button>
+            </div>
+          </div>
+          <div class="btn-container">
+            <a href="../pages/Q3.html" class="before-btn">이전</a>
+            <div class="btn-gap"></div>
+            <a href="../pages/Qfind.html" class="next-btn">다음</a>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script type="module">
+      import { loadHeader } from "../js/loadHeader.js";
+      import { loadSidebar } from "../js/loadSidebar.js";
+      import { updateQstep } from "../js/Qstep.js";
+
+      // ✅ 헤더, 사이드바 로딩
+      loadHeader();
+      loadSidebar();
+
+      // ✅ Q 스텝 단계 표시
+      updateQstep(4); // Q4 단계
+
+      // ✅ 현재 질문 키 추출 및 로컬스토리지 저장
+      const questionKey = document.body.dataset.questionKey;
+      console.log("📌 현재 질문 키:", questionKey);
+
+      const buttons = document.querySelectorAll(".option-btn");
+
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          // 선택 스타일 적용
+          buttons.forEach((b) => b.classList.remove("selected"));
+          e.currentTarget.classList.add("selected");
+
+          // 답변 저장
+          const answer =
+            e.currentTarget.dataset.answer ||
+            e.currentTarget.textContent.trim();
+          const answers =
+            JSON.parse(localStorage.getItem("surveyAnswers")) || {};
+
+          answers[questionKey] = answer;
+          localStorage.setItem("surveyAnswers", JSON.stringify(answers));
+
+          console.log(`✅ ${questionKey} 저장됨:`, answer);
+        });
+      });
+    </script>
+  </body>
+</html>

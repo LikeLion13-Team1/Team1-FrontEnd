@@ -1,0 +1,83 @@
+.text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  text-align: center; /* 텍스트도 중앙 정렬 */
+  margin: 0 auto; /* 필요시 중앙 정렬 */
+  padding: 1rem 0; /* 위아래 간격 */
+}
+.text1 {
+  color: #45624e;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.04rem;
+  margin-bottom: 0.5rem;
+}
+.highlight {
+  color: #45624e;
+  font-family: "Pretendard Variable";
+  font-size: 1.6rem; /* 약 25.6px */
+  font-weight: 700;
+  letter-spacing: 0.04rem;
+}
+
+.text2 {
+  color: #3a5141;
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: 0.05rem;
+  margin-top: 0;
+  margin-bottom: 2rem;
+}
+
+.text3 {
+  color: #9d9d9d;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.04rem;
+  margin-top: 0;
+  margin-bottom: 2rem;
+}
+
+.text4 {
+  color: #45624e;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.04rem;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.text5 {
+  color: #45624e;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.04rem;
+  margin-top: 0;
+  margin-bottom: 2rem;
+}
+
+.baro-btn {
+  display: flex;
+  width: 300px;
+  height: 50px;
+  padding: 14px 60px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 24px;
+  background: #45624e;
+  margin-top: 0;
+  color: #fff;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.4rem;
+  letter-spacing: -0.05rem;
+  border: 0;
+}
+.baro-btn:hover {
+  background-color: #324638;
+}

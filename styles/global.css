@@ -1,11 +1,92 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css");
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+html,
 body {
+  font-family: "Pretendard Variable", sans-serif;
+  background-color: #f3f4ec;
   width: 100%;
   height: 100%;
-  font-family: "Pretendard", sans-serif;
+}
+
+.main-header {
+  height: 90px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 28px;
+  font-weight: bold;
+  font-family: "Pretendard Variable", sans-serif;
+  z-index: 10;
+  top: 0;
+  padding: 0 10px;
+}
+
+/* 공통 레이아웃 */
+.main {
+  display: flex;
+  flex-wrap: wrap;
+  min-height: calc(100vh - 90px);
+  padding: 0 10px;
+  gap: 14px;
+}
+
+.main-content {
+  flex: 1;
+  min-width: 300px;
+}
+
+/* 공통 사이드바 */
+.aside {
+  width: 216px;
+  height: 100%;
+  min-height: 652px;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  padding: 10px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 2px 20px 2px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+  z-index: 1;
+}
+
+/* 공통 콘텐츠 영역 */
+.content {
+  flex: 1;
+  min-width: 300px;
+  width: 100%;
+  height: 100%;
+  min-height: 652px;
+  max-width: 100%;
+  overflow-x: hidden;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0px 2px 20px 2px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+.login-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-loading p {
+  font-size: 50px;
 }

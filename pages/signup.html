@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>회원가입하기</title>
+    <link rel="stylesheet" href="../styles/signup.css" />
+  </head>
+  <body>
+    <!--회원가입 화면1-->
+    <div class="login-box" id="signupPage1">
+      <div class="logo">
+        <img src="../assets/salimi_icon2.png" />
+      </div>
+      <h1 id="second">살리미에 가입하고<br />다양한 서비스를 이용하세요.</h1>
+      <div class="form-group">
+        <label for="email">이메일</label>
+        <input type="email" id="signupEmail" />
+      </div>
+      <button class="login-button" id="toSignup2">다음</button>
+
+      <div class="divider">
+        <span>또는</span>
+      </div>
+
+      <div class="social-buttons">
+        <button class="social-button">
+          <img src="../assets/google-icon.png" alt="Google" /> Google로 계속하기
+        </button>
+        <button class="social-button">
+          <img src="../assets/kakao-icon.png" alt="Kakao" /> 카카오로 계속하기
+        </button>
+        <button class="social-button">
+          <img src="../assets/apple-icon.png" alt="Apple" /> Apple로 계속하기
+        </button>
+      </div>
+
+      <div class="signup-text">
+        이미 계정이 있나요?
+        <a href="#" class="backToLogin">살리미에 로그인하기</a>
+      </div>
+    </div>
+
+    <!--회원가입 화면2-->
+    <div class="login-box" id="signupPage2" style="display: none">
+      <div class="logo">
+        <img src="../assets/salimi_icon2.png" />
+      </div>
+      <h2>살 리 미</h2>
+      <div class="form-group">
+        <label for="finalEmail">이메일</label>
+        <input type="email" id="finalEmail" readonly />
+      </div>
+      <div class="form-group">
+        <label for="name">이름</label>
+        <input type="text" id="name" />
+      </div>
+      <div class="form-group">
+        <label for="password">비밀번호</label>
+        <input type="password" id="signupPassword" />
+        <p class="password-guide">문자, 숫자, 특수문자 포함 8자 이상</p>
+      </div>
+      <div class="form-group">
+        <label for="confirmPassword">비밀번호 확인</label>
+        <input type="password" id="confirmPassword" />
+      </div>
+      <div class="checkbox-group">
+        <label
+          ><input type="checkbox" id="agreeTerms" /> &lt;필수&gt; 개인 정보 제공
+          동의</label
+        >
+        <label
+          ><input type="checkbox" id="agreePush" /> &lt;선택&gt; 푸시
+          알림</label
+        >
+      </div>
+
+      <button class="login-button">회원가입하기</button>
+
+      <div class="signup-text">
+        이미 계정이 있나요?
+        <a href="#" class="backToLogin">살리미에 로그인하기</a>
+      </div>
+    </div>
+
+    <script src="../js/signup.js"></script>
+  </body>
+</html>
