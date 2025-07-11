@@ -1,6 +1,6 @@
 import { fetchWithAuth } from "../auth/auth.js";
 
-const BASE_URL = "http://13.209.221.182:8080";
+const BASE_URL = "https://www.dlrbdjs.store";
 
 // 회원 특성 저장 (존재하면 PATCH, 없으면 POST)
 export const saveUserFeature = async (featureData) => {

@@ -6,7 +6,7 @@ import { fetchWithAuth } from "../auth/auth.js";
 
 // ✅ 루틴 그룹 생성
 export async function createRoutineGroup(name) {
-  const res = await fetchWithAuth("http://13.209.221.182:8080/api/v1/groups", {
+  const res = await fetchWithAuth("https://www.dlrbdjs.store/api/v1/groups", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ name }),
@@ -21,7 +21,7 @@ export async function createRoutineGroup(name) {
 // ✅ 루틴 그룹 단일 조회
 export async function fetchRoutineGroup(groupId) {
   const res = await fetchWithAuth(
-    `http://13.209.221.182:8080/api/v1/groups/${groupId}`
+    `https://www.dlrbdjs.store/api/v1/groups/${groupId}`
   );
   if (!res.ok) throw new Error("루틴 그룹 조회 실패");
 
@@ -32,7 +32,7 @@ export async function fetchRoutineGroup(groupId) {
 // ✅ 루틴 그룹 수정
 export async function updateRoutineGroup(groupId, newName) {
   const res = await fetchWithAuth(
-    `http://13.209.221.182:8080/api/v1/groups/${groupId}`,
+    `https://www.dlrbdjs.store/api/v1/groups/${groupId}`,
     {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
@@ -49,7 +49,7 @@ export async function updateRoutineGroup(groupId, newName) {
 // ✅ 루틴 그룹 삭제
 export async function deleteRoutineGroup(groupId) {
   const res = await fetchWithAuth(
-    `http://13.209.221.182:8080/api/v1/groups/${groupId}`,
+    `https://www.dlrbdjs.store/api/v1/groups/${groupId}`,
     {
       method: "DELETE",
     }
@@ -63,7 +63,7 @@ export async function deleteRoutineGroup(groupId) {
 // ✨ 특정 그룹의 루틴 목록 조회
 export async function fetchRoutinesInGroup(groupId, cursor, size) {
   const res = await fetchWithAuth(
-    `http://13.209.221.182:8080/api/v1/groups/${groupId}/routines/my?cursor=${cursor}&size=${size}`
+    `https://www.dlrbdjs.store/api/v1/groups/${groupId}/routines/my?cursor=${cursor}&size=${size}`
   );
   const data = await res.json();
   return data.result.routines || [];
@@ -76,7 +76,7 @@ export async function fetchRoutinesInGroup(groupId, cursor, size) {
 // ✅ 루틴 생성 (그룹 내)
 export async function createRoutineInGroup(groupId, routineData) {
   const res = await fetchWithAuth(
-    `http://13.209.221.182:8080/api/v1/group/${groupId}/routines`,
+    `https://www.dlrbdjs.store/api/v1/group/${groupId}/routines`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -93,7 +93,7 @@ export async function createRoutineInGroup(groupId, routineData) {
 // ✅ 루틴 단일 조회
 export async function fetchRoutineById(routineId) {
   const res = await fetchWithAuth(
-    `http://13.209.221.182:8080/api/v1/routines/${routineId}`
+    `https://www.dlrbdjs.store/api/v1/routines/${routineId}`
   );
 
   if (!res.ok) throw new Error("루틴 단일 조회 실패");
@@ -105,7 +105,7 @@ export async function fetchRoutineById(routineId) {
 // ✅ 그룹의 모든 루틴 + isActive = true
 export async function fetchRoutineActive(groupId, cursor, size) {
   const res = await fetchWithAuth(
-    `http://13.209.221.182:8080/api/v1/groups/${groupId}/routines/my/active?cursor=${cursor}&size=${size}`
+    `https://www.dlrbdjs.store/api/v1/groups/${groupId}/routines/my/active?cursor=${cursor}&size=${size}`
   );
 
   if (!res.ok) throw new Error("루틴 Active 조회 실패");
@@ -117,7 +117,7 @@ export async function fetchRoutineActive(groupId, cursor, size) {
 // ✅ 루틴 활성화
 export async function activateRoutine(routineId) {
   const res = await fetchWithAuth(
-    `http://13.209.221.182:8080/api/v1/routines/${routineId}/activate`,
+    `https://www.dlrbdjs.store/api/v1/routines/${routineId}/activate`,
     { method: "PATCH" }
   );
 
@@ -130,7 +130,7 @@ export async function activateRoutine(routineId) {
 // ✅ 루틴 비활성화
 export async function inactivateRoutine(routineId) {
   const res = await fetchWithAuth(
-    `http://13.209.221.182:8080/api/v1/routines/${routineId}/inactivate`,
+    `https://www.dlrbdjs.store/api/v1/routines/${routineId}/inactivate`,
     { method: "PATCH" }
   );
 
@@ -143,7 +143,7 @@ export async function inactivateRoutine(routineId) {
 // ✅ 내 루틴 전체 목록 조회
 export async function fetchMyRoutines() {
   const res = await fetchWithAuth(
-    "http://13.209.221.182:8080/api/v1/routines/my"
+    "https://www.dlrbdjs.store/api/v1/routines/my"
   );
 
   if (!res.ok) throw new Error("루틴 목록 불러오기 실패");
@@ -155,7 +155,7 @@ export async function fetchMyRoutines() {
 
 export async function updateRoutineById(routineId, data) {
   const response = await fetchWithAuth(
-    `http://13.209.221.182:8080/api/v1/routines/${routineId}`,
+    `https://www.dlrbdjs.store/api/v1/routines/${routineId}`,
     {
       method: "PATCH",
       headers: {
@@ -167,6 +167,46 @@ export async function updateRoutineById(routineId, data) {
 
   if (!response.ok) {
     throw new Error("루틴 수정 실패");
+  }
+
+  return response.json();
+}
+
+export async function fetchUserInfo() {
+  const res = await fetchWithAuth(
+    "https://www.dlrbdjs.store/api/v1/members/info"
+  );
+  if (!res.ok) throw new Error("회원 정보 불러오기 실패");
+
+  const json = await res.json();
+  return json.result; // { username: "김멋사", ... }
+}
+
+export async function markRoutineAsDone(eventId) {
+  const response = await fetchWithAuth(
+    `https://www.dlrbdjs.store/api/v1/events/${eventId}/done`,
+    {
+      method: "PATCH",
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("루틴 완료 처리 실패");
+  }
+
+  return response.json();
+}
+
+export async function cancelRoutineDone(eventId) {
+  const response = await fetchWithAuth(
+    `https://www.dlrbdjs.store/api/v1/events/${eventId}/undone`,
+    {
+      method: "PATCH",
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("루틴 완료 취소 실패");
   }
 
   return response.json();

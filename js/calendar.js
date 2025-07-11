@@ -11,8 +11,18 @@ function renderCalendar(year, month) {
   daysContainer.innerHTML = "";
 
   const monthNames = [
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December",
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
   ];
   monthLabel.textContent = monthNames[month] + " " + year;
 
@@ -167,7 +177,12 @@ async function getRoutines(year, month, date) {
     ).padStart(2, "0")}`;
 
     const response = await fetch(
-      `http://13.209.221.182:8080/api/v1/events?start=${dateStr}&end=${dateStr}&cursor=0&size=20`,
+      `https://www.dlrbdjs.store/api/v1/events?start=${year}-${String(
+        month + 1
+      ).padStart(2, "0")}-${String(date).padStart(2, "0")}&end=${year}-${String(
+        month + 1
+      ).padStart(2, "0")}-${String(date).padStart(2, "0")}&cursor=0&size=20`,
+
       {
         method: "GET",
         headers: {
@@ -180,7 +195,29 @@ async function getRoutines(year, month, date) {
     if (!response.ok) throw new Error("서버 응답 오류");
 
     const data = await response.json();
-    return data.result.events.map((event) => event.routineName);
+
+
+    // 실제로 받아온 event 목록에서 routineId들을 이용해 루틴 이름 목록을 병렬로 가져오는 로직 예시
+    const routinePromises = data.result.events.map(async (event) => {
+      const res = await fetch(
+        `https://www.dlrbdjs.store/api/v1/routines/${event.routineId}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (!res.ok) throw new Error("루틴 상세 응답 오류");
+      const routineData = await res.json();
+      // routineData 구조에 따라 조절 필요 (예: routineData.result.name)
+      return routineData.result.name;
+    });
+
+    const routineNames = await Promise.all(routinePromises);
+    return routineNames;
+
   } catch (error) {
     console.error("루틴 로딩 실패:", error);
     return [];

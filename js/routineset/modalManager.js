@@ -6,6 +6,7 @@ import {
 } from "../api/routineApi.js";
 import { renderRoutineSections } from "./renderRoutineSections.js";
 
+window.dispatchEvent(new Event("routine-added"));
 const cycleMap = {
   NO: "없음",
   DAY: "매일",
@@ -132,6 +133,9 @@ export function setupModalHandlers() {
     .querySelector(".save-button-modal")
     .addEventListener("click", async () => {
       if (!currentSectionBox || !currentGroupId) return;
+      // ✅ [1] 안내 문구 제거
+      const emptyMessage = currentSectionBox.querySelector(".empty-message");
+      if (emptyMessage) emptyMessage.remove();
 
       const ul = currentSectionBox.querySelector("ul");
       const checkedBoxes = document.querySelectorAll(
@@ -171,8 +175,8 @@ export function setupModalHandlers() {
             description: "사용자 추가 루틴",
             isActive: true,
             cycle: "NO",
-            startAt: customInput.startAt,
-            endAt: customInput.endAt,
+            startAt: customInput.startAt || "2025-07-13",
+            endAt: customInput.endAt || "2025-07-13",
           });
           const li = createRoutineItem(customInput, routine.routineId);
           ul.appendChild(li);

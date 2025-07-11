@@ -1,7 +1,7 @@
 import { saveUserFeature, getUserFeature } from "./api/featuresApi.js";
 import { fetchWithAuth } from "../js/auth/auth.js";
 
-const BASE_URL = "http://13.209.221.182:8080";
+const BASE_URL = "https://www.dlrbdjs.store";
 
 // 점수 매핑
 const scoreMap = {

@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     try {
       const response = await fetch(
-        "http://13.209.221.182:8080/api/v1/auth/login",
+        "https://www.dlrbdjs.store/api/v1/auth/login",
         {
           method: "POST",
           headers: {

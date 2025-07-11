@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       const response = await fetch(
-        "http://13.209.221.182:8080/api/v1/members/signup",
+        "https://www.dlrbdjs.store/api/v1/members/signup",
         {
           method: "POST",
           headers: {
@@ -122,7 +122,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
   try {
     const res = await fetch(
-      `http://13.209.221.182:8080/api/v1/callback/kakao?code=${code}`
+      `https://www.dlrbdjs.store/api/v1/callback/kakao?code=${code}`
     );
     const data = await res.json();
 

@@ -8,12 +8,10 @@ export function setupCheckboxToggle() {
       const isChecked = icon.dataset.checked === "true";
       const routineId = icon.closest(".routine-item")?.dataset.routineId;
 
-      console.log("루틴아디:", routineId);
-      // ✅ 상태 전환
+      // ✅ 상태 전환 (UI 즉시 반영)
       icon.src = `../assets/${isChecked ? "unchecked" : "checked"}.svg`;
       icon.dataset.checked = (!isChecked).toString();
 
-      // ✅ API 호출
       try {
         if (routineId) {
           if (!isChecked) {
@@ -21,6 +19,23 @@ export function setupCheckboxToggle() {
           } else {
             await inactivateRoutine(routineId);
           }
+        }
+
+        // ✅ 진행률만 다시 계산
+        const allCheckboxes = document.querySelectorAll(".checkbox-icon");
+        const total = allCheckboxes.length;
+        const completed = [...allCheckboxes].filter(
+          (cb) => cb.dataset.checked === "true"
+        ).length;
+
+        const percentage =
+          total > 0 ? Math.round((completed / total) * 100) : 0;
+        const routineDes = document.getElementById("routine-description");
+        if (routineDes) {
+          routineDes.innerHTML = `
+            벌써 오늘 하루 목표의 <strong>${percentage}%</strong>에 도달했어요!<br />
+            아자아자 멋사님은 해낼 수 있어요 ~
+          `;
         }
       } catch (err) {
         console.error("루틴 상태 변경 실패:", err);

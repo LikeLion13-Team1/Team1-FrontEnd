@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (!token || !welcomeEl) return;
 
   try {
-    const res = await fetch("http://13.209.221.182:8080/api/v1/members/info", {
+    const res = await fetch("https://www.dlrbdjs.store/api/v1/members/info", {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,

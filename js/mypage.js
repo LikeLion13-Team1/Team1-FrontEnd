@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
 async function loadUserInfo() {
   try {
     const res = await fetchWithAuth(
-      "http://13.209.221.182:8080/api/v1/members/info"
+      "https://www.dlrbdjs.store/api/v1/members/info"
     );
     if (!res.ok) throw new Error("회원 정보 불러오기 실패");
     const data = await res.json();
@@ -42,7 +42,7 @@ async function loadUserInfo() {
 async function loadRoutineGroups() {
   try {
     const res = await fetchWithAuth(
-      "http://13.209.221.182:8080/api/v1/groups/my?cursor=0&size=3"
+      "https://www.dlrbdjs.store/api/v1/groups/my?cursor=0&size=3"
     );
     const data = await res.json();
     if (!data.isSuccess) throw new Error("그룹 조회 실패");
@@ -53,20 +53,25 @@ async function loadRoutineGroups() {
     liElements.forEach((li, idx) => {
       const strong = li.querySelector("strong");
       const span = li.querySelector("span");
-      const btn = li.querySelector("button");
+      const btn = li.querySelector("button"); // 버튼이 있을 수도 있고 없을 수도 있음
 
       strong.textContent = `루틴 ${idx + 1}`;
+
       if (groups[idx]) {
         const group = groups[idx];
         span.textContent = group.name || "루틴이 비어있어요.";
         span.classList.toggle("empty", !group.name);
-        btn.onclick = () =>
-          (window.location.href = `./routineset.html?groupId=${group.groupId}`);
+        if (btn) {
+          btn.onclick = () =>
+            (window.location.href = `./routineset.html?groupId=${group.groupId}`);
+        }
       } else {
         span.textContent = "루틴이 비어있어요.";
         span.classList.add("empty");
-        btn.disabled = true;
-        btn.style.opacity = "0.4";
+        if (btn) {
+          btn.disabled = true;
+          btn.style.opacity = "0.4";
+        }
       }
     });
   } catch (err) {
@@ -87,7 +92,7 @@ function setupLogout() {
     confirmBtn.addEventListener("click", async () => {
       try {
         const res = await fetchWithAuth(
-          "http://13.209.221.182:8080/api/v1/auth/logout",
+          "https://www.dlrbdjs.store/api/v1/auth/logout",
           { method: "POST", headers: { "Content-Type": "application/json" } }
         );
         const data = await res.json();
@@ -117,7 +122,7 @@ function setupWithdraw() {
     confirmBtn.addEventListener("click", async () => {
       try {
         const res = await fetchWithAuth(
-          "http://13.209.221.182:8080/api/v1/members/withdrawal",
+          "https://www.dlrbdjs.store/api/v1/members/withdrawal",
           { method: "POST", headers: { "Content-Type": "application/json" } }
         );
         const data = await res.json();
@@ -153,7 +158,7 @@ function setupPasswordChange() {
     }
     try {
       const res = await fetchWithAuth(
-        "http://13.209.221.182:8080/api/v1/auth/password/reset",
+        "https://www.dlrbdjs.store/api/v1/auth/password/reset",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

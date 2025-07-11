@@ -1,5 +1,5 @@
 import { fetchWithAuth } from "../js/auth/auth.js";
-const BASE_URL = "http://13.209.221.182:8080";
+const BASE_URL = "https://www.dlrbdjs.store";
 
 export function loadSidebar(path = "../pages/sidebar.html") {
   document.addEventListener("DOMContentLoaded", () => {
