@@ -84,6 +84,13 @@ export async function renderRoutineSections(routineIds, container) {
 
   container.innerHTML = "";
 
+  const existingEmptyMessage = container.querySelector(
+    ".routine-box .empty-message"
+  );
+  if (existingEmptyMessage) {
+    existingEmptyMessage.remove();
+  }
+
   // ✅ 전체 루틴 박스 및 리스트 요소 생성
   const routineBox = document.createElement("div");
   routineBox.className = "routine-box";
@@ -137,6 +144,13 @@ export async function renderRoutineSections(routineIds, container) {
       console.error(`❌ 루틴 ${routineId} 로딩 실패`, err);
     }
   }
+  // ✅ ✨ 루틴이 없을 때 안내 메시지 추가
+  if (totalTasks === 0) {
+    const emptyMessage = document.createElement("p");
+    emptyMessage.className = "empty-message";
+    emptyMessage.textContent = "수정하기 버튼을 통해 추천 루틴을 확인해보세요!";
+    routineBox.appendChild(emptyMessage);
+  }
 
   // ✅ 루틴 목록과 수정 버튼 추가
   routineBox.appendChild(ul);
@@ -148,4 +162,20 @@ export async function renderRoutineSections(routineIds, container) {
 
   // ✅ 최종 결과 container에 추가
   container.appendChild(routineBox);
+  // ✅ ✨ 진행률 계산 및 설명 표시
+  const routineDes = document.getElementById("routine-description");
+  if (routineDes && totalTasks > 0) {
+    const percentage = Math.round((completedTasks / totalTasks) * 100);
+    const userName = "멋사님"; // 동적으로 바꾸기 가능
+
+    routineDes.innerHTML = `
+      벌써 오늘 하루 목표의 <strong>${percentage}%</strong>에 도달했어요!<br />
+      아자아자 ${userName}은 해낼 수 있어요 ~
+    `;
+    console.log("📊 총 루틴:", totalTasks, "완료된 루틴:", completedTasks);
+    console.log(
+      "📈 계산된 진행률:",
+      totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0
+    );
+  }
 }
