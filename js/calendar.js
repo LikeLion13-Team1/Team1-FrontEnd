@@ -11,8 +11,18 @@ function renderCalendar(year, month) {
   daysContainer.innerHTML = "";
 
   const monthNames = [
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December",
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
   ];
   monthLabel.textContent = monthNames[month] + " " + year;
 
@@ -160,7 +170,7 @@ async function showRoutines(year, month, date) {
 async function getRoutines(year, month, date) {
   try {
     const response = await fetch(
-      `http://13.209.221.182:8080/api/v1/events?start=${year}-${String(
+      `https://www.dlrbdjs.store/api/v1/events?start=${year}-${String(
         month + 1
       ).padStart(2, "0")}-${String(date).padStart(2, "0")}&end=${year}-${String(
         month + 1
@@ -183,7 +193,7 @@ async function getRoutines(year, month, date) {
     // 실제로 받아온 event 목록에서 routineId들을 이용해 루틴 이름 목록을 병렬로 가져오는 로직 예시
     const routinePromises = data.result.events.map(async (event) => {
       const res = await fetch(
-        `http://13.209.221.182:8080/api/v1/routines/${event.routineId}`,
+        `https://www.dlrbdjs.store/api/v1/routines/${event.routineId}`,
         {
           method: "GET",
           headers: {

@@ -1,4 +1,6 @@
 import { fetchRoutineById, updateRoutineById } from "../api/routineApi.js";
+import { markRoutineAsDone, cancelRoutineDone } from "../api/routineApi.js";
+
 const cycleMap = {
   NO: "없음",
   DAY: "매일",
@@ -164,18 +166,14 @@ export async function renderRoutineSections(routineIds, container) {
   container.appendChild(routineBox);
   // ✅ ✨ 진행률 계산 및 설명 표시
   const routineDes = document.getElementById("routine-description");
+  const userName = "회원님";
+
   if (routineDes && totalTasks > 0) {
     const percentage = Math.round((completedTasks / totalTasks) * 100);
-    const userName = "멋사님"; // 동적으로 바꾸기 가능
 
     routineDes.innerHTML = `
-      벌써 오늘 하루 목표의 <strong>${percentage}%</strong>에 도달했어요!<br />
-      아자아자 ${userName}은 해낼 수 있어요 ~
-    `;
-    console.log("📊 총 루틴:", totalTasks, "완료된 루틴:", completedTasks);
-    console.log(
-      "📈 계산된 진행률:",
-      totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0
-    );
+    오늘 해야 할 루틴이 <strong>${percentage}%</strong> 남아있어요!<br />
+    아자아자 ${userName}은 해낼 수 있어요 ~
+  `;
   }
 }

@@ -1,7 +1,7 @@
 export async function reissueAccessToken() {
   const refreshToken = localStorage.getItem("refreshToken");
 
-  const res = await fetch("http://13.209.221.182:8080/api/v1/auth/reissue", {
+  const res = await fetch("https://www.dlrbdjs.store/api/v1/auth/reissue", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
