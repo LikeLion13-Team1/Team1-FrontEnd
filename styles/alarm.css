@@ -1,0 +1,57 @@
+#alarm-modal {
+    position: fixed; /* 또는 absolute (parent 기준이면) */
+    border-radius: 5px;
+    padding: 10px;
+    color: #3a5141;
+    border-color: #45624e;
+    background-color: rgb(190, 201, 208);
+    transform: translateX(130%);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: transform 0.2s ease;
+    width: 400px;
+    right: 20px;
+    bottom: 20px;
+    z-index: 1000; /* 다른 요소보다 위로 */
+}
+
+#alarm-modal.active {
+    transform: translateX(0); /* 오른쪽 벽에서 왼쪽으로 슬라이드 인 */
+    transition: transform 0.2s ease;
+
+}
+
+.alarm-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 8px;
+}
+
+.alarm-title {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.alarm-close-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+}
+
+.alarm-close-btn:hover {
+    color: #000;
+}
+
+.alarm-description {
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.alarm-time {
+    font-size: 12px;
+    color: #888;
+    text-align: right;
+}
