@@ -30,13 +30,13 @@ export async function fetchRoutineGroup(groupId) {
 }
 
 // ✅ 루틴 그룹 수정
-export async function updateRoutineGroup(groupId, name) {
+export async function updateRoutineGroup(groupId, newName) {
   const res = await fetchWithAuth(
     `http://13.209.221.182:8080/api/v1/groups/${groupId}`,
     {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name }),
+      body: JSON.stringify({ name: newName }),
     }
   );
 
@@ -151,4 +151,20 @@ export async function fetchMyRoutines() {
   const data = await res.json();
   console.log(data.result);
   return data.result; // 루틴 배열
+}
+
+export async function updateRoutineById(routineId, data) {
+  const response = await fetchWithAuth(`/api/v1/routines/${routineId}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    throw new Error("루틴 수정 실패");
+  }
+
+  return response.json();
 }
