@@ -1,3 +1,5 @@
+const alarmToken = localStorage.getItem("accessToken");
+
 function checkAlarm(alarm) {
     if (!alarm || alarm.activation !== "Y") return;
 
@@ -32,7 +34,7 @@ function fetchAndCheckAlarm() {
     fetch(url, {
         method: 'GET',
         headers: {
-            'Authorization': `Bearer ${token}`,
+            'Authorization': `Bearer ${alarmToken}`,
             'Content-Type': 'application/json'
         }
     })
@@ -52,10 +54,4 @@ function fetchAndCheckAlarm() {
 fetchAndCheckAlarm();
 
 // 15초 간격으로 실행
-setInterval(fetchAndCheckAlarm, 20000);
-
-// 테스트용 모달 (원하면 유지, 아니라면 제거)
-setTimeout(() => {
-    // 테스트용 예시 alarm 객체
-    // showModal({ routineName: "테스트 루틴", routineDescription: "설명", time: new Date().toISOString(), activation: "Y" });
-}, 2000);
+setInterval(fetchAndCheckAlarm, 15000);
