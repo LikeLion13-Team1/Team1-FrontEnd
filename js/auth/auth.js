@@ -7,6 +7,7 @@ export async function fetchWithAuth(url, options = {}) {
   const authOptions = {
     ...options,
     headers: {
+      "Content-Type": "application/json",
       ...(options.headers || {}),
       Authorization: `Bearer ${accessToken}`,
     },
@@ -16,7 +17,7 @@ export async function fetchWithAuth(url, options = {}) {
 
   // 토큰 만료 401코드 -> 재발급 시도
   if (res.status === 401) {
-    console.log("accessToken 만료 → 재발급 시도 중");
+    console.warn("accessToken 만료 → 재발급 시도 중");
     // 리프레쉬 토큰으로 새로운 액세스 토큰 재발급
     const success = await reissueAccessToken();
     if (!success) return res; // 만약 재발급 실패 -> 로그인 페이지로 이동됨

@@ -39,14 +39,16 @@
           </div>
 
           <div class="question-box">
-            <h2 class="Q1">Q1. 집이 어질러지면 나는?</h2>
+            <h2 class="Q1">Q1. 나의 살림 관심분야는?</h2>
             <div class="btn">
-              <button class="option-btn">
-                으! 못 참아요. 바로 정리부터 해요.
+              <button class="option-btn" data-score="3">
+                청소는 무조건! 먼지는 못 참아요.
               </button>
-              <button class="option-btn">조금 참다가 결국 치워요.</button>
-              <button class="option-btn">
-                안 보여요. 난 못 본 걸로 할래요.
+              <button class="option-btn" data-score="2">
+                정리는 해요~ 너무 더러우면요.
+              </button>
+              <button class="option-btn" data-score="1">
+                청소에는 전혀 관심 없어요!
               </button>
             </div>
           </div>
@@ -61,41 +63,33 @@
     <script type="module" src="../js/auth/authCheck.js"></script>
     <script type="module">
       import { loadHeader } from "../js/loadHeader.js";
-      loadHeader();
-    </script>
-    <script type="module">
       import { loadSidebar } from "../js/loadSidebar.js";
+
+      loadHeader();
       loadSidebar();
-      // 설문에 대한 option-btn 클릭시
-      document.querySelectorAll(".option-btn").forEach((btn) => {
+
+      const questionKey = document.body.dataset.questionKey;
+      console.log("📌 현재 질문 키:", questionKey);
+
+      const buttons = document.querySelectorAll(".option-btn");
+
+      buttons.forEach((btn) => {
         btn.addEventListener("click", (e) => {
-          document
-            .querySelectorAll(".option-btn")
-            .forEach((b) => b.classList.remove("selected"));
+          // 버튼 선택 UI
+          buttons.forEach((b) => b.classList.remove("selected"));
           e.currentTarget.classList.add("selected");
-        });
-      });
-      //Q에대한 대답 저장
-      document.addEventListener("DOMContentLoaded", () => {
-        const questionKey = document.body.dataset.questionKey;
 
-        console.log(" 현재 질문 키:", questionKey);
+          // 답변 저장
+          const answer =
+            e.currentTarget.dataset.answer ||
+            e.currentTarget.textContent.trim();
+          const answers =
+            JSON.parse(localStorage.getItem("surveyAnswers")) || {};
 
-        document.querySelectorAll(".option-btn").forEach((btn) => {
-          btn.addEventListener("click", (e) => {
-            document.querySelectorAll(".option-btn").forEach((b) => {
-              b.classList.remove("selected");
-            });
-            e.target.classList.add("selected");
+          answers[questionKey] = answer;
+          localStorage.setItem("surveyAnswers", JSON.stringify(answers));
 
-            const answer =
-              e.target.dataset.answer || e.target.textContent.trim();
-            const answers =
-              JSON.parse(localStorage.getItem("surveyAnswers")) || {};
-            answers[questionKey] = answer;
-            localStorage.setItem("surveyAnswers", JSON.stringify(answers));
-            console.log(`${questionKey} 저장됨:`, answer);
-          });
+          console.log(`✅ ${questionKey} 저장됨:`, answer);
         });
       });
     </script>
