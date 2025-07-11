@@ -104,5 +104,14 @@
       loadHeader();
     </script>
     <script src="../js/home2.js"></script>
+    <script>
+    fetch('alarm.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('alarm-modal-container').innerHTML = html;
+      })
+      .catch(console.error);
+    </script>
+    <script src="../js/alarm.js"></script>
   </body>
 </html>
