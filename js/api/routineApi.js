@@ -154,13 +154,16 @@ export async function fetchMyRoutines() {
 }
 
 export async function updateRoutineById(routineId, data) {
-  const response = await fetchWithAuth(`/api/v1/routines/${routineId}`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
+  const response = await fetchWithAuth(
+    `http://13.209.221.182:8080/api/v1/routines/${routineId}`,
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }
+  );
 
   if (!response.ok) {
     throw new Error("루틴 수정 실패");
