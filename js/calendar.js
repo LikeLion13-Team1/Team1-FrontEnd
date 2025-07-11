@@ -1,35 +1,24 @@
-//현재 보여주고 있는 년,월,일
-let viewYear = 2025;
-let viewMonth = 6;
-let selectedDate = 11; // 전역으로 선택된 날짜
+const token = localStorage.getItem("accessToken");
+
+const today = new Date();
+let viewYear = today.getFullYear();
+let viewMonth = today.getMonth(); // 0부터 시작: 0 = January
+let selectedDate = today.getDate();
 
 function renderCalendar(year, month) {
-  // 초기화
   const daysContainer = document.getElementById("days");
   const monthLabel = document.getElementById("month-year");
   daysContainer.innerHTML = "";
 
   const monthNames = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December",
   ];
   monthLabel.textContent = monthNames[month] + " " + year;
 
-  //일요일=0 --> 해당 달이 월요일부터 시작하는지 봄
-  const firstDay = new Date(year, month, 1).getDay(); //해당 달의 1일이 어떤 요일인지
-  const lastDate = new Date(year, month + 1, 0).getDate(); //  마지막 날짜구하기(다음달의 0일 -> 자동적으로 이번달의 마지막일로 됨 )
+  const firstDay = new Date(year, month, 1).getDay();
+  const lastDate = new Date(year, month + 1, 0).getDate();
   const offset = firstDay === 0 ? 6 : firstDay - 1;
-  //firstDay=0이면 일요일이 첫째날, 6칸비워둠 : 아니면 firstday-1칸 비워둠
 
   // 이전 달 날짜 표시
   const prevLastDate = new Date(year, month, 0).getDate();
@@ -41,13 +30,13 @@ function renderCalendar(year, month) {
     daysContainer.appendChild(btn);
   }
 
-  // 현재 달 날짜 렌더링, 선택한 날짜 기준 어제,다음날,다다음날, 다다다음날까지 반영
   const range = [
     selectedDate - 1,
     selectedDate + 1,
     selectedDate + 2,
     selectedDate + 3,
   ];
+
   for (let date = 1; date <= lastDate; date++) {
     const dayBtn = document.createElement("button");
     dayBtn.textContent = date;
@@ -60,8 +49,8 @@ function renderCalendar(year, month) {
 
     dayBtn.onclick = () => {
       selectedDate = date;
-      renderCalendar(viewYear, viewMonth); //캘린더 버튼 표시
-      showRoutines(viewYear, viewMonth, selectedDate); //루틴 표시
+      renderCalendar(viewYear, viewMonth);
+      showRoutines(viewYear, viewMonth, selectedDate);
     };
 
     daysContainer.appendChild(dayBtn);
@@ -78,37 +67,33 @@ function renderCalendar(year, month) {
   }
 }
 
-//루틴박스 초기화
-function showRoutines(year, month, date) {
+// showRoutines를 async 함수로 변경
+async function showRoutines(year, month, date) {
   const routineContainer = document.getElementById("routine-container");
   while (routineContainer.firstChild) {
     routineContainer.removeChild(routineContainer.firstChild);
   }
 
-  //getDay() --> 요일(숫자)를 요일(문자)로
   const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-  // 날짜 기준 배열 구성: 전날, 선택일, 다음날, 다다음날
   const baseDate = new Date(year, month, date);
   const datesToShow = [
     new Date(baseDate.getTime() - 1 * 86400000), // 전날
     baseDate, // 선택일
     new Date(baseDate.getTime() + 1 * 86400000), // 다음날
     new Date(baseDate.getTime() + 2 * 86400000), // 다다음날
-    new Date(baseDate.getTime() + 3 * 86400000), //다다다음날
+    new Date(baseDate.getTime() + 3 * 86400000), // 다다다음날
   ];
 
-  datesToShow.forEach((dateObj) => {
+  for (const dateObj of datesToShow) {
     const displayYear = dateObj.getFullYear();
     const displayMonth = dateObj.getMonth();
     const displayDate = dateObj.getDate();
     const weekday = daysOfWeek[dateObj.getDay()];
 
-    //날짜, 요일, 루틴 박스 감싸줌
     const column = document.createElement("div");
     column.className = "routine-column";
 
-    // 선택된 날짜면 강조
     if (
       displayYear === year &&
       displayMonth === month &&
@@ -118,21 +103,23 @@ function showRoutines(year, month, date) {
     }
 
     const routineHeader = document.createElement("div");
-    routineHeader.className = "routine-date"; //날짜+요일을 감쌈
+    routineHeader.className = "routine-date";
 
     const dateNum = document.createElement("div");
-    dateNum.className = "routine-day-number"; //날짜
+    dateNum.className = "routine-day-number";
     dateNum.textContent = displayDate;
 
     const weekdayEl = document.createElement("div");
-    weekdayEl.className = "routine-day-week"; //요일
+    weekdayEl.className = "routine-day-week";
     weekdayEl.textContent = weekday;
 
     routineHeader.appendChild(dateNum);
     routineHeader.appendChild(weekdayEl);
     column.appendChild(routineHeader);
 
-    const Routines = getRoutines(displayYear, displayMonth, displayDate);
+    // 비동기 getRoutines 호출
+    const Routines = await getRoutines(displayYear, displayMonth, displayDate);
+
     const stepEl = document.createElement("div");
     stepEl.className = "routine-step";
     column.appendChild(stepEl);
@@ -140,11 +127,11 @@ function showRoutines(year, month, date) {
     const hr = document.createElement("hr");
     hr.className = "routine-divider";
     column.appendChild(hr);
-    // Routines.forEach(...) 전
-    if (Routines.length === 0) {
+
+    if (!Array.isArray(Routines) || Routines.length === 0) {
       const emptyEl = document.createElement("div");
       emptyEl.className = "routine-box empty";
-      emptyEl.textContent = "루틴 없음"; // 또는 아이콘/공백 등 원하는 표시
+      emptyEl.textContent = "루틴 없음";
       column.appendChild(emptyEl);
     } else {
       Routines.forEach((task) => {
@@ -165,26 +152,61 @@ function showRoutines(year, month, date) {
         column.appendChild(taskEl);
       });
     }
+
     routineContainer.appendChild(column);
-  });
+  }
 }
-// 예시 루틴 데이터 (테스트용)
-function getRoutines(year, month, date) {
-  const dummy = {
-    10: ["창문 열고 환기", "쓰레기 비우기", "마른 걸레로 바닥 쓰기"],
-    11: ["식탁 닦기", "세탁물 확인", "내일 일정 체크", "에어컨 필터 교체하기"],
-    12: ["택배 개봉 후 정리", "분리수거날", "화분 물주기", "책상 청소"],
-    13: ["창문 열고 환기", "화분 물주기", "냉장고 정리", "계절 옷 정리"],
-    14: ["창문 열고 환기", "화분 물주기", "냉장고 정리", "계절 옷 정리"],
-    15: ["창문 열고 환기", "쓰레기 비우기", "마른 걸레로 바닥 쓰기"],
-    16: ["식탁 닦기", "세탁물 확인", "내일 일정 체크", "에어컨 필터 교체하기"],
-    17: ["택배 개봉 후 정리", "분리수거날", "화분 물주기", "책상 청소"],
-    18: ["창문 열고 환기", "화분 물주기", "냉장고 정리", "계절 옷 정리"],
-    19: ["창문 열고 환기", "화분 물주기", "냉장고 정리", "계절 옷 정리"],
-  };
-  return dummy[date] || [];
+
+async function getRoutines(year, month, date) {
+  try {
+    const response = await fetch(
+      `http://13.209.221.182:8080/api/v1/events?start=${year}-${String(
+        month + 1
+      ).padStart(2, "0")}-${String(date).padStart(2, "0")}&end=${year}-${String(
+        month + 1
+      ).padStart(2, "0")}-${String(date).padStart(2, "0")}&cursor=0&size=20`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // 필요한 경우만
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("서버 응답 오류");
+    }
+
+    const data = await response.json();
+
+    // 실제로 받아온 event 목록에서 routineId들을 이용해 루틴 이름 목록을 병렬로 가져오는 로직 예시
+    const routinePromises = data.result.events.map(async (event) => {
+      const res = await fetch(
+        `http://13.209.221.182:8080/api/v1/routines/${event.routineId}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (!res.ok) throw new Error("루틴 상세 응답 오류");
+      const routineData = await res.json();
+      // routineData 구조에 따라 조절 필요 (예: routineData.result.name)
+      return routineData.result.name;
+    });
+
+    const routineNames = await Promise.all(routinePromises);
+    return routineNames;
+  } catch (error) {
+    console.error("루틴 로딩 실패:", error);
+    return [];
+  }
 }
-//전달, 전월로 이동
+
+// 전달, 전월로 이동
 function prevMonth() {
   if (viewMonth === 0) {
     viewMonth = 11;
@@ -195,7 +217,7 @@ function prevMonth() {
   renderCalendar(viewYear, viewMonth);
   showRoutines(viewYear, viewMonth, selectedDate);
 }
-//다음달 , 다음 월로 이동
+// 다음달, 다음 월로 이동
 function nextMonth() {
   if (viewMonth === 11) {
     viewMonth = 0;
