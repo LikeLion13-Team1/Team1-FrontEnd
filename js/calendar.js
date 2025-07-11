@@ -20,7 +20,6 @@ function renderCalendar(year, month) {
   const lastDate = new Date(year, month + 1, 0).getDate();
   const offset = firstDay === 0 ? 6 : firstDay - 1;
 
-  // 이전 달 날짜 표시
   const prevLastDate = new Date(year, month, 0).getDate();
   for (let i = offset - 1; i >= 0; i--) {
     const prevDate = prevLastDate - i;
@@ -56,7 +55,6 @@ function renderCalendar(year, month) {
     daysContainer.appendChild(dayBtn);
   }
 
-  // 다음 달 날짜 채우기
   const totalCells = offset + lastDate;
   const nextDays = 42 - totalCells;
   for (let i = 1; i <= nextDays; i++) {
@@ -67,25 +65,32 @@ function renderCalendar(year, month) {
   }
 }
 
-// showRoutines를 async 함수로 변경
+// ✅ 병렬 요청 적용된 showRoutines
 async function showRoutines(year, month, date) {
   const routineContainer = document.getElementById("routine-container");
-  while (routineContainer.firstChild) {
-    routineContainer.removeChild(routineContainer.firstChild);
-  }
+  routineContainer.innerHTML = "";
 
   const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   const baseDate = new Date(year, month, date);
   const datesToShow = [
-    new Date(baseDate.getTime() - 1 * 86400000), // 전날
-    baseDate, // 선택일
-    new Date(baseDate.getTime() + 1 * 86400000), // 다음날
-    new Date(baseDate.getTime() + 2 * 86400000), // 다다음날
-    new Date(baseDate.getTime() + 3 * 86400000), // 다다다음날
+    new Date(baseDate.getTime() - 1 * 86400000),
+    baseDate,
+    new Date(baseDate.getTime() + 1 * 86400000),
+    new Date(baseDate.getTime() + 2 * 86400000),
+    new Date(baseDate.getTime() + 3 * 86400000),
   ];
 
-  for (const dateObj of datesToShow) {
+  // 👉 병렬 요청
+  const routinePromises = datesToShow.map((d) =>
+    getRoutines(d.getFullYear(), d.getMonth(), d.getDate())
+  );
+  const routineResults = await Promise.all(routinePromises);
+
+  for (let i = 0; i < datesToShow.length; i++) {
+    const dateObj = datesToShow[i];
+    const routineList = routineResults[i];
+
     const displayYear = dateObj.getFullYear();
     const displayMonth = dateObj.getMonth();
     const displayDate = dateObj.getDate();
@@ -117,9 +122,6 @@ async function showRoutines(year, month, date) {
     routineHeader.appendChild(weekdayEl);
     column.appendChild(routineHeader);
 
-    // 비동기 getRoutines 호출
-    const Routines = await getRoutines(displayYear, displayMonth, displayDate);
-
     const stepEl = document.createElement("div");
     stepEl.className = "routine-step";
     column.appendChild(stepEl);
@@ -128,13 +130,13 @@ async function showRoutines(year, month, date) {
     hr.className = "routine-divider";
     column.appendChild(hr);
 
-    if (!Array.isArray(Routines) || Routines.length === 0) {
+    if (!Array.isArray(routineList) || routineList.length === 0) {
       const emptyEl = document.createElement("div");
       emptyEl.className = "routine-box empty";
       emptyEl.textContent = "루틴 없음";
       column.appendChild(emptyEl);
     } else {
-      Routines.forEach((task) => {
+      routineList.forEach((task) => {
         const taskEl = document.createElement("div");
         taskEl.className = "routine-box";
 
@@ -157,56 +159,34 @@ async function showRoutines(year, month, date) {
   }
 }
 
+// 그대로 유지
 async function getRoutines(year, month, date) {
   try {
+    const dateStr = `${year}-${String(month + 1).padStart(2, "0")}-${String(
+      date
+    ).padStart(2, "0")}`;
+
     const response = await fetch(
-      `http://13.209.221.182:8080/api/v1/events?start=${year}-${String(
-        month + 1
-      ).padStart(2, "0")}-${String(date).padStart(2, "0")}&end=${year}-${String(
-        month + 1
-      ).padStart(2, "0")}-${String(date).padStart(2, "0")}&cursor=0&size=20`,
+      `http://13.209.221.182:8080/api/v1/events?start=${dateStr}&end=${dateStr}&cursor=0&size=20`,
       {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, // 필요한 경우만
+          Authorization: `Bearer ${token}`,
         },
       }
     );
 
-    if (!response.ok) {
-      throw new Error("서버 응답 오류");
-    }
+    if (!response.ok) throw new Error("서버 응답 오류");
 
     const data = await response.json();
-
-    // 실제로 받아온 event 목록에서 routineId들을 이용해 루틴 이름 목록을 병렬로 가져오는 로직 예시
-    const routinePromises = data.result.events.map(async (event) => {
-      const res = await fetch(
-        `http://13.209.221.182:8080/api/v1/routines/${event.routineId}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      if (!res.ok) throw new Error("루틴 상세 응답 오류");
-      const routineData = await res.json();
-      // routineData 구조에 따라 조절 필요 (예: routineData.result.name)
-      return routineData.result.name;
-    });
-
-    const routineNames = await Promise.all(routinePromises);
-    return routineNames;
+    return data.result.events.map((event) => event.routineName);
   } catch (error) {
     console.error("루틴 로딩 실패:", error);
     return [];
   }
 }
 
-// 전달, 전월로 이동
 function prevMonth() {
   if (viewMonth === 0) {
     viewMonth = 11;
@@ -217,7 +197,7 @@ function prevMonth() {
   renderCalendar(viewYear, viewMonth);
   showRoutines(viewYear, viewMonth, selectedDate);
 }
-// 다음달, 다음 월로 이동
+
 function nextMonth() {
   if (viewMonth === 11) {
     viewMonth = 0;
